@@ -1,0 +1,283 @@
+INFO 2023-05-30 18:59:15,872 MainThread 140455105001280 connection connection.py 22 celery.worker.consumer.connection start 6036 Connected to redis://localhost:6379//
+INFO 2023-05-30 18:59:15,874 MainThread 140455105001280 mingle mingle.py 40 celery.worker.consumer.mingle sync 6036 mingle: searching for neighbors
+INFO 2023-05-30 18:59:16,881 MainThread 140455105001280 mingle mingle.py 49 celery.worker.consumer.mingle sync 6036 mingle: all alone
+INFO 2023-05-30 19:20:34,474 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Creating a BLAST database[d411ad03-fa7a-45a7-956b-99f31a53eef1] received
+INFO 2023-05-30 19:20:34,581 MainThread 140455105001280 tasks tasks.py 54 blast_db_creator createdb_task 6040 BLAST database: "slime_molds_db_private" was created successfully.
+INFO 2023-05-30 19:20:34,597 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Creating a BLAST database[d411ad03-fa7a-45a7-956b-99f31a53eef1] succeeded in 0.11177752300000066s: {'state': 'SUCCESS', 'task_id': 'd411ad03-fa7a-45a7-956b-99f31a53eef1'}
+INFO 2023-05-30 19:21:02,592 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Creating a BLAST database[588c6626-2a6b-4be6-acde-ea7926954e09] received
+INFO 2023-05-30 19:21:02,633 MainThread 140455105001280 tasks tasks.py 54 blast_db_creator createdb_task 6040 BLAST database: "cyanobacteria-db-private" was created successfully.
+INFO 2023-05-30 19:21:02,641 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Creating a BLAST database[588c6626-2a6b-4be6-acde-ea7926954e09] succeeded in 0.048331466000036016s: {'state': 'SUCCESS', 'task_id': '588c6626-2a6b-4be6-acde-ea7926954e09'}
+INFO 2023-05-30 19:37:40,309 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTp program[277452ea-dd96-469b-8bc8-5ecbe516618b] received
+WARNING 2023-05-30 19:37:40,391 MainThread 140455105001280 tasks tasks.py 121 blast_db_creator blastp_task 6040 Could not search for similar sequences using "blastp" program.Errors received: BLAST query error: CFastaReader: Near line 1, there's a line that doesn't look like plausible data, but it's not marked as defline or comment.
+....
+INFO 2023-05-30 19:37:58,829 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTp program[dc12f027-a015-42b2-9119-24eb6f605eae] received
+INFO 2023-05-30 19:37:58,912 MainThread 140455105001280 tasks tasks.py 130 blast_db_creator blastp_task 6040 Search for similar sequences using "blastp" program finished succesfully. 
+INFO 2023-05-30 19:37:58,949 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTp program[dc12f027-a015-42b2-9119-24eb6f605eae] succeeded in 0.12035259100048279s: {'state': 'SUCCESS', 'task_id': 'dc12f027-a015-42b2-9119-24eb6f605eae'}
+INFO 2023-05-30 19:38:19,320 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTx program[4011bc3a-2a95-429d-bc10-cc7e1ee77c7d] received
+WARNING 2023-05-30 19:38:19,401 MainThread 140455105001280 tasks tasks.py 172 blast_db_creator blastx_task 6040 Could not search for similar sequences using "blastx" program.Errors received: FASTA-Reader: Ignoring invalid residues at position(s): On line 2: 5, 9, 12-13, 17, 19-20, 27, 32, 40, 46, 51, 53, 55-57, 60, 64-65, 68, 70
+FASTA-Reader: Ignoring invalid residues at position(s): On line 3: 1, 5-6, 10, 13, 19-20, 28, 33, 37, 39-41, 4....
+INFO 2023-05-30 19:38:39,080 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTx program[ee4ee3a9-28ad-446b-964b-a2eb022db958] received
+INFO 2023-05-30 19:38:39,175 MainThread 140455105001280 tasks tasks.py 181 blast_db_creator blastx_task 6040 Search for similar sequences using "blastx" program finished succesfully. 
+INFO 2023-05-30 19:38:39,184 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTx program[ee4ee3a9-28ad-446b-964b-a2eb022db958] succeeded in 0.10311309300050198s: {'state': 'SUCCESS', 'task_id': 'ee4ee3a9-28ad-446b-964b-a2eb022db958'}
+INFO 2023-05-30 19:39:08,200 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTn program[35fc226e-4536-4c0a-a464-7ae7124bc835] received
+INFO 2023-05-30 19:39:08,299 MainThread 140455105001280 tasks tasks.py 78 blast_db_creator blastn_task 6040 Search for similar sequences using "blastn" program finished succesfully. 
+INFO 2023-05-30 19:39:08,305 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTn program[35fc226e-4536-4c0a-a464-7ae7124bc835] succeeded in 0.1039458340001147s: {'state': 'SUCCESS', 'task_id': '35fc226e-4536-4c0a-a464-7ae7124bc835'}
+INFO 2023-05-30 19:39:39,128 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running tBLASTn program[bef4ab45-649e-4195-8afb-e2a589a0262c] received
+INFO 2023-05-30 19:39:39,225 MainThread 140455105001280 tasks tasks.py 283 blast_db_creator tblastn_task 6040 Search for similar sequences using "tblastn" program finished succesfully. 
+INFO 2023-05-30 19:39:39,244 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running tBLASTn program[bef4ab45-649e-4195-8afb-e2a589a0262c] succeeded in 0.1154934719997982s: {'state': 'SUCCESS', 'task_id': 'bef4ab45-649e-4195-8afb-e2a589a0262c'}
+INFO 2023-05-30 19:39:53,610 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running tBLASTx program[221fa0ff-19ab-4f8d-9d30-514d1eec61eb] received
+INFO 2023-05-30 19:39:53,783 MainThread 140455105001280 tasks tasks.py 232 blast_db_creator tblastx_task 6040 Search for similar sequences using "tblastx" program finished succesfully. 
+INFO 2023-05-30 19:39:53,790 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running tBLASTx program[221fa0ff-19ab-4f8d-9d30-514d1eec61eb] succeeded in 0.17998104299931583s: {'state': 'SUCCESS', 'task_id': '221fa0ff-19ab-4f8d-9d30-514d1eec61eb'}
+INFO 2023-05-30 19:40:10,399 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[1b7129f3-55a7-4eeb-865f-eb68c7f1fbcf] received
+INFO 2023-05-30 19:40:10,456 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-ude" was created successfully.
+INFO 2023-05-30 19:40:10,475 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-ude" information was saved successfully.
+INFO 2023-05-30 19:40:10,482 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[1b7129f3-55a7-4eeb-865f-eb68c7f1fbcf] succeeded in 0.08215208199999324s: {'state': 'SUCCESS', 'task_id': '1b7129f3-55a7-4eeb-865f-eb68c7f1fbcf'}
+INFO 2023-05-30 19:40:23,907 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[84a448ed-064a-41a1-bad0-02fea335128b] received
+WARNING 2023-05-30 19:40:23,958 MainThread 140455105001280 tasks tasks.py 327 blast_db_creator createdb_update_task 6040 Could not update BLAST database: "slime_molds_db_private". Error from "makeblastdb" program: FASTA-Reader: Ignoring invalid residues at position(s): On line 2: 2-3, 8-9, 11-15, 17, 22-23, 33-34, 37, 41,  There might be protein sequences in the input file. Please choose BLAST database type as protein or upload a new file, containing nucleotid... 
+INFO 2023-05-30 19:40:46,464 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[9c0c73f6-7ea5-4399-ab28-d6936343edca] received
+INFO 2023-05-30 19:40:46,511 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-jzs" was created successfully.
+INFO 2023-05-30 19:40:46,529 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-jzs" information was saved successfully.
+INFO 2023-05-30 19:40:46,546 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[9c0c73f6-7ea5-4399-ab28-d6936343edca] succeeded in 0.0815370010004699s: {'state': 'SUCCESS', 'task_id': '9c0c73f6-7ea5-4399-ab28-d6936343edca'}
+INFO 2023-05-30 19:40:57,808 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[ceb5e5cf-e7cd-4ecf-bb20-62e90ceed8ac] received
+INFO 2023-05-30 19:40:57,936 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-vwv" was created successfully.
+INFO 2023-05-30 19:40:57,960 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-vwv" information was saved successfully.
+INFO 2023-05-30 19:40:57,971 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLASTn alignments[224a92d7-ad2c-4212-8e10-425b1ee217eb] received
+INFO 2023-05-30 19:40:57,995 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating tBLASTn alignments[1c14786f-3876-4409-9b04-8ff668613109] received
+INFO 2023-05-30 19:40:57,997 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating tBLASTx alignments[3d90e938-aec5-4f90-8e7b-b992dec60d9a] received
+INFO 2023-05-30 19:40:58,055 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[ceb5e5cf-e7cd-4ecf-bb20-62e90ceed8ac] succeeded in 0.24699372200029757s: {'state': 'SUCCESS', 'task_id': 'ceb5e5cf-e7cd-4ecf-bb20-62e90ceed8ac'}
+INFO 2023-05-30 19:40:58,203 MainThread 140455105001280 tasks tasks.py 732 blast_db_creator update_blastn_alignments 6038 Succesfully updated alignments results using "blastn" program.
+INFO 2023-05-30 19:40:58,252 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6038 Task Updating BLASTn alignments[224a92d7-ad2c-4212-8e10-425b1ee217eb] succeeded in 0.2798700710000048s: {'state': 'SUCCESS', 'task_id': '224a92d7-ad2c-4212-8e10-425b1ee217eb'}
+INFO 2023-05-30 19:40:58,267 MainThread 140455105001280 tasks tasks.py 659 blast_db_creator update_tblastn_alignments 6041 Succesfully updated alignments results using "tblastn" program.
+INFO 2023-05-30 19:40:58,276 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6041 Task Updating tBLASTn alignments[1c14786f-3876-4409-9b04-8ff668613109] succeeded in 0.25469471599990356s: {'state': 'SUCCESS', 'task_id': '1c14786f-3876-4409-9b04-8ff668613109'}
+INFO 2023-05-30 19:40:58,329 MainThread 140455105001280 tasks tasks.py 583 blast_db_creator update_tblastx_alignments 6039 Succesfully updated alignments results using "tblastx" program.
+INFO 2023-05-30 19:40:58,343 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6039 Task Updating tBLASTx alignments[3d90e938-aec5-4f90-8e7b-b992dec60d9a] succeeded in 0.3376841470008003s: {'state': 'SUCCESS', 'task_id': '3d90e938-aec5-4f90-8e7b-b992dec60d9a'}
+INFO 2023-05-30 19:41:13,192 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[a6c7696f-36b8-484d-8d2c-85e21de95562] received
+INFO 2023-05-30 19:41:13,240 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-c3a" was created successfully.
+INFO 2023-05-30 19:41:13,251 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-c3a" information was saved successfully.
+INFO 2023-05-30 19:41:13,253 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLASTp alignments[987edb15-e26e-446f-8214-25cae2a15253] received
+INFO 2023-05-30 19:41:13,255 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLASTx alignments[64c07ebc-c4bf-4e2e-b29c-72085fc101ef] received
+INFO 2023-05-30 19:41:13,303 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[a6c7696f-36b8-484d-8d2c-85e21de95562] succeeded in 0.10952957199970115s: {'state': 'SUCCESS', 'task_id': 'a6c7696f-36b8-484d-8d2c-85e21de95562'}
+INFO 2023-05-30 19:41:13,404 MainThread 140455105001280 tasks tasks.py 436 blast_db_creator update_blastp_alignments 6038 Succesfully updated alignments results using "blastp" program.
+INFO 2023-05-30 19:41:13,425 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6038 Task Updating BLASTp alignments[987edb15-e26e-446f-8214-25cae2a15253] succeeded in 0.17097743900012574s: {'state': 'SUCCESS', 'task_id': '987edb15-e26e-446f-8214-25cae2a15253'}
+INFO 2023-05-30 19:41:13,450 MainThread 140455105001280 tasks tasks.py 510 blast_db_creator update_blastx_alignments 6041 Succesfully updated alignments results using "blastx" program.
+INFO 2023-05-30 19:41:13,460 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6041 Task Updating BLASTx alignments[64c07ebc-c4bf-4e2e-b29c-72085fc101ef] succeeded in 0.2046030610008529s: {'state': 'SUCCESS', 'task_id': '64c07ebc-c4bf-4e2e-b29c-72085fc101ef'}
+INFO 2023-05-30 19:41:25,061 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[7ab38faa-a5ee-4276-b7ae-941ee30aea8d] received
+INFO 2023-05-30 19:41:25,108 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-c3a-zob" was created successfully.
+INFO 2023-05-30 19:41:25,128 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "cyanobacteria-db-private-c3a-zob" information was saved successfully.
+INFO 2023-05-30 19:41:25,142 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[7ab38faa-a5ee-4276-b7ae-941ee30aea8d] succeeded in 0.08016154599954461s: {'state': 'SUCCESS', 'task_id': '7ab38faa-a5ee-4276-b7ae-941ee30aea8d'}
+INFO 2023-05-30 19:41:47,009 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTn program for alignments update[8a5f986f-bc99-4959-94be-37b5be9a07fb] received
+INFO 2023-05-30 19:41:47,081 MainThread 140455105001280 tasks tasks.py 104 blast_db_creator blastn_update_task 6040 Succesfully updated alignments results using "blastn" program.
+INFO 2023-05-30 19:41:47,091 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTn program for alignments update[8a5f986f-bc99-4959-94be-37b5be9a07fb] succeeded in 0.08098025399976905s: {'state': 'SUCCESS', 'task_id': '8a5f986f-bc99-4959-94be-37b5be9a07fb'}
+INFO 2023-05-30 19:41:58,561 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTx program for alignments update[59dbc789-82c5-41e0-bc87-f5ad111f9172] received
+INFO 2023-05-30 19:41:58,664 MainThread 140455105001280 tasks tasks.py 206 blast_db_creator blastx_update_task 6040 Succesfully updated alignments results using "blastx" program.
+INFO 2023-05-30 19:41:58,695 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTx program for alignments update[59dbc789-82c5-41e0-bc87-f5ad111f9172] succeeded in 0.13397340700066707s: {'state': 'SUCCESS', 'task_id': '59dbc789-82c5-41e0-bc87-f5ad111f9172'}
+INFO 2023-05-30 19:42:07,841 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTx program for alignments update[bcf851e8-6b96-433e-b574-ff3400e4808c] received
+INFO 2023-05-30 19:42:07,976 MainThread 140455105001280 tasks tasks.py 206 blast_db_creator blastx_update_task 6040 Succesfully updated alignments results using "blastx" program.
+INFO 2023-05-30 19:42:07,982 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTx program for alignments update[bcf851e8-6b96-433e-b574-ff3400e4808c] succeeded in 0.13987980799993238s: {'state': 'SUCCESS', 'task_id': 'bcf851e8-6b96-433e-b574-ff3400e4808c'}
+INFO 2023-05-30 19:42:24,386 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running tBLASTx program for alignments update[5715b65c-c552-417a-a590-e70ae27ab1cb] received
+INFO 2023-05-30 19:42:24,482 MainThread 140455105001280 tasks tasks.py 257 blast_db_creator tblastx_update_task 6040 Succesfully updated alignments results using "tblastx" program.
+INFO 2023-05-30 19:42:24,492 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running tBLASTx program for alignments update[5715b65c-c552-417a-a590-e70ae27ab1cb] succeeded in 0.10566052900048817s: {'state': 'SUCCESS', 'task_id': '5715b65c-c552-417a-a590-e70ae27ab1cb'}
+INFO 2023-05-30 19:42:34,024 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running tBLASTn program for alignments update[447483ba-201e-4ba5-8f34-d7455f2b8663] received
+INFO 2023-05-30 19:42:34,108 MainThread 140455105001280 tasks tasks.py 308 blast_db_creator tblastn_update_task 6040 Succesfully updated alignments results using "tblastn" program.
+INFO 2023-05-30 19:42:34,114 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running tBLASTn program for alignments update[447483ba-201e-4ba5-8f34-d7455f2b8663] succeeded in 0.08924013399973774s: {'state': 'SUCCESS', 'task_id': '447483ba-201e-4ba5-8f34-d7455f2b8663'}
+INFO 2023-05-30 19:42:51,376 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTp program for alignments update[47aadc0e-c0f7-4fa2-bb48-37d2611f40d6] received
+INFO 2023-05-30 19:42:51,474 MainThread 140455105001280 tasks tasks.py 155 blast_db_creator blastp_update_task 6040 Succesfully updated alignments results using "blastp" program.
+INFO 2023-05-30 19:42:51,479 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTp program for alignments update[47aadc0e-c0f7-4fa2-bb48-37d2611f40d6] succeeded in 0.10296210600063205s: {'state': 'SUCCESS', 'task_id': '47aadc0e-c0f7-4fa2-bb48-37d2611f40d6'}
+INFO 2023-05-30 19:43:17,487 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Running BLASTp program for alignments update[7c53696f-db1d-4bd7-b321-2d5b46f12542] received
+INFO 2023-05-30 19:43:17,604 MainThread 140455105001280 tasks tasks.py 155 blast_db_creator blastp_update_task 6040 Succesfully updated alignments results using "blastp" program.
+INFO 2023-05-30 19:43:17,609 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Running BLASTp program for alignments update[7c53696f-db1d-4bd7-b321-2d5b46f12542] succeeded in 0.12041614899953856s: {'state': 'SUCCESS', 'task_id': '7c53696f-db1d-4bd7-b321-2d5b46f12542'}
+INFO 2023-05-30 19:44:25,828 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Generating batch BLASTn alignments[ec7182c6-df40-4102-b15c-71bf02fc29fc] received
+INFO 2023-05-30 19:44:26,069 MainThread 140455105001280 tasks tasks.py 793 blast_db_creator batch_blastn_alignments 6040 Batch alignment generation for many BLAST databases using "blastn" program was successful.
+INFO 2023-05-30 19:44:26,075 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Generating batch BLASTn alignments[ec7182c6-df40-4102-b15c-71bf02fc29fc] succeeded in 0.2465374299999894s: {'state': 'SUCCESS', 'task_id': 'ec7182c6-df40-4102-b15c-71bf02fc29fc'}
+INFO 2023-05-30 19:45:01,526 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Generating batch BLASTp alignments[fc583b60-e063-4658-b94e-e41c2f60c668] received
+INFO 2023-05-30 19:45:01,804 MainThread 140455105001280 tasks tasks.py 916 blast_db_creator batch_blastp_alignments 6040 Batch alignment generation for many BLAST databases using "blastp" program was successful.
+INFO 2023-05-30 19:45:01,810 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Generating batch BLASTp alignments[fc583b60-e063-4658-b94e-e41c2f60c668] succeeded in 0.28267108500040194s: {'state': 'SUCCESS', 'task_id': 'fc583b60-e063-4658-b94e-e41c2f60c668'}
+INFO 2023-05-30 19:47:44,219 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Generating batch BLASTx alignments[a7fb42a0-3028-475d-8313-7e3066103dd2] received
+INFO 2023-05-30 19:47:44,434 MainThread 140455105001280 tasks tasks.py 855 blast_db_creator batch_blastx_alignments 6040 Batch alignment generation for many BLAST databases using "blastx" program was successful.
+INFO 2023-05-30 19:47:44,439 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Generating batch BLASTx alignments[a7fb42a0-3028-475d-8313-7e3066103dd2] succeeded in 0.21877459200004523s: {'state': 'SUCCESS', 'task_id': 'a7fb42a0-3028-475d-8313-7e3066103dd2'}
+INFO 2023-05-30 19:48:44,635 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLAST database[ec084c5c-6f83-4851-a47e-5b0d39366297] received
+INFO 2023-05-30 19:48:44,699 MainThread 140455105001280 tasks tasks.py 334 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-wyz" was created successfully.
+INFO 2023-05-30 19:48:44,723 MainThread 140455105001280 tasks tasks.py 354 blast_db_creator createdb_update_task 6040 BLAST database: "slime_molds_db_private-wyz" information was saved successfully.
+INFO 2023-05-30 19:48:44,726 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating BLASTn alignments[cb723902-fe41-4dcd-8676-0725b724f959] received
+INFO 2023-05-30 19:48:44,729 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating tBLASTn alignments[80aead1e-5065-4e53-a8f6-775c3f5a15f8] received
+INFO 2023-05-30 19:48:44,731 MainThread 140455105001280 strategy strategy.py 161 celery.worker.strategy task_message_handler 6036 Task Updating tBLASTx alignments[34a93dcb-c4f7-4043-b318-e6545be2a44d] received
+INFO 2023-05-30 19:48:44,841 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6040 Task Updating BLAST database[ec084c5c-6f83-4851-a47e-5b0d39366297] succeeded in 0.20525852199989458s: {'state': 'SUCCESS', 'task_id': 'ec084c5c-6f83-4851-a47e-5b0d39366297'}
+INFO 2023-05-30 19:48:44,977 MainThread 140455105001280 tasks tasks.py 732 blast_db_creator update_blastn_alignments 6038 Succesfully updated alignments results using "blastn" program.
+INFO 2023-05-30 19:48:44,988 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6038 Task Updating BLASTn alignments[cb723902-fe41-4dcd-8676-0725b724f959] succeeded in 0.2617799149993516s: {'state': 'SUCCESS', 'task_id': 'cb723902-fe41-4dcd-8676-0725b724f959'}
+INFO 2023-05-30 19:48:45,000 MainThread 140455105001280 tasks tasks.py 583 blast_db_creator update_tblastx_alignments 6039 Succesfully updated alignments results using "tblastx" program.
+INFO 2023-05-30 19:48:45,006 MainThread 140455105001280 tasks tasks.py 659 blast_db_creator update_tblastn_alignments 6041 Succesfully updated alignments results using "tblastn" program.
+INFO 2023-05-30 19:48:45,011 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6041 Task Updating tBLASTn alignments[80aead1e-5065-4e53-a8f6-775c3f5a15f8] succeeded in 0.2814713700008724s: {'state': 'SUCCESS', 'task_id': '80aead1e-5065-4e53-a8f6-775c3f5a15f8'}
+INFO 2023-05-30 19:48:45,020 MainThread 140455105001280 trace trace.py 131 celery.app.trace info 6039 Task Updating tBLASTx alignments[34a93dcb-c4f7-4043-b318-e6545be2a44d] succeeded in 0.28885092299969983s: {'state': 'SUCCESS', 'task_id': '34a93dcb-c4f7-4043-b318-e6545be2a44d'}
+WARNING 2023-05-30 19:48:58,423 MainThread 140455105001280 consumer consumer.py 354 celery.worker.consumer.consumer on_connection_error_after_connected 6036 consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 332, in start
+    blueprint.start(self)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 628, in start
+    c.loop(*c.loop_args())
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/loops.py", line 97, in asynloop
+    next(loop)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 362, in create_loop
+    cb(*cbargs)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 1326, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 562, in on_readable
+    chan.handlers[type]()
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 906, in _receive
+    ret.append(self._receive_one(c))
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 916, in _receive_one
+    response = c.parse_response()
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1540, in try_read
+    return conn.read_response(disconnect_on_error=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 874, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 347, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 357, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 260, in readline
+    self._read_from_socket()
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 213, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+ERROR 2023-05-30 19:48:58,514 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 2.00 seconds... (1/100)
+
+ERROR 2023-05-30 19:49:00,515 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 4.00 seconds... (2/100)
+
+ERROR 2023-05-30 19:49:04,517 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 6.00 seconds... (3/100)
+
+INFO 2023-05-31 13:33:40,107 MainThread 140153274763072 connection connection.py 22 celery.worker.consumer.connection start 4257 Connected to redis://localhost:6379//
+INFO 2023-05-31 13:33:40,309 MainThread 140153274763072 mingle mingle.py 40 celery.worker.consumer.mingle sync 4257 mingle: searching for neighbors
+INFO 2023-05-31 13:33:41,316 MainThread 140153274763072 mingle mingle.py 49 celery.worker.consumer.mingle sync 4257 mingle: all alone
+INFO 2023-05-31 13:34:48,200 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[b86ab479-4415-4ad2-9fa3-47b32db5733b] received
+INFO 2023-05-31 13:34:50,720 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs" was created successfully.
+INFO 2023-05-31 13:34:50,743 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs" information was saved successfully.
+INFO 2023-05-31 13:34:50,756 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[b86ab479-4415-4ad2-9fa3-47b32db5733b] succeeded in 2.5047587290000592s: {'state': 'SUCCESS', 'task_id': 'b86ab479-4415-4ad2-9fa3-47b32db5733b'}
+INFO 2023-05-31 13:35:08,784 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[635f5232-5775-4ea0-96d6-9ff3c56fef3b] received
+INFO 2023-05-31 13:35:08,838 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-hyn" was created successfully.
+INFO 2023-05-31 13:35:08,874 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-hyn" information was saved successfully.
+INFO 2023-05-31 13:35:08,881 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[635f5232-5775-4ea0-96d6-9ff3c56fef3b] succeeded in 0.09690674100011165s: {'state': 'SUCCESS', 'task_id': '635f5232-5775-4ea0-96d6-9ff3c56fef3b'}
+INFO 2023-05-31 13:35:23,441 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[44e693dd-56de-42d4-8606-b1db3a8e3b35] received
+INFO 2023-05-31 13:35:23,604 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-wyz-mdx" was created successfully.
+INFO 2023-05-31 13:35:23,625 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-wyz-mdx" information was saved successfully.
+INFO 2023-05-31 13:35:23,649 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLASTn alignments[71c665fd-cb98-43f9-9111-f168f8dec03d] received
+INFO 2023-05-31 13:35:23,667 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating tBLASTn alignments[3beaeb13-4637-474c-80cf-4216858c6251] received
+INFO 2023-05-31 13:35:23,712 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating tBLASTx alignments[47f4a7cb-f639-4628-bfa2-0f63cc98c0f6] received
+INFO 2023-05-31 13:35:23,729 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[44e693dd-56de-42d4-8606-b1db3a8e3b35] succeeded in 0.28828926400001365s: {'state': 'SUCCESS', 'task_id': '44e693dd-56de-42d4-8606-b1db3a8e3b35'}
+INFO 2023-05-31 13:35:25,007 MainThread 140153274763072 tasks tasks.py 659 blast_db_creator update_tblastn_alignments 4262 Succesfully updated alignments results using "tblastn" program.
+INFO 2023-05-31 13:35:25,021 MainThread 140153274763072 tasks tasks.py 583 blast_db_creator update_tblastx_alignments 4260 Succesfully updated alignments results using "tblastx" program.
+INFO 2023-05-31 13:35:25,033 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4260 Task Updating tBLASTx alignments[47f4a7cb-f639-4628-bfa2-0f63cc98c0f6] succeeded in 1.3195377120000558s: {'state': 'SUCCESS', 'task_id': '47f4a7cb-f639-4628-bfa2-0f63cc98c0f6'}
+INFO 2023-05-31 13:35:25,037 MainThread 140153274763072 tasks tasks.py 732 blast_db_creator update_blastn_alignments 4259 Succesfully updated alignments results using "blastn" program.
+INFO 2023-05-31 13:35:25,045 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4259 Task Updating BLASTn alignments[71c665fd-cb98-43f9-9111-f168f8dec03d] succeeded in 1.3950228109999898s: {'state': 'SUCCESS', 'task_id': '71c665fd-cb98-43f9-9111-f168f8dec03d'}
+INFO 2023-05-31 13:35:25,054 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4262 Task Updating tBLASTn alignments[3beaeb13-4637-474c-80cf-4216858c6251] succeeded in 1.3849864539999999s: {'state': 'SUCCESS', 'task_id': '3beaeb13-4637-474c-80cf-4216858c6251'}
+INFO 2023-05-31 13:35:39,333 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[be5d3655-f01e-4f5f-9578-c5f58281d872] received
+INFO 2023-05-31 13:35:39,454 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-qg0" was created successfully.
+INFO 2023-05-31 13:35:39,465 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-qg0" information was saved successfully.
+INFO 2023-05-31 13:35:39,503 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[be5d3655-f01e-4f5f-9578-c5f58281d872] succeeded in 0.16916104500000984s: {'state': 'SUCCESS', 'task_id': 'be5d3655-f01e-4f5f-9578-c5f58281d872'}
+INFO 2023-05-31 13:44:32,226 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[2964a876-b2d0-4bfa-a683-ed750820457d] received
+INFO 2023-05-31 13:44:32,301 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-hyn-lam" was created successfully.
+INFO 2023-05-31 13:44:32,325 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "slime_molds_db_private-uzs-hyn-lam" information was saved successfully.
+INFO 2023-05-31 13:44:32,336 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[2964a876-b2d0-4bfa-a683-ed750820457d] succeeded in 0.10905921799985663s: {'state': 'SUCCESS', 'task_id': '2964a876-b2d0-4bfa-a683-ed750820457d'}
+INFO 2023-05-31 14:17:58,440 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Creating a BLAST database[7a440559-ae87-42ca-bbb3-44a6f5f7e000] received
+INFO 2023-05-31 14:17:58,593 MainThread 140153274763072 tasks tasks.py 54 blast_db_creator createdb_task 4261 BLAST database: "fungi-database" was created successfully.
+INFO 2023-05-31 14:17:58,612 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Creating a BLAST database[7a440559-ae87-42ca-bbb3-44a6f5f7e000] succeeded in 0.17119664900019416s: {'state': 'SUCCESS', 'task_id': '7a440559-ae87-42ca-bbb3-44a6f5f7e000'}
+INFO 2023-05-31 14:19:53,466 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[b1f832a0-8e83-41a7-9451-e3d9d78c0c4b] received
+INFO 2023-05-31 14:19:53,507 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-e2n" was created successfully.
+INFO 2023-05-31 14:19:53,522 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-e2n" information was saved successfully.
+INFO 2023-05-31 14:19:53,529 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[b1f832a0-8e83-41a7-9451-e3d9d78c0c4b] succeeded in 0.06261835099940072s: {'state': 'SUCCESS', 'task_id': 'b1f832a0-8e83-41a7-9451-e3d9d78c0c4b'}
+INFO 2023-05-31 14:21:50,100 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[a99b6ae2-6d63-496e-aaf2-e8814e7cf185] received
+INFO 2023-05-31 14:21:50,178 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk" was created successfully.
+INFO 2023-05-31 14:21:50,190 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk" information was saved successfully.
+INFO 2023-05-31 14:21:50,211 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[a99b6ae2-6d63-496e-aaf2-e8814e7cf185] succeeded in 0.10965514200051985s: {'state': 'SUCCESS', 'task_id': 'a99b6ae2-6d63-496e-aaf2-e8814e7cf185'}
+INFO 2023-05-31 14:22:10,034 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[34dc630b-56eb-4059-bd65-4b5cb01bb7f2] received
+INFO 2023-05-31 14:22:10,105 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-9ai" was created successfully.
+INFO 2023-05-31 14:22:10,130 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-9ai" information was saved successfully.
+INFO 2023-05-31 14:22:10,137 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[34dc630b-56eb-4059-bd65-4b5cb01bb7f2] succeeded in 0.10241003299961449s: {'state': 'SUCCESS', 'task_id': '34dc630b-56eb-4059-bd65-4b5cb01bb7f2'}
+INFO 2023-05-31 14:22:49,572 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[6d2cb883-d05d-4817-bcad-7889d7ab01d0] received
+INFO 2023-05-31 14:22:49,621 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-9ai-zcs" was created successfully.
+INFO 2023-05-31 14:22:49,641 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-9ai-zcs" information was saved successfully.
+INFO 2023-05-31 14:22:49,652 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[6d2cb883-d05d-4817-bcad-7889d7ab01d0] succeeded in 0.07882213300035801s: {'state': 'SUCCESS', 'task_id': '6d2cb883-d05d-4817-bcad-7889d7ab01d0'}
+INFO 2023-05-31 14:23:42,109 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[fbe96143-f45e-4ebd-874d-af5e81f31901] received
+INFO 2023-05-31 14:23:42,164 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-e45" was created successfully.
+INFO 2023-05-31 14:23:42,180 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-e45" information was saved successfully.
+INFO 2023-05-31 14:23:42,186 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[fbe96143-f45e-4ebd-874d-af5e81f31901] succeeded in 0.07637132400031987s: {'state': 'SUCCESS', 'task_id': 'fbe96143-f45e-4ebd-874d-af5e81f31901'}
+INFO 2023-05-31 14:23:55,489 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[1ddd556a-f89a-4d60-b223-36392b32ad91] received
+INFO 2023-05-31 14:23:55,540 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-jcx" was created successfully.
+INFO 2023-05-31 14:23:55,552 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-jcx" information was saved successfully.
+INFO 2023-05-31 14:23:55,558 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[1ddd556a-f89a-4d60-b223-36392b32ad91] succeeded in 0.06741506300022593s: {'state': 'SUCCESS', 'task_id': '1ddd556a-f89a-4d60-b223-36392b32ad91'}
+INFO 2023-05-31 14:24:26,001 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Updating BLAST database[0fa47fde-3de3-4d62-86a0-2692d8f5f42e] received
+INFO 2023-05-31 14:24:26,062 MainThread 140153274763072 tasks tasks.py 334 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-jcx-94b" was created successfully.
+INFO 2023-05-31 14:24:26,082 MainThread 140153274763072 tasks tasks.py 354 blast_db_creator createdb_update_task 4261 BLAST database: "fungi-database-atk-jcx-94b" information was saved successfully.
+INFO 2023-05-31 14:24:26,087 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Updating BLAST database[0fa47fde-3de3-4d62-86a0-2692d8f5f42e] succeeded in 0.0856121050001093s: {'state': 'SUCCESS', 'task_id': '0fa47fde-3de3-4d62-86a0-2692d8f5f42e'}
+INFO 2023-05-31 14:36:39,082 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Generating batch tBLASTn alignments[063d5eb2-3b79-4b56-a2b2-83eba74edb9f] received
+INFO 2023-05-31 14:36:39,314 MainThread 140153274763072 tasks tasks.py 977 blast_db_creator batch_tblastn_alignments 4261 Batch alignment generation for many BLAST databases using "tblastn" program was successful.
+INFO 2023-05-31 14:36:39,321 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Generating batch tBLASTn alignments[063d5eb2-3b79-4b56-a2b2-83eba74edb9f] succeeded in 0.23915807799949107s: {'state': 'SUCCESS', 'task_id': '063d5eb2-3b79-4b56-a2b2-83eba74edb9f'}
+INFO 2023-05-31 14:40:30,066 MainThread 140153274763072 strategy strategy.py 161 celery.worker.strategy task_message_handler 4257 Task Generating batch tBLASTn alignments[09f77b10-da96-446b-91b3-b878e9c6127a] received
+INFO 2023-05-31 14:40:30,253 MainThread 140153274763072 tasks tasks.py 977 blast_db_creator batch_tblastn_alignments 4261 Batch alignment generation for many BLAST databases using "tblastn" program was successful.
+INFO 2023-05-31 14:40:30,260 MainThread 140153274763072 trace trace.py 131 celery.app.trace info 4261 Task Generating batch tBLASTn alignments[09f77b10-da96-446b-91b3-b878e9c6127a] succeeded in 0.1934121820004293s: {'state': 'SUCCESS', 'task_id': '09f77b10-da96-446b-91b3-b878e9c6127a'}
+INFO 2023-06-01 11:17:45,038 MainThread 140379476825920 connection connection.py 22 celery.worker.consumer.connection start 5899 Connected to redis://localhost:6379//
+INFO 2023-06-01 11:17:45,069 MainThread 140379476825920 mingle mingle.py 40 celery.worker.consumer.mingle sync 5899 mingle: searching for neighbors
+INFO 2023-06-01 11:17:46,079 MainThread 140379476825920 mingle mingle.py 49 celery.worker.consumer.mingle sync 5899 mingle: all alone
+INFO 2023-06-01 11:19:56,413 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[4c19b2e4-7395-47f9-a943-2ccdc6d90b74] received
+INFO 2023-06-01 11:19:59,073 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-5ep" was created successfully.
+INFO 2023-06-01 11:19:59,099 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-5ep" information was saved successfully.
+INFO 2023-06-01 11:19:59,134 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[4c19b2e4-7395-47f9-a943-2ccdc6d90b74] succeeded in 2.7196746300000996s: {'state': 'SUCCESS', 'task_id': '4c19b2e4-7395-47f9-a943-2ccdc6d90b74'}
+INFO 2023-06-01 11:20:20,699 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[9d7028c3-2d28-4323-882e-add5b6f07cb2] received
+INFO 2023-06-01 11:20:20,774 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq" was created successfully.
+INFO 2023-06-01 11:20:20,804 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq" information was saved successfully.
+INFO 2023-06-01 11:20:20,841 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[9d7028c3-2d28-4323-882e-add5b6f07cb2] succeeded in 0.14035819799983074s: {'state': 'SUCCESS', 'task_id': '9d7028c3-2d28-4323-882e-add5b6f07cb2'}
+INFO 2023-06-01 11:20:47,333 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[76a49baa-f1ed-4a25-9eb3-b8fe1be6a1b9] received
+INFO 2023-06-01 11:20:47,400 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-6ke" was created successfully.
+INFO 2023-06-01 11:20:47,426 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-6ke" information was saved successfully.
+INFO 2023-06-01 11:20:47,454 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[76a49baa-f1ed-4a25-9eb3-b8fe1be6a1b9] succeeded in 0.11997021300021515s: {'state': 'SUCCESS', 'task_id': '76a49baa-f1ed-4a25-9eb3-b8fe1be6a1b9'}
+INFO 2023-06-01 11:25:19,994 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[47f62619-f065-46a5-9e20-6bd0911b2ecd] received
+INFO 2023-06-01 11:25:20,079 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-qqa" was created successfully.
+INFO 2023-06-01 11:25:20,093 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-qqa" information was saved successfully.
+INFO 2023-06-01 11:25:20,103 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[47f62619-f065-46a5-9e20-6bd0911b2ecd] succeeded in 0.09841146600047068s: {'state': 'SUCCESS', 'task_id': '47f62619-f065-46a5-9e20-6bd0911b2ecd'}
+INFO 2023-06-01 11:25:49,386 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[08063623-dbeb-4731-81e2-6a6e1986ca07] received
+INFO 2023-06-01 11:25:49,448 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-col" was created successfully.
+INFO 2023-06-01 11:25:49,481 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-col" information was saved successfully.
+INFO 2023-06-01 11:25:49,494 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[08063623-dbeb-4731-81e2-6a6e1986ca07] succeeded in 0.10750680699948134s: {'state': 'SUCCESS', 'task_id': '08063623-dbeb-4731-81e2-6a6e1986ca07'}
+INFO 2023-06-01 11:26:21,876 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[b249d525-5448-4781-a7b0-99a3c323969e] received
+INFO 2023-06-01 11:26:21,931 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-6ke-rbe" was created successfully.
+INFO 2023-06-01 11:26:22,016 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-6ke-rbe" information was saved successfully.
+INFO 2023-06-01 11:26:22,084 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[b249d525-5448-4781-a7b0-99a3c323969e] succeeded in 0.2071435340003518s: {'state': 'SUCCESS', 'task_id': 'b249d525-5448-4781-a7b0-99a3c323969e'}
+INFO 2023-06-01 11:26:44,167 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Updating BLAST database[5aabcf88-8c36-443f-9626-46a5bba3f764] received
+INFO 2023-06-01 11:26:44,222 MainThread 140379476825920 tasks tasks.py 334 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-col-kqf" was created successfully.
+INFO 2023-06-01 11:26:44,242 MainThread 140379476825920 tasks tasks.py 354 blast_db_creator createdb_update_task 5907 BLAST database: "fungi-database-mhq-col-kqf" information was saved successfully.
+INFO 2023-06-01 11:26:44,248 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Updating BLAST database[5aabcf88-8c36-443f-9626-46a5bba3f764] succeeded in 0.07947219899961055s: {'state': 'SUCCESS', 'task_id': '5aabcf88-8c36-443f-9626-46a5bba3f764'}
+INFO 2023-06-01 11:30:21,316 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Creating a BLAST database[d6d4a523-2a64-4a61-845e-edf71b0085f9] received
+INFO 2023-06-01 11:30:21,370 MainThread 140379476825920 tasks tasks.py 54 blast_db_creator createdb_task 5907 BLAST database: "gram_positives-database" was created successfully.
+INFO 2023-06-01 11:30:21,378 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Creating a BLAST database[d6d4a523-2a64-4a61-845e-edf71b0085f9] succeeded in 0.06101572199986549s: {'state': 'SUCCESS', 'task_id': 'd6d4a523-2a64-4a61-845e-edf71b0085f9'}
+INFO 2023-06-01 11:33:40,629 MainThread 140379476825920 strategy strategy.py 161 celery.worker.strategy task_message_handler 5899 Task Generating batch BLASTn alignments[92d4f16b-c913-4adb-8f02-3a82020ad6b5] received
+INFO 2023-06-01 11:33:41,709 MainThread 140379476825920 tasks tasks.py 793 blast_db_creator batch_blastn_alignments 5907 Batch alignment generation for many BLAST databases using "blastn" program was successful.
+INFO 2023-06-01 11:33:41,734 MainThread 140379476825920 trace trace.py 131 celery.app.trace info 5907 Task Generating batch BLASTn alignments[92d4f16b-c913-4adb-8f02-3a82020ad6b5] succeeded in 1.1038598529994488s: {'state': 'SUCCESS', 'task_id': '92d4f16b-c913-4adb-8f02-3a82020ad6b5'}

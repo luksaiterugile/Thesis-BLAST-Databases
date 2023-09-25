@@ -1,0 +1,187 @@
+BLASTX 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+
+Database: cyanobacteria-blast-database
+           5 sequences; 1,480 total letters
+
+
+
+Query= AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase
+A, complete cds
+
+Length=3219
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]   18.5       4.3  
+WP_190630793.1 MULTISPECIES: orange carotenoid protein N-terminal...  18.1       4.5  
+WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protei...  18.5       4.6  
+WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein [Cyano...  17.3       10.0 
+
+
+>WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+Length=424
+
+ Score = 18.5 bits (36),  Expect = 4.3, Method: Compositional matrix adjust.
+ Identities = 7/10 (70%), Positives = 8/10 (80%), Gaps = 0/10 (0%)
+ Frame = +3
+
+Query  768  AQAVLLAHNP  797
+            A AVL+A NP
+Sbjct  74   ADAVLIASNP  83
+
+
+>WP_190630793.1 MULTISPECIES: orange carotenoid protein N-terminal 
+domain-containing protein [Cyanobacteria]
+Length=147
+
+ Score = 18.1 bits (35),  Expect = 4.5, Method: Compositional matrix adjust.
+ Identities = 6/18 (33%), Positives = 10/18 (56%), Gaps = 0/18 (0%)
+ Frame = -1
+
+Query  1263  RDLMHGVDRTLQQLHQEV  1210
+             RD++ G D    Q +Q +
+Sbjct  73    RDILAGADTRFTQAYQTL  90
+
+
+>WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protein 
+[Cyanobacteria]
+Length=476
+
+ Score = 18.5 bits (36),  Expect = 4.6, Method: Compositional matrix adjust.
+ Identities = 6/11 (55%), Positives = 8/11 (73%), Gaps = 0/11 (0%)
+ Frame = +1
+
+Query  232  SSNNLKWKWNT  264
+            SSNN  W+W+ 
+Sbjct  387  SSNNGGWQWSA  397
+
+
+ Score = 17.3 bits (33),  Expect = 8.5, Method: Compositional matrix adjust.
+ Identities = 12/50 (24%), Positives = 23/50 (46%), Gaps = 7/50 (14%)
+ Frame = -1
+
+Query  2595  LLIGSLGTQDHVLNDSWQDHDWNHTHENEDHRVLDDDWHCPQTHHQWGNT  2446
+             +++ S  T+D ++N  WQ   W   +  +  R++D D        QW  +
+Sbjct  356   MIVASFLTKDLIVN--WQ---WGEKYFMQ--RLVDGDLSSNNGGWQWSAS  398
+
+
+>WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein [Cyanobacteria]
+Length=259
+
+ Score = 17.3 bits (33),  Expect = 10.0, Method: Compositional matrix adjust.
+ Identities = 18/67 (27%), Positives = 24/67 (36%), Gaps = 5/67 (7%)
+ Frame = +1
+
+Query  1828  IPHNKAGNINNGVFNESTKADFEFIGL-----LDADQQPHPDFLKRVMPYFYSDEGAELA  1992
+             IPH +      G   +S  A  E++GL     L   Q   P  L  V      D  A+  
+Sbjct  186   IPHVEPLPAEVGSRAQSLLAIREYLGLVSYAGLGRFQGESPQTLPEVAREMAEDFPADRC  245
+
+Query  1993  FVQTPQF  2013
+             F+   Q 
+Sbjct  246   FMTAEQL  252
+
+
+
+Lambda      K        H        a         alpha
+   0.318    0.134    0.401    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1277370
+
+
+Query= DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit
+ribosomal RNA gene, partial sequence
+
+Length=3193
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  27.3       0.006
+WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protei...  19.6       1.7  
+WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein [Cyano...  19.2       2.0  
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 27.3 bits (59),  Expect = 0.006, Method: Compositional matrix adjust.
+ Identities = 19/62 (31%), Positives = 26/62 (42%), Gaps = 1/62 (2%)
+ Frame = +2
+
+Query  2981  NEEFLVVARHQRATNASLPFVHTARRCYRL-GFTVTRSEAMGTTPHGVGTTAEVLITVRP  3157
+             N  F +       TN + P  +T      + GF +T ++AM T P   G    V  TV P
+Sbjct  77    NSRFAISTTELGFTNENAPLDYTYTMTAGVSGFEITSTQAMPTNPALRGYAGVVFATVDP  136
+
+Query  3158  RG  3163
+              G
+Sbjct  137   SG  138
+
+
+>WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protein 
+[Cyanobacteria]
+Length=476
+
+ Score = 19.6 bits (39),  Expect = 1.7, Method: Compositional matrix adjust.
+ Identities = 14/31 (45%), Positives = 15/31 (48%), Gaps = 2/31 (6%)
+ Frame = +2
+
+Query  3032  LPFVHTARRCYRLGFTVTRSEAMGTTPHGVG  3124
+             L F H  RR  RLG  V  + A   TP  VG
+Sbjct  5     LLFWH--RRDLRLGDNVGLAAARDRTPQVVG  33
+
+
+>WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein [Cyanobacteria]
+Length=259
+
+ Score = 19.2 bits (38),  Expect = 2.0, Method: Compositional matrix adjust.
+ Identities = 7/13 (54%), Positives = 8/13 (62%), Gaps = 0/13 (0%)
+ Frame = -3
+
+Query  1958  LPHTEPQPNPEGS  1920
+             +PH EP P   GS
+Sbjct  186   IPHVEPLPAEVGS  198
+
+
+ Score = 17.3 bits (33),  Expect = 9.8, Method: Compositional matrix adjust.
+ Identities = 7/15 (47%), Positives = 7/15 (47%), Gaps = 0/15 (0%)
+ Frame = -1
+
+Query  2461  CNFSEVQGESRWTLP  2417
+                   QGES  TLP
+Sbjct  216   AGLGRFQGESPQTLP  230
+
+
+
+Lambda      K        H        a         alpha
+   0.318    0.134    0.401    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1266165
+
+
+  Database: cyanobacteria-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 1,480
+  Number of sequences in database:  5
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 12
+Window for multiple hits: 40

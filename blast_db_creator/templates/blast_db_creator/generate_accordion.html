@@ -1,0 +1,98 @@
+{% load filters %}
+
+{% block alignment_info %}
+<div>
+    <p class="mb-1 mt-1"><b>Query file: </b>{{ alignments.0.query_file|basename}}</p>
+    <p class="mb-1"><b>Date: </b>{{ alignments.0.created }}</p>
+    {% if alignments.0.task %}
+    <p class="mb-1"><b>Task: </b>{{ alignments.0.task | upper }}</p>
+    {% else %}
+    <p class="mb-1"><b>Task: </b>-</p>
+    {% endif %}
+</div>
+<div class="accordion mt-4" id="multidbs">
+    {% for db in databases %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="{{ db.database.slug }}">
+                <button 
+                    class="accordion-button collapsed" 
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#db{{ db.database.slug }}"
+                    aria-expanded="false"
+                    aria-controls="db{{ db.database.slug }}">
+                    BLAST Database:&nbsp;<b>{{ db.database.slug }}</b>
+                </button>
+            </h2>
+            <div 
+                id="db{{ db.database.slug}}"
+                class="accordion-collapse collapse"
+                aria-labelledby="{{ db.database.slug }}"
+                data-bs-parent="#multidbs">
+                <div class="accordion-body">
+                    {% for align in alignments %}
+                        {% if index_of_multi == align.batch_align.unique_db_index %}
+                            {% if align.database.slug == db.database.slug %}
+                                <b>Output filename: </b>{{align.output_filename}}
+                                <div class="mt-3">
+                                    <div 
+                                        class="button-row mb-3"
+                                        style="margin-left:9em">
+                                        <button 
+                                            class="btn btn-outline-dark 
+                                            first"
+                                            id="first{{ db.database.slug }}">
+                                            First
+                                        </button>
+                                        <button 
+                                            class="btn btn-dark
+                                             previous" 
+                                            id="prev{{ db.database.slug }}">
+                                            Previous
+                                        </button>
+                                        <span class="mx-2">Page</span>
+                                        <input 
+                                            type="number"
+                                            id="section_num{{ db.database.slug }}"
+                                            class="form-group col-lg-1">
+                                        <span class="mx-2">of</span>
+                                        <span class="me-2" 
+                                            id="all_section_num{{ db.database.slug }}">
+                                        </span>
+                                        <button 
+                                            class="btn btn-dark next"
+                                            id="next{{ db.database.slug }}">
+                                            Next
+                                        </button>
+                                        <button 
+                                            class="btn btn-outline-dark
+                                             last"
+                                            id="last{{ db.database.slug }}">
+                                            Last
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="file-content position-content">
+                                    <div class="mt-4">
+                                        {% for blastdb, results in alignment_content.items %}
+                                            {% if blastdb == db.database.slug %}
+                                            {% for chunk in results %}
+                                            <section
+                                                id="{{ forloop.counter }}-{{ db.database.slug }}"
+                                                class="section">
+                                                <pre>{{chunk}}</pre>
+                                            </section>
+                                            {% endfor %} 
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}                            
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

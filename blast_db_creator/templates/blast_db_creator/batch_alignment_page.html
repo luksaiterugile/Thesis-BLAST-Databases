@@ -1,0 +1,83 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% load filters %}
+{% block head %}
+<title>Batch alignment</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div
+    class="usage-margin treetop" 
+    data-aos="fade-up">
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div 
+                        class="alert {{ message.tags }} alert-dismissible fade show" 
+                        role="alert">
+                        <div class="text-break">
+                            {{ message }}
+                        </div>
+                        <button 
+                            type="button" 
+                            class="btn-close" 
+                            data-bs-dismiss="alert" 
+                            aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="tree-margin">
+        <b>BLAST Databases used: </b>
+        {% for db in databases %}
+            {{ db.database.slug }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+        <br>
+        {% if blastp_alignments %}
+            {% with alignments=blastp_alignments %} 
+            {% include "blast_db_creator/generate_accordion.html" with alignments=alignments %}
+            {% endwith %}
+        {% elif blastn_alignments %}
+            {% with alignments=blastn_alignments %} 
+            {% include "blast_db_creator/generate_accordion.html" with alignments=alignments %}
+            {% endwith %}
+        {% elif tblastn_alignments %}
+            {% with alignments=tblastn_alignments %} 
+            {% include "blast_db_creator/generate_accordion.html" with alignments=alignments %}
+            {% endwith %}
+        {% elif tblastx_alignments %}
+            {% with alignments=tblastx_alignments %} 
+            {% include "blast_db_creator/generate_accordion.html" with alignments=alignments %}
+            {% endwith %}
+        {% elif blastx_alignments %}
+            {% with alignments=blastx_alignments %} 
+            {% include "blast_db_creator/generate_accordion.html" with alignments=alignments %}
+            {% endwith %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script 
+	src="{% static '/blast_db_creator/js/script_multi_view_result.js' %}" 
+	type="text/javascript">
+</script>
+{% endblock %}

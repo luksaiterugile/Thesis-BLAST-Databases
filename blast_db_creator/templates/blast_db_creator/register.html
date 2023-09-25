@@ -1,0 +1,70 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block head %}
+<title>Register</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block form %}
+<div 
+    class="d-flex align-items-center justify-content-center" 
+    data-aos="fade-up">
+    <form 
+        class="top-margin-f bottom-margin" 
+        method="POST" 
+        style="background-color: #B3C4BC">
+        {% csrf_token %}
+        <div class="border border-light p-4">
+            <h4 class="d-flex align-items-center justify-content-center mb-3">
+                Register
+            </h4>
+            <div 
+                class="border border-light p-4 " 
+                style="background-color: #e7e8e6">
+                <div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="container-fluid p-0">
+                                <div 
+                                    class="alert 
+                                        {{ message.tags }} 
+                                        alert-dismissible fade show" 
+                                    role="alert">
+                                    <div class="text-break">
+										{{ message }}
+									</div>
+                                    <button 
+                                        type="button" 
+                                        class="btn-close" 
+                                        data-bs-dismiss="alert" 
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {{ form| crispy }} <br>
+                <div class="col text-center">
+                    <button 
+                        class="btn btn-dark btn-block w-100" 
+                        type="submit" 
+                        name="createuser">
+                        Register
+                    </button>
+                    <div class="mt-2">
+                        <span>Already have an account?</span>
+                        <a href="{% url 'login' %}">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

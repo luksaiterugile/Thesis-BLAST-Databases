@@ -1,0 +1,125 @@
+TBLASTN 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+
+Database: flagellates-blast-database
+           3 sequences; 9,080 total letters
+
+
+
+Query= WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein
+[Cyanobacteria]
+
+Length=259
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.323    0.136    0.411    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 629300
+
+
+Query= WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+
+Length=424
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.319    0.134    0.383    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1091664
+
+
+Query= WP_190630793.1 MULTISPECIES: orange carotenoid protein N-terminal
+domain-containing protein [Cyanobacteria]
+
+Length=147
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.327    0.136    0.401    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 320650
+
+
+Query= WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protein
+[Cyanobacteria]
+
+Length=476
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.320    0.137    0.437    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1237665
+
+
+Query= WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein
+[Cyanobacteria]
+
+Length=174
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.320    0.131    0.377    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 396032
+
+
+  Database: flagellates-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 9,080
+  Number of sequences in database:  3
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 21
+Window for multiple hits: 40

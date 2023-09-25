@@ -1,0 +1,451 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% block head %}
+<title>BLAST result</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div data-aos="fade-up">
+    <div class="top-margin ms-3">
+        <h3>Public BLAST Results</h3>
+        <h5>Choose BLAST type:</h5>
+    </div>
+    <p class="mt-2 ms-3">
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastn_table" 
+            aria-expanded="false" 
+            aria-controls="blastn_table">View BLASTn Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastx_table" 
+            aria-expanded="false" 
+            aria-controls="blastx_table">View BLASTx Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#tblastx_table" 
+            aria-expanded="false" 
+            aria-controls="tblastx_table">View tBLASTx Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#tblastn_table" 
+            aria-expanded="false" 
+            aria-controls="tblastn_table">View tBLASTn Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastp_table" 
+            aria-expanded="false" 
+            aria-controls="blastp_table">View BLASTp Results</button>
+    </p>
+</div>
+
+
+<div class="collapse" id="blastn_table">
+    <div class="container-fluid">
+        <table 
+            id="public_blastn" 
+            class="table table-hover border border-light table-sm" 
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result_nucl in blastn_results %}
+                {% if result_nucl.blastn_request.database.user_input.public_or_private == 'public' %}
+                <tr>
+                    <td 
+                        class="align-middle wrap">
+                        {{ result_nucl.blastn_request.database.user_input.name_of_blast_db }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result_nucl.blastn_request.output_filename }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result_nucl.blastn_request.filename }}
+                    </td>
+                    <td class="align-middle">Nucleotide</td>
+                    {% if result_nucl.blastn_request.task == 'blastn' %}
+                    <td class="align-middle">BLASTn</td>
+                    {% elif result_nucl.blastn_request.task == 'blastn-short' %}
+                    <td class="align-middle">BLASTn-short</td>
+                    {% elif result_nucl.blastn_request.task == 'dc-megablast' %}
+                    <td class="align-middle">Dc-megaBLAST</td>
+                    {% elif result_nucl.blastn_request.task == 'megablast' %}
+                    <td class="align-middle">MegaBLAST</td>
+                    {% else %}
+                    <td class="align-middle">RmBLASTn</td>
+                    {% endif %}
+                    <td 
+                        class="align-middle">
+                        {{ result_nucl.blastn_request.created }}
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table" 
+                            href="{{ result_nucl.blastn_result.url }}">
+                            Download result</a>
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a class="btn 
+                            btn-light 
+                            fit-button-table
+                             d-flex justify-content-center align-items-center" 
+                        href="{% url 'taskresult' result_nucl.blastn_request.output_filename %}"
+                        >
+                        View result</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="blastp_table">
+    <div class="container-fluid">
+        <table 
+            id="public_blastp" 
+            class="table table-hover border border-light table-sm" 
+            style="background-color: #B3C4BC">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result_prot in blastp_results %}
+                {% if result_prot.blastp_request.database.user_input.public_or_private == 'public' %}
+                <tr>
+                    <td 
+                        class="align-middle wrap">
+                        {{ result_prot.blastp_request.database.user_input.name_of_blast_db }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result_prot.blastp_request.output_filename }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result_prot.blastp_request.filename}}
+                    </td>
+                    <td class="align-middle">Protein</td>
+                    {% if result_prot.blastp_request.task == 'blastp' %}
+                    <td class="align-middle">BLASTp</td>
+                    {% elif result_prot.blastp_request.task == 'blastp-fast' %}
+                    <td class="align-middle">BLASTp-fast</td>
+                    {% else %}
+                    <td class="align-middle">BLASTp-short</td>
+                    {% endif %}
+                    <td 
+                        class="align-middle">
+                        {{ result_prot.blastp_request.created }}
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table" 
+                            href="{{ result_prot.blastp_result.url }}">
+                            Download result</a>
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn 
+                                btn-light 
+                                fit-button-table
+                                d-flex 
+                                justify-content-center align-items-center" 
+                            href="{% url 'taskresult' result_prot.blastp_request.output_filename %}"
+                            >
+                            View result</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="tblastn_table">
+    <div class="container-fluid">
+        <table 
+            id="public_tblastn" 
+            class="table table-hover border border-light table-sm" 
+            style="background-color: #B3C4BC">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in tblastn_results %}
+                {% if result.tblastn_request.database.user_input.public_or_private == 'public' %}
+                <tr>
+                    <td 
+                        class="align-middle wrap">
+                        {{ result.tblastn_request.database.user_input.name_of_blast_db }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.tblastn_request.output_filename }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.tblastn_request.filename}}
+                    </td>
+                    <td class="align-middle">Nucleotide</td>
+                    {% if result.tblastn_request.task == 'tblastn' %}
+                    <td class="align-middle">tBLASTn</td>
+                    {% elif result.tblastn_request.task == 'tblastn-fast' %}
+                    <td class="align-middle">tBLASTn-fast</td>
+                    {% endif %}
+                    <td 
+                        class="align-middle">
+                        {{ result.tblastn_request.created }}
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table" 
+                            href="{{ result.tblastn_result.url }}">
+                            Download result</a>
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                            href="{% url 'taskresult' result.tblastn_request.output_filename %}"
+                            >
+                            View result</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="tblastx_table">
+    <div class="container-fluid">
+        <table 
+            id="public_tblastx" 
+            class="table table-hover border border-light table-sm" 
+            style="background-color: #B3C4BC">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in tblastx_results %}
+                {% if result.tblastx_request.database.user_input.public_or_private == 'public' %}
+                <tr>
+                    <td 
+                        class="align-middle wrap">
+                        {{ result.tblastx_request.database.user_input.name_of_blast_db }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.tblastx_request.output_filename }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.tblastx_request.filename}}
+                    </td>
+                    <td class="align-middle">Nucleotide</td>
+                    <td 
+                        class="align-middle">
+                        {{ result.tblastx_request.created }}
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table" 
+                            href="{{ result.tblastx_result.url }}">
+                            Download result</a>
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                            href="{% url 'taskresult' result.tblastx_request.output_filename %}"
+                            >
+                            View result</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="blastx_table">
+    <div class="container-fluid">
+        <table 
+            id="public_blastx" 
+            class="table table-hover border border-light table-sm" 
+            style="background-color: #B3C4BC">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in blastx_results %}
+                {% if result.blastx_request.database.user_input.public_or_private == 'public' %}
+                <tr>
+                    <td 
+                        class="align-middle wrap">
+                        {{ result.blastx_request.database.user_input.name_of_blast_db }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.blastx_request.output_filename }}
+                    </td>
+                    <td
+                        class="align-middle wrap">
+                        {{ result.blastx_request.filename}}
+                    </td>
+                    <td class="align-middle">Protein</td>
+                    {% if result.blastx_request.task == 'blastx' %}
+                    <td class="align-middle">BLASTx</td>
+                    {% elif result.blastx_request.task == 'blastx-fast' %}
+                    <td class="align-middle">BLASTx-fast</td>
+                    {% endif %}
+                    <td 
+                        class="align-middle">
+                        {{ result.blastx_request.created }}
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table" 
+                            href="{{ result.blastx_result.url }}">
+                            Download result</a>
+                    </td>
+                    <td 
+                        class="align-middle">
+                        <a 
+                            class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                            href="{% url 'taskresult' result.blastx_request.output_filename %}"
+                            >
+                            View result</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script>
+    $('#public_blastn').DataTable(
+        {
+            "autoWidth": false,
+            order: [[5, 'desc']]
+        }   
+    );
+    $('#public_blastp').DataTable(
+        {
+            "autoWidth": false,
+            order: [[5, 'desc']]
+        }   
+    );
+    $('#public_tblastn').DataTable(
+        {
+            "autoWidth": false,
+            order: [[5, 'desc']]
+        }   
+    );
+    $('#public_tblastx').DataTable(
+        {
+            "autoWidth": false,
+            order: [[4, 'desc']]
+        }   
+    );
+    $('#public_blastx').DataTable(
+        {
+            "autoWidth": false,
+            order: [[5, 'desc']]
+        }   
+    );
+    
+</script>
+<script>
+    $('.change').click( function(e) {
+            $('.collapse').collapse('hide');
+    });
+</script>
+{% endblock %}

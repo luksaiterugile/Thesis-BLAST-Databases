@@ -1,0 +1,72 @@
+WARNING 2023-05-30 19:37:40,391 MainThread 140455105001280 tasks tasks.py 121 blast_db_creator blastp_task 6040 Could not search for similar sequences using "blastp" program.Errors received: BLAST query error: CFastaReader: Near line 1, there's a line that doesn't look like plausible data, but it's not marked as defline or comment.
+....
+WARNING 2023-05-30 19:38:19,401 MainThread 140455105001280 tasks tasks.py 172 blast_db_creator blastx_task 6040 Could not search for similar sequences using "blastx" program.Errors received: FASTA-Reader: Ignoring invalid residues at position(s): On line 2: 5, 9, 12-13, 17, 19-20, 27, 32, 40, 46, 51, 53, 55-57, 60, 64-65, 68, 70
+FASTA-Reader: Ignoring invalid residues at position(s): On line 3: 1, 5-6, 10, 13, 19-20, 28, 33, 37, 39-41, 4....
+WARNING 2023-05-30 19:40:23,958 MainThread 140455105001280 tasks tasks.py 327 blast_db_creator createdb_update_task 6040 Could not update BLAST database: "slime_molds_db_private". Error from "makeblastdb" program: FASTA-Reader: Ignoring invalid residues at position(s): On line 2: 2-3, 8-9, 11-15, 17, 22-23, 33-34, 37, 41,  There might be protein sequences in the input file. Please choose BLAST database type as protein or upload a new file, containing nucleotid... 
+WARNING 2023-05-30 19:48:58,423 MainThread 140455105001280 consumer consumer.py 354 celery.worker.consumer.consumer on_connection_error_after_connected 6036 consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 332, in start
+    blueprint.start(self)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/consumer/consumer.py", line 628, in start
+    c.loop(*c.loop_args())
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/celery/worker/loops.py", line 97, in asynloop
+    next(loop)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/asynchronous/hub.py", line 362, in create_loop
+    cb(*cbargs)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 1326, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 562, in on_readable
+    chan.handlers[type]()
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 906, in _receive
+    ret.append(self._receive_one(c))
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/kombu/transport/redis.py", line 916, in _receive_one
+    response = c.parse_response()
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/client.py", line 1540, in try_read
+    return conn.read_response(disconnect_on_error=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 874, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 347, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 357, in _read_response
+    raw = self._buffer.readline()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 260, in readline
+    self._read_from_socket()
+  File "/home/rugile/Desktop/Tikrinimas_05-30/blast-databases/BLAST_Databases/lib/python3.11/site-packages/redis/connection.py", line 213, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+ERROR 2023-05-30 19:48:58,514 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 2.00 seconds... (1/100)
+
+ERROR 2023-05-30 19:49:00,515 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 4.00 seconds... (2/100)
+
+ERROR 2023-05-30 19:49:04,517 MainThread 140455105001280 consumer consumer.py 451 celery.worker.consumer.consumer _error_handler 6036 consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 6.00 seconds... (3/100)
+

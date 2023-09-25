@@ -1,0 +1,1198 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% block head %}
+<title>BLAST results</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div data-aos="fade-up">
+    <div class="top-margin ms-3">
+        <h3>My BLAST Results</h3>
+        <h5>Choose BLAST type:</h5>
+    </div>
+
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div 
+                        class="alert {{ message.tags }} 
+                            alert-dismissible fade show" 
+                        role="alert">
+                        <div class="text-break">
+                            {{ message }}
+                        </div>
+                        <button 
+                            type="button" 
+                            class="btn-close" 
+                            data-bs-dismiss="alert" 
+                            aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <p class="mt-2 ms-3">
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastn_table" 
+            aria-expanded="false" 
+            aria-controls="blastn_table">View BLASTn Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastx_table" 
+            aria-expanded="false" 
+            aria-controls="blastx_table">View BLASTx Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#tblastx_table" 
+            aria-expanded="false" 
+            aria-controls="tblastx_table">View tBLASTx Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#tblastn_table" 
+            aria-expanded="false" 
+            aria-controls="tblastn_table">View tBLASTn Results</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#blastp_table" 
+            aria-expanded="false" 
+            aria-controls="blastp_table">View BLASTp Results</button>
+    </p>
+</div>
+
+<div class="collapse" id="blastn_table">
+    <div class="container-fluid">
+        <div class="mb-3">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark fit" 
+                id="deletealignmentblastn"
+                value="Delete selected alignments">
+        </div>
+        <table 
+            id="private_blastn" 
+            class="table table-hover border border-light table-sm"
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_alln"
+                            class="checkbox form-check-input"
+                            value="selectallblastn"
+                        />
+                    </th>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result_nucl in blastn_results %}
+                    {% if result_nucl.blastn_request.database %}
+                        {% if result_nucl.blastn_request.database.user_input %}
+                            {% if result_nucl.blastn_request.database.user_input.public_or_private == 'private' %}
+                                {% if result_nucl.blastn_request.database.user_input.user == user %}
+                                    <tr id="{{ result_nucl.blastn_request.output_filename }}"
+                                    >
+                                        <td class="align-middle">
+                                            <input 
+                                                type="checkbox" 
+                                                value="
+                                                {{ result_nucl.blastn_request.output_filename }}" 
+                                                id="delete_alignmentn"
+                                                name="blastn_alignment_names[]"
+                                                class="
+                                                    checkbox-blastn 
+                                                    form-check-input"
+                                            >
+                                        </td>
+                                        <td 
+                                            class="align-middle wrap">
+                                            {{ result_nucl.blastn_request.database.user_input.name_of_blast_db }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result_nucl.blastn_request.output_filename }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result_nucl.blastn_request.filename }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            Nucleotide</td>
+                                        {% if result_nucl.blastn_request.task == 'blastn' %}
+                                        <td 
+                                            class="align-middle">
+                                            BLASTn</td>
+                                        {% elif result_nucl.blastn_request.task == 'blastn-short' %}
+                                        <td 
+                                            class="align-middle">
+                                            BLASTn-short</td>
+                                        {% elif result_nucl.blastn_request.task == 'dc-megablast' %}
+                                        <td 
+                                            class="align-middle">
+                                            Dc-MegaBLAST</td>
+                                        {% elif result_nucl.blastn_request.task == 'megablast' %}
+                                        <td 
+                                            class="align-middle">
+                                            MegaBLAST</td>
+                                        {% else %}
+                                        <td 
+                                            class="align-middle">
+                                            RmBLASTn</td>
+                                        {% endif %}
+                                        <td 
+                                            class="align-middle">
+                                            {{ result_nucl.blastn_request.created }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            <a 
+                                                class="
+                                                    btn btn-light 
+                                                    fit-button-table" 
+                                                href="{{ result_nucl.blastn_result.url }}">
+                                                Download result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="
+                                                    btn 
+                                                    btn-light 
+                                                    fit-button-table 
+                                                    d-flex 
+                                                    justify-content-center 
+                                                    align-items-center" 
+                                                href="{% url 'taskresult' result_nucl.blastn_request.output_filename %}">
+                                                View result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for parent, alignments in to_update_blastn.items %}
+                                                {% if parent == result_nucl.blastn_request.database.slug %}
+                                                    {% for align in alignments %}
+                                                        {% if align == result_nucl.blastn_request.output_filename %}
+                                                        <a 
+                                                            class="
+                                                                btn 
+                                                                btn-light 
+                                                                fit-button-table" 
+                                                            href="{% url 'updatealign' result_nucl.blastn_request.output_filename %}"
+                                                            value="{{ result_nucl.blastn_request.database.slug }}">
+                                                            Update alignment
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}                    
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="blastp_table">
+    <div class="container-fluid">
+        <div class="mb-3">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark fit" 
+                id="deletealignmentblastp"
+                value="Delete selected alignments">
+        </div>
+        <table 
+            id="private_blastp" 
+            class="table table-hover border border-light table-sm"
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_allp"
+                            class="checkbox form-check-input"
+                            value="selectallblastp"
+                        />
+                    </th>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result_prot in blastp_results %}
+                    {% if result_prot.blastp_request.database %}
+                        {% if result_prot.blastp_request.database.user_input %}
+                            {% if result_prot.blastp_request.database.user_input.public_or_private == 'private' %}
+                                {% if result_prot.blastp_request.database.user_input.user == user %}
+                                    <tr id="{{ result_prot.blastp_request.output_filename }}">
+                                        <td class="align-middle">
+                                            <input 
+                                                type="checkbox" 
+                                                value="{{ result_prot.blastp_request.output_filename }}" 
+                                                id="delete_alignmentp"
+                                                class="checkbox-blastp form-check-input"
+                                                name="blastp_alignment_names[]"
+                                            >
+                                        </td>
+                                        <td class="align-middle wrap">
+                                            {{ result_prot.blastp_request.database.user_input.name_of_blast_db }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result_prot.blastp_request.output_filename }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result_prot.blastp_request.filename }}
+                                        </td>
+                                        <td class="align-middle">Protein</td>
+                                        {% if result_prot.blastp_request.task == 'blastp' %}
+                                        <td class="align-middle">BLASTp</td>
+                                        {% elif result_prot.blastp_request.task == 'blastp-fast' %}
+                                        <td class="align-middle">
+                                            BLASTp-fast</td>
+                                        {% else %}
+                                        <td class="align-middle">
+                                            BLASTp-short</td>
+                                        {% endif %}
+                                        <td class="align-middle">
+                                            {{ result_prot.blastp_request.created }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table" 
+                                                href="{{ result_prot.blastp_result.url }}">
+                                                Download result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                                                href="{% url 'taskresult' result_prot.blastp_request.output_filename %}">
+                                                View result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for parent, alignments in to_update_blastp.items %}
+                                                {% if parent == result_prot.blastp_request.database.slug %}
+                                                    {% for align in alignments %}
+                                                        {% if align == result_prot.blastp_request.output_filename %}
+                                                        <a 
+                                                            class="btn btn-light fit-button-table" 
+                                                            href="{% url 'updatealign' result_prot.blastp_request.output_filename %}"
+                                                            value="{{ result_prot.blastp_request.database.slug }}">
+                                                            Update alignment
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="tblastn_table">
+    <div class="container-fluid">
+        <div class="mb-3">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark fit" 
+                id="deletealignmenttblastn"
+                value="Delete selected alignments">
+        </div>
+        <table 
+            id="private_tblastn" 
+            class="table table-hover border border-light table-sm"
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_alltblastn"
+                            class="checkbox form-check-input"
+                            value="selectalltblastn"
+                        />
+                    </th>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in tblastn_results %}
+                    {% if result.tblastn_request.database %}
+                        {% if result.tblastn_request.database.user_input %}
+                            {% if result.tblastn_request.database.user_input.public_or_private == 'private' %}
+                                {% if result.tblastn_request.database.user_input.user == user %}
+                                    <tr id="{{ result.tblastn_request.output_filename }}"
+                                    >
+                                        <td class="align-middle">
+                                            <input 
+                                                type="checkbox" 
+                                                value="{{ result.tblastn_request.output_filename }}" 
+                                                id="delete_alignmenttblastn"
+                                                name="tblastn_alignment_names[]"
+                                                class="checkbox-tblastn form-check-input"
+                                            >
+                                        </td>
+                                        <td 
+                                            class="align-middle wrap">
+                                            {{ result.tblastn_request.database.user_input.name_of_blast_db }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.tblastn_request.output_filename }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.tblastn_request.filename }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            Nucleotide</td>
+                                        {% if result.tblastn_request.task == 'tblastn' %}
+                                        <td 
+                                            class="align-middle">
+                                            tBLASTn</td>
+                                        {% elif result.tblastn_request.task == 'tblastn-fast' %}
+                                        <td 
+                                            class="align-middle">
+                                            tBLASTn-fast</td>
+                                        {% endif %}
+                                        <td 
+                                            class="align-middle">
+                                            {{ result.tblastn_request.created }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table" 
+                                                href="{{ result.tblastn_result.url }}">
+                                                Download result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                                                href="{% url 'taskresult' result.tblastn_request.output_filename %}">
+                                                View result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for parent, alignments in to_update_tblastn.items %}
+                                                {% if parent == result.tblastn_request.database.slug %}
+                                                    {% for align in alignments %}
+                                                        {% if align == result.tblastn_request.output_filename %}
+                                                        <a 
+                                                            class="btn btn-light fit-button-table" 
+                                                            href="{% url 'updatealign' result.tblastn_request.output_filename %}"
+                                                            value="{{ result.tblastn_request.database.slug }}">
+                                                            Update alignment
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="tblastx_table">
+    <div class="container-fluid">
+        <div class="mb-3">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark fit" 
+                id="deletealignmenttblastx"
+                value="Delete selected alignments">
+        </div>
+        <table 
+            id="private_tblastx" 
+            class="table table-hover border border-light table-sm"
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_alltblastx"
+                            class="checkbox form-check-input"
+                            value="selectalltblastx"
+                        />
+                    </th>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in tblastx_results %}
+                    {% if result.tblastx_request.database %}
+                        {% if result.tblastx_request.database.user_input %}
+                            {% if result.tblastx_request.database.user_input.public_or_private == 'private' %}
+                                {% if result.tblastx_request.database.user_input.user == user %}
+                                    <tr id="{{ result.tblastx_request.output_filename }}"
+                                    >
+                                        <td class="align-middle">
+                                            <input 
+                                                type="checkbox" 
+                                                value="{{ result.tblastx_request.output_filename }}" 
+                                                id="delete_alignmenttblastx"
+                                                name="tblastx_alignment_names[]"
+                                                class="checkbox-tblastx form-check-input"
+                                            >
+                                        </td>
+                                        <td 
+                                            class="align-middle wrap">
+                                            {{ result.tblastx_request.database.user_input.name_of_blast_db }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.tblastx_request.output_filename }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.tblastx_request.filename }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            Nucleotide</td>
+                                        <td 
+                                            class="align-middle">
+                                            {{ result.tblastx_request.created }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table" 
+                                                href="{{ result.tblastx_result.url }}">
+                                                Download result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                                                href="{% url 'taskresult' result.tblastx_request.output_filename %}">
+                                                View result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for parent, alignments in to_update_tblastx.items %}
+                                                {% if parent == result.tblastx_request.database.slug %}
+                                                    {% for align in alignments %}
+                                                        {% if align == result.tblastx_request.output_filename %}
+                                                        <a 
+                                                            class="btn btn-light fit-button-table" 
+                                                            href="{% url 'updatealign' result.tblastx_request.output_filename %}"
+                                                            value="{{ result.tblastx_request.database.slug }}">
+                                                            Update alignment
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="collapse" id="blastx_table">
+    <div class="container-fluid">
+        <div class="mb-3">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark fit" 
+                id="deletealignmentblastx"
+                value="Delete selected alignments">
+        </div>
+        <table 
+            id="private_blastx" 
+            class="table table-hover border border-light table-sm"
+            style="background-color: #B3C4BC;">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_allblastx"
+                            class="checkbox form-check-input"
+                            value="selectallblastx"
+                        />
+                    </th>
+                    <th scope="col">Database name</th>
+                    <th scope="col">Output filename</th>
+                    <th scope="col" style="width: 20%">Query file</th>
+                    <th scope="col">Database type</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Submitted at</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in blastx_results %}
+                    {% if result.blastx_request.database %}
+                        {% if result.blastx_request.database.user_input %}
+                            {% if result.blastx_request.database.user_input.public_or_private == 'private' %}
+                                {% if result.blastx_request.database.user_input.user == user %}
+                                    <tr id="{{ result.blastx_request.output_filename }}"
+                                    >
+                                        <td class="align-middle">
+                                            <input 
+                                                type="checkbox" 
+                                                value="{{ result.blastx_request.output_filename }}" 
+                                                id="delete_alignmentblastx"
+                                                name="blastx_alignment_names[]"
+                                                class="checkbox-blastx form-check-input"
+                                            >
+                                        </td>
+                                        <td 
+                                            class="align-middle wrap">
+                                            {{ result.blastx_request.database.user_input.name_of_blast_db }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.blastx_request.output_filename }}
+                                        </td>
+                                        <td
+                                            class="align-middle wrap">
+                                            {{ result.blastx_request.filename }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            Protein</td>
+                                        {% if result.blastx_request.task == 'blastx' %}
+                                        <td 
+                                            class="align-middle">
+                                            BLASTx</td>
+                                        {% elif result.blastx_request.task == 'blastx-fast' %}
+                                        <td 
+                                            class="align-middle">
+                                            BLASTx-fast</td>
+                                        {% endif %}
+                                        <td 
+                                            class="align-middle">
+                                            {{ result.blastx_request.created }}
+                                        </td>
+                                        <td 
+                                            class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table" 
+                                                href="{{ result.blastx_result.url }}">
+                                                Download result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a 
+                                                class="btn btn-light fit-button-table d-flex justify-content-center align-items-center" 
+                                                href="{% url 'taskresult' result.blastx_request.output_filename %}">
+                                                View result
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for parent, alignments in to_update_blastx.items %}
+                                                {% if parent == result.blastx_request.database.slug %}
+                                                    {% for align in alignments %}
+                                                        {% if align == result.blastx_request.output_filename %}
+                                                        <a 
+                                                            class="btn btn-light fit-button-table" 
+                                                            href="{% url 'updatealign' result.blastx_request.output_filename %}"
+                                                            value="{{ result.blastx_request.database.slug }}">
+                                                            Update alignment
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    {% endif %}
+{% endblock %}
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script>
+    var private_blastn_table = $('#private_blastn').DataTable(
+        {
+            "autoWidth": false,
+            order: [[6, 'desc']]
+        }
+    );
+    var private_blastp_table = $('#private_blastp').DataTable(
+        {
+            "autoWidth": false,
+            order: [[6, 'desc']]
+        }  
+    );
+    var private_tblastn_table = $('#private_tblastn').DataTable(
+        {
+            "autoWidth": false,
+            order: [[6, 'desc']]
+        }   
+    );
+    var private_tblastx_table = $('#private_tblastx').DataTable(
+        {
+            "autoWidth": false,
+            order: [[5, 'desc']]
+        }   
+    );
+    var private_blastx_table = $('#private_blastx').DataTable(
+        {
+            "autoWidth": false,
+            order: [[6, 'desc']]
+        }   
+    );
+</script>
+
+<script>
+    $(document).ready(function(){
+        // Show only one collapse at a time
+        $('.change').click( function(e) {
+            $('.collapse').collapse('hide');
+        });
+
+        // Reset checkboxes if collapse was collapsed
+        $('.collapse').on('hidden.bs.collapse', function () {
+            if (!$(this).hasClass('show')) {
+                if($(this).attr('id') == "blastn_table"){
+                    private_blastn_table.$('.checkbox-blastn').each(function(){
+                        this.checked = false;
+                    });
+                    $('#select_alln').prop('checked', false);
+                }
+                else if($(this).attr('id') == "blastp_table"){
+                    private_blastp_table.$('.checkbox-blastp').each(function(){
+                        this.checked = false;
+                    });
+                    $('#select_allp').prop('checked', false);
+                }
+                else if($(this).attr('id') == "tblastn_table"){
+                    private_tblastn_table.$('.checkbox-tblastn').each(function(){
+                        this.checked = false;
+                    });
+                    $('#select_alltblastn').prop('checked', false);
+                }
+                else if($(this).attr('id') == "tblastx_table"){
+                    private_tblastx_table.$('.checkbox-tblastx').each(function(){
+                        this.checked = false;
+                    });
+                    $('#select_alltblastx').prop('checked', false);
+                }
+                else if($(this).attr('id') == "blastx_table"){
+                    private_blastx_table.$('.checkbox-blastx').each(function(){
+                        this.checked = false;
+                    });
+                    $('#select_allblastx').prop('checked', false);
+                }
+            }
+        });
+        
+
+        function call_ajax_blastn(blastn_alignment_names){
+            $.ajax({
+                url: ".",
+                method: "POST",
+                data: {
+                    blastn_alignment_names,
+                    csrfmiddlewaretoken:
+                        $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(response){
+                    for(var item = 0; 
+                        item < blastn_alignment_names.length; item++){
+                        private_blastn_table.row(
+                            $('tr#' + blastn_alignment_names[item])
+                            ).remove().draw(false)
+                        
+                    }
+                }
+            })
+        }
+
+        var selected_values_blastn = [];
+        $('#deletealignmentblastn').click(function(){
+            if(confirm("Are you sure you want to " + 
+                "delete selected nucleotide alignments?"))
+            {
+                var blastn_alignment_names = [];
+                private_blastn_table.$(':checkbox:checked').each(function(i){
+                    blastn_alignment_names[i] = $(this).val().trim()
+                })
+
+                if(blastn_alignment_names.length === 0){
+                    window.alert("Please select nucleotide" + 
+                    " alignments you want to delete")
+                }
+                else{
+                    if(blastn_alignment_names[0] == 'selectallblastn'){
+                        blastn_alignment_names.shift();
+                        call_ajax_blastn(blastn_alignment_names);
+                        $('#select_alln').prop('checked', false);
+                    }
+                    else{
+                        call_ajax_blastn(blastn_alignment_names);
+                        $('#select_alln').prop('checked', false);
+                    }
+                }
+            }
+        })
+        $('#select_alln').click(function(){
+            selected_values_blastn = [];
+            if(this.checked){
+                private_blastn_table.$('.checkbox-blastn').each(function(){
+                    if($(this).val() != 'selectallblastn' && 
+                       $(this).val() != 'selectallblastp'&&
+                       $(this).val() != 'selectalltblastn' &&
+                       $(this).val() != 'selectalltblastx' &&
+                       $(this).val() != 'selectallblastx'){
+                        this.checked = true;
+                        selected_values_blastn.push($(this).val());
+                    }
+                });
+            }
+            else{
+                private_blastn_table.$('.checkbox-blastn').each(function(){
+                    this.checked = false;
+                });
+            }
+        })
+
+        private_blastn_table.$('.checkbox-blastn').click(function(){
+            if(private_blastn_table.$('.checkbox-blastn:checked').length == 
+            private_blastn_table.$('.checkbox-blastn').length){
+                $('#select_alln').prop('checked', true);
+            }
+            else{
+                $('#select_alln').prop('checked', false);
+            }
+        })
+    })
+</script>
+<script>
+     $(document).ready(function(){
+        function call_ajax_blastp(blastp_alignment_names){
+            $.ajax({
+                url: ".",
+                method: "POST",
+                data: {
+                    blastp_alignment_names,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(response){
+                    for(var item = 0; 
+                    item < blastp_alignment_names.length; item++){
+                        private_blastp_table.row(
+                            $('tr#' + blastp_alignment_names[item])
+                            ).remove().draw(false)
+                    }
+                }
+            })
+        }
+
+        var selected_values_blastp = [];
+        $('#deletealignmentblastp').click(function(){
+            if(confirm("Are you sure you want to delete selected" +
+             " protein alignments?"))
+            {
+                var blastp_alignment_names = [];
+                private_blastp_table.$(':checkbox:checked').each(function(i){
+                    blastp_alignment_names[i] = $(this).val().trim()
+                })
+                if(blastp_alignment_names.length === 0){
+                    window.alert("Please select protein alignments" + 
+                    " you want to delete")
+                }
+                else{
+                    if(blastp_alignment_names[0] == 'selectallblastp'){
+                        blastp_alignment_names.shift();
+                        call_ajax_blastp(blastp_alignment_names);
+                        $('#select_allp').prop('checked', false);
+                    }
+                    else{
+                        call_ajax_blastp(blastp_alignment_names);
+                        $('#select_allp').prop('checked', false);
+                    }
+                }
+            }
+        })
+
+        $('#select_allp').click(function(){
+            selected_values_blastp = [];
+            if(this.checked){
+                private_blastp_table.$('.checkbox-blastp').each(function(){
+                    if($(this).val() != 'selectallblastn' && 
+                       $(this).val() != 'selectallblastp'&&
+                       $(this).val() != 'selectalltblastn' &&
+                       $(this).val() != 'selectalltblastx' &&
+                       $(this).val() != 'selectallblastx'){
+                        this.checked = true;
+                        selected_values_blastp.push($(this).val());
+                    }
+                });
+            }
+            else{
+                private_blastp_table.$('.checkbox-blastp').each(function(){
+                    this.checked = false;
+                });
+            }
+        })
+
+        private_blastp_table.$('.checkbox-blastp').click(function(){
+            if(private_blastp_table.$('.checkbox-blastp:checked').length == 
+                private_blastp_table.$('.checkbox-blastp').length){
+                $('#select_allp').prop('checked', true);
+            }
+            else{
+                $('#select_allp').prop('checked', false);
+            }
+        })
+    })
+</script>
+
+<script>
+    $(document).ready(function(){
+       function call_ajax_tblastn(tblastn_alignment_names){
+           $.ajax({
+               url: ".",
+               method: "POST",
+               data: {
+                   tblastn_alignment_names,
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+               },
+               success:function(response){
+                   for(var item = 0; 
+                   item < tblastn_alignment_names.length; item++){
+                       private_tblastn_table.row(
+                           $('tr#' + tblastn_alignment_names[item])
+                           ).remove().draw(false)
+                   }
+               }
+           })
+       }
+
+       var selected_values_tblastn = [];
+       $('#deletealignmenttblastn').click(function(){
+           if(confirm("Are you sure you want to delete selected" +
+            " protein alignments?"))
+           {
+               var tblastn_alignment_names = [];
+               private_tblastn_table.$(':checkbox:checked').each(function(i){
+                   tblastn_alignment_names[i] = $(this).val().trim()
+               })
+               if(tblastn_alignment_names.length === 0){
+                   window.alert("Please select alignments" + 
+                   " you want to delete")
+               }
+               else{
+                   if(tblastn_alignment_names[0] == 'selectalltblastn'){
+                       tblastn_alignment_names.shift();
+                       call_ajax_tblastn(tblastn_alignment_names);
+                       $('#select_alltblastn').prop('checked', false);
+                   }
+                   else{
+                       call_ajax_tblastn(tblastn_alignment_names);
+                       $('#select_alltblastn').prop('checked', false);
+                   }
+               }
+           }
+       })
+
+       $('#select_alltblastn').click(function(){
+           selected_values_tblastn = [];
+           if(this.checked){
+                private_tblastn_table.$('.checkbox-tblastn').each(function(){
+                   if($(this).val() != 'selectallblastn' && 
+                       $(this).val() != 'selectallblastp'&&
+                       $(this).val() != 'selectalltblastn' &&
+                       $(this).val() != 'selectalltblastx' &&
+                       $(this).val() != 'selectallblastx'){
+                       this.checked = true;
+                       selected_values_tblastn.push($(this).val());
+                   }
+                });
+           }
+           else{
+                private_tblastn_table.$('.checkbox-tblastn').each(function(){
+                   this.checked = false;
+                });
+           }
+       })
+
+       private_tblastn_table.$('.checkbox-tblastn').click(function(){
+           if(private_tblastn_table.$('.checkbox-tblastn:checked').length == 
+                private_tblastn_table.$('.checkbox-tblastn').length){
+               $('#select_alltblastn').prop('checked', true);
+           }
+           else{
+               $('#select_alltblastn').prop('checked', false);
+           }
+       })
+   })
+</script>
+
+<script>
+    $(document).ready(function(){
+       function call_ajax_tblastx(tblastx_alignment_names){
+           $.ajax({
+               url: ".",
+               method: "POST",
+               data: {
+                tblastx_alignment_names,
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+               },
+               success:function(response){
+                   for(var item = 0; 
+                   item < tblastx_alignment_names.length; item++){
+                       private_tblastx_table.row(
+                           $('tr#' + tblastx_alignment_names[item])
+                           ).remove().draw(false)
+                   }
+               }
+           })
+       }
+
+       var selected_values_tblastx = [];
+       $('#deletealignmenttblastx').click(function(){
+           if(confirm("Are you sure you want to delete selected" +
+            " protein alignments?"))
+           {
+               var tblastx_alignment_names = [];
+               private_tblastx_table.$(':checkbox:checked').each(function(i){
+                   tblastx_alignment_names[i] = $(this).val().trim()
+               })
+               if(tblastx_alignment_names.length === 0){
+                   window.alert("Please select alignments" + 
+                   " you want to delete")
+               }
+               else{
+                   if(tblastx_alignment_names[0] == 'selectalltblastx'){
+                       tblastx_alignment_names.shift();
+                       call_ajax_tblastx(tblastx_alignment_names);
+                       $('#select_alltblastx').prop('checked', false);
+                   }
+                   else{
+                       call_ajax_tblastx(tblastx_alignment_names);
+                       $('#select_alltblastx').prop('checked', false);
+                   }
+               }
+           }
+       })
+
+       $('#select_alltblastx').click(function(){
+           selected_values_tblastx = [];
+           if(this.checked){
+                private_tblastx_table.$('.checkbox-tblastx').each(function(){
+                   if($(this).val() != 'selectallblastn' && 
+                       $(this).val() != 'selectallblastp'&&
+                       $(this).val() != 'selectalltblastn' &&
+                       $(this).val() != 'selectalltblastx' &&
+                       $(this).val() != 'selectallblastx'){
+                       this.checked = true;
+                       selected_values_tblastx.push($(this).val());
+                   }
+                });
+           }
+           else{
+                private_tblastx_table.$('.checkbox-tblastx').each(function(){
+                   this.checked = false;
+                });
+           }
+       })
+
+        private_tblastx_table.$('.checkbox-tblastx').click(function(){
+           if(private_tblastx_table.$('.checkbox-tblastx:checked').length == 
+           private_tblastx_table.$('.checkbox-tblastx').length){
+               $('#select_alltblastx').prop('checked', true);
+           }
+           else{
+               $('#select_alltblastx').prop('checked', false);
+           }
+        })
+   })
+</script>
+
+<script>
+    $(document).ready(function(){
+        function call_ajax_blastx(blastx_alignment_names){
+            $.ajax({
+                url: ".",
+                method: "POST",
+                data: {
+                blastx_alignment_names,
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(response){
+                    for(var item = 0; 
+                   item < blastx_alignment_names.length; item++){
+                       private_blastx_table.row(
+                           $('tr#' + blastx_alignment_names[item])
+                           ).remove().draw(false)
+                    }
+                }
+            })
+        }
+
+        var selected_values_blastx = [];
+        $('#deletealignmentblastx').click(function(){
+           if(confirm("Are you sure you want to delete selected" +
+            " protein alignments?"))
+            {
+               var blastx_alignment_names = [];
+                private_blastx_table.$(':checkbox:checked').each(function(i){
+                   blastx_alignment_names[i] = $(this).val().trim()
+                })
+                if(blastx_alignment_names.length === 0){
+                   window.alert("Please select alignments" + 
+                   " you want to delete")
+                }
+                else{
+                    if(blastx_alignment_names[0] == 'selectallblastx'){
+                       blastx_alignment_names.shift();
+                       call_ajax_blastx(blastx_alignment_names);
+                       $('#select_allblastx').prop('checked', false);
+                    }
+                   else{
+                       call_ajax_blastx(blastx_alignment_names);
+                       $('#select_allblastx').prop('checked', false);
+                    }
+                }
+            }
+        })
+
+        $('#select_allblastx').click(function(){
+           selected_values_blastx = [];
+            if(this.checked){
+                private_blastx_table.$('.checkbox-blastx').each(function(){
+                   if($(this).val() != 'selectallblastn' && 
+                       $(this).val() != 'selectallblastp'&&
+                       $(this).val() != 'selectalltblastn' &&
+                       $(this).val() != 'selectalltblastx' &&
+                       $(this).val() != 'selectallblastx'){
+                       this.checked = true;
+                       selected_values_blastx.push($(this).val());
+                    }
+                });
+            }
+           else{
+                private_blastx_table.$('.checkbox-blastx').each(function(){
+                   this.checked = false;
+                });
+            }
+        })
+
+        private_blastx_table.$('.checkbox-blastx').click(function(){
+            if(private_blastx_table.$('.checkbox-blastx:checked').length == 
+                private_blastx_table.$('.checkbox-blastx').length){
+               $('#select_allblastx').prop('checked', true);
+            }
+            else{
+               $('#select_allblastx').prop('checked', false);
+            }
+        })
+    })
+</script>
+
+{% endblock %}

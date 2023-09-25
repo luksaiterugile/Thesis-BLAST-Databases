@@ -1,0 +1,63 @@
+BLASTN 2.9.0+
+
+
+Reference: Zheng Zhang, Scott Schwartz, Lukas Wagner, and Webb
+Miller (2000), "A greedy algorithm for aligning DNA sequences", J
+Comput Biol 2000; 7(1-2):203-14.
+
+
+
+Database: flagellates-blast-database
+           3 sequences; 9,080 total letters
+
+
+
+Query= AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase
+A, complete cds
+
+Length=3219
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 28910858
+
+
+Query= DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit
+ribosomal RNA gene, partial sequence
+
+Length=3193
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 28676104
+
+
+  Database: flagellates-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 9,080
+  Number of sequences in database:  3
+
+
+
+Matrix: blastn matrix 1 -2
+Gap Penalties: Existence: 0, Extension: 2.5

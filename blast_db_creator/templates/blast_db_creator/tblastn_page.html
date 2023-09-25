@@ -1,0 +1,139 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+<title>tBLASTn</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div class="top-margin d-flex align-items-center justify-content-center mb-4">
+	<form 
+		method="post" 
+		enctype="multipart/form-data" 
+		style="background-color: #B3C4BC" 
+		data-aos="fade-up"
+		data-aos-delay="100">
+		{% csrf_token %}
+		<div class="border border-light p-4">
+			<h3 
+				class="text-center">
+				Translated BLAST: tblastn
+			</h3>
+			<div 
+				class="border border-light p-4" 
+				style="background-color: #e7e8e6">
+				<div class="mb-3">
+					{% if object %}
+						<span 
+							class="font-weight-bold wrap">
+							{% if object %}
+								BLAST Database: 
+								<b>{{ object.user_input.name_of_blast_db }}</b>
+							{% endif %}
+						</span>
+						{% if user.is_authenticated %}
+							{% if object %}
+								{% if object.user_input.public_or_private == "public" %}
+									<a 
+										href="{% url 'viewdb' %}">
+										<input 
+											type="button" 
+											value="Choose other BLAST database" 
+											class="btn btn-outline-dark ml-1" />
+									</a>
+								{% elif object.user_input.public_or_private == "private" %}
+									<a 
+									href="{% url 'privatedb' %}">
+									<input 
+										type="button" 
+										value="Choose other BLAST database" 
+										class="btn btn-outline-dark ml-1" />
+									</a>
+								{% endif %}
+							{% endif %}
+						{% else %}
+						<a 
+							href="{% url 'viewdb' %}">
+							<input 
+								type="button" 
+								value="Choose other BLAST database" 
+								class="btn btn-outline-dark ml-1" />
+						</a>
+						{% endif %}
+
+					{% elif multi_align %}
+						<span 
+							class="font-weight-bold">
+								BLAST Databases: 
+								{% for db in multi_align %}
+									<b>{{ db.database.slug }}{% if not forloop.last %},{% endif %}</b>
+								{% endfor %}
+						</span>
+							{% if user.is_authenticated %}
+								{% if multi_align %}
+									<a 
+										href="{% url 'privatedb' %}">
+										<input 
+											type="button" 
+											value="Choose other BLAST database" 
+											class="btn btn-outline-dark ml-1" />
+									</a>
+								{% endif %}
+							{% endif %}
+					{% endif %}
+				</div>
+				<div>
+					{% if messages %}
+						{% for message in messages %}
+							<div class="container-fluid p-0">
+								<div 
+									class="alert {{ message.tags }} alert-dismissible fade show" 
+									role="alert">
+									<div class="text-break">
+										{{ message }}
+									</div>
+									<button 
+										type="button" 
+										class="btn-close" 
+										data-bs-dismiss="alert" 
+										aria-label="Close">
+									</button>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+				{{ form|crispy }} <br>
+				<div class="col text-center">
+					<button 
+						class="btn btn-dark w-100" 
+						type="submit" 
+						name="upload"
+						id="submitform"
+						data-slug="{{ slug }}">
+						Upload
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+{% endblock %}
+
+{% block code %}
+<script>
+$('#submitform').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+</script>
+{% endblock %}

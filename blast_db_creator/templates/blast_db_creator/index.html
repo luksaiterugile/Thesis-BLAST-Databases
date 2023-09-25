@@ -1,0 +1,346 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<title>BLAST Databases</title>
+<link href="{% static '/blast_db_creator/css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div data-aos="fade-up" data-aos-delay="150">
+	<header class="py-5 index-margin">
+		<div class="container px-lg-5 ">
+			<div 
+			class="p-4 p-lg-5 rounded-3 text-center
+			background-index border border-white">
+				<div class="m-4 m-lg-5">
+					<h1 
+						class="display-5 fw-bold">Welcome to BLAST Databases
+					</h1>
+					<p class="fs-4">Create your own BLAST databases here!</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Page Content-->
+	<section class="pt-1">
+		<div class="container px-lg-5">
+			<!-- Page Features-->
+			<div class="row gx-lg-5">
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5
+							pt-0 pt-lg-0 border border-white">
+							<div 
+								class="feature feature-index text-white
+								rounded-3 mb-4 mt-n4">
+								<i class="bi bi-view-stacked text-dark"></i>
+							</div>
+							<h2 
+								class="fs-4 fw-bold">
+								<a 
+									href="{% url 'createuserdb' %}" 
+									class="text-dark">Create BLAST database
+								</a>
+							</h2>
+							<p 
+								class="mb-0">
+								Create a public or private BLAST database
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center
+						 p-4 p-lg-5 pt-0 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient 
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-file-earmark-lock text-dark">
+								</i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									id="privatedbredirect"
+									href="{% url 'privatedb' %}" 
+									class="text-dark">
+									View your private BLAST databases
+								</a>
+							</h2>
+							<p class="mb-0">
+								Look through your
+								private BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5
+							pt-0 pt-lg-0 border border-white">
+							<div 
+								class="feature feature-index bg-gradient 
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-border-style text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									id="privatealignredirect"
+									href="{% url 'blastresultuser' %}" 
+									class="text-dark">
+									View your private pairwise alignments
+								</a>
+							</h2>
+							<p class="mb-0">
+								Check out your pairwise alignment outcomes 
+								for private BLAST databases</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5
+							 pt-0 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient 
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-layers-half text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									id="publicdbredirect"
+									href="{% url 'viewdb' %}" 
+									class="text-dark">
+									View already created BLAST databases
+								</a>
+							</h2>
+							<p class="mb-0">
+								Look through public BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 pt-0 
+							pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-card-text text-dark text-dark">
+								</i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									id="publicalignredirect"
+									href="{% url 'blastresultpublic' %}" 
+									class="text-dark">
+									View public alignment results
+								</a>
+							</h2>
+							<p class="mb-0">
+								Check out all of the pairwise alignment 
+								outcomes for public BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 pt-0
+							 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient
+							 text-white rounded-3 mb-4 mt-n4">
+							 	<i class="bi bi-question text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'usage' %}" 
+									class="text-dark">
+									Usage
+								</a>
+							</h2>
+							<p class="mb-0">Need some help? Click here
+								for more information</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% else %}
+ <!-- Header-->
+ <div data-aos="fade-up" data-aos-delay="150">
+	<header class="py-5 index-margin">
+		<div class="container px-lg-5 ">
+			<div class="p-4 p-lg-5 rounded-3 text-center 
+				background-index border border-white">
+				<div class="m-4 m-lg-5">
+					<h1 class="display-5 fw-bold">
+						Welcome to BLAST Databases
+					</h1>
+					<p class="fs-4">Create your own BLAST databases here!</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Page Content-->
+	<section class="pt-1">
+		<div class="container px-lg-5">
+			<!-- Page Features-->
+			<div class="row gx-lg-5">
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100" >
+						<div class="card-body text-center p-4 p-lg-5 pt-0
+							pt-lg-0 border border-white">
+							<div class="feature feature-index text-white 
+								rounded-3 mb-4 mt-n4">
+								<i class="bi bi-view-stacked text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'createpublicdb' %}" 
+									class="text-dark">Create a BLAST database
+								</a>
+							</h2>
+							<p class="mb-0">Create a public BLAST database</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 pt-0
+							 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient 
+							text-white rounded-3 mb-4 mt-n4">
+							<i class="bi bi-search text-dark"></i></div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'viewdb' %}" 
+									class="text-dark">
+									View already created BLAST databases
+								</a>
+							</h2>
+							<p class="mb-0">
+								Look through all created BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 pt-0 
+							pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-card-text text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'blastresultpublic' %}" 
+									class="text-dark">
+									View alignment results
+								</a>
+							</h2>
+							<p class="mb-0">
+								Check out all of the pairwise alignment
+								outcomes for public BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 
+							pt-0 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient 
+								text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-person-square text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'register' %}" 
+									class="text-dark">Register
+								</a>
+							</h2>
+							<p class="mb-0">
+								Become a member and create
+								your own private BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 pt-0 
+							pt-lg-0 border border-white">
+							<div class="feature feature-index 
+								bg-gradient text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-box-arrow-in-right text-dark">
+								</i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a 
+									href="{% url 'login' %}" 
+									class="text-dark">Log in
+								</a>
+							</h2>
+							<p class="mb-0">
+								Logged users can create and use
+								private BLAST databases
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-xxl-4 mb-5">
+					<div class="card background-index border-0 h-100">
+						<div class="card-body text-center p-4 p-lg-5 
+							pt-0 pt-lg-0 border border-white">
+							<div class="feature feature-index bg-gradient 
+							text-white rounded-3 mb-4 mt-n4">
+								<i class="bi bi-question text-dark"></i>
+							</div>
+							<h2 class="fs-4 fw-bold">
+								<a
+									href="{% url 'usage' %}" 
+									class="text-dark">Usage
+								</a>
+							</h2>
+							<p class="mb-0">
+								Need some help? Click here for more information
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endif %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script src="{% static '/blast_db_creator/js/scripts.js' %}"></script>
+<script>
+$('#privatedbredirect').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+
+$('#publicdbredirect').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+
+$('#publicalignredirect').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+
+$('#privatealignredirect').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+</script>
+{% endblock %}

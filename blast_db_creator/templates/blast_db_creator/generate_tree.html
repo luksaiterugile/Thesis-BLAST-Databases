@@ -1,0 +1,26 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% block head %}
+<title>BLAST DB Tree</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+
+{% block content %}
+<div
+    class="usage-margin treetop" 
+    data-aos="fade-up">
+    <div class="tree-margin">
+        <h3>Generated tree for BLAST Database:<b> {{ father_db }}</b></h3>
+        <br>
+        <div class="accordion" id="tree">
+            {% include "blast_db_creator/recursive_tree_generator.html" with nested_dict=db_tree %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,7 @@
+WARNING 2023-05-30 19:00:01,410 Thread-2 (process_request_thread) 140685636413184 log log.py 241 django.request log_response 6046 Not Found: /favicon.ico
+WARNING 2023-05-30 19:00:01,411 Thread-2 (process_request_thread) 140685636413184 basehttp basehttp.py 212 django.server log_message 6046 "GET /favicon.ico HTTP/1.1" 404 6709
+WARNING 2023-05-31 14:35:40,584 Thread-7 (process_request_thread) 140013932553984 log log.py 241 django.request log_response 4740 Not Found: /favicon.ico
+WARNING 2023-05-31 14:35:40,615 Thread-7 (process_request_thread) 140013932553984 basehttp basehttp.py 212 django.server log_message 4740 "GET /favicon.ico HTTP/1.1" 404 6709
+WARNING 2023-06-01 11:18:57,495 Thread-2 (process_request_thread) 140468865971968 log log.py 241 django.request log_response 5919 Not Found: /favicon.ico
+WARNING 2023-06-01 11:20:49,845 Thread-1 (process_request_thread) 140468874364672 log log.py 241 django.request log_response 5919 Not Found: /task-list/
+WARNING 2023-06-01 11:20:49,848 Thread-1 (process_request_thread) 140468874364672 basehttp basehttp.py 212 django.server log_message 5919 "GET /task-list/ HTTP/1.1" 404 6706

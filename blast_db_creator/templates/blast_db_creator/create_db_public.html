@@ -1,0 +1,85 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+<title>BLAST Database Creator</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block form %}
+<div class="d-flex align-items-center justify-content-center top-margin-f mb-4"
+	id="data">
+	<form 
+		method="post" 
+		enctype="multipart/form-data" 
+		style="background-color: #B3C4BC" 
+		data-aos="fade-up">
+		{% csrf_token %}
+		<div class="border border-light p-4">
+			<h4 class="d-flex align-items-center justify-content-center mb-4">
+				Create a BLAST Database
+			</h4>
+			<div 
+				class="border border-light p-4" 
+				style="background-color: #e7e8e6">
+				<div>
+					{% if messages %}
+						{% for message in messages %}
+							<div class="container-fluid p-0">
+								<div 
+									class="alert 
+										{{ message.tags }} 
+										alert-dismissible fade show" 
+									role="alert"
+									>
+									<div class="text-break">
+										{{ message }}
+									</div>
+									<button 
+										type="button" 
+										class="btn-close" 
+										data-bs-dismiss="alert" 
+										aria-label="Close">
+									</button>
+								</div>
+							</div>
+						{% endfor %}
+        			{% endif %}
+				</div>
+				{{ form_public | crispy }} <br>
+				<div class="col text-center">
+					<button 
+						class="btn btn-dark w-100" 
+						type="submit"
+						id="create_db_p"
+						name="upload">
+						Upload
+					</button>
+				</div>
+			</div>
+			
+		</div>
+	</form>
+</div>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+	src="{% static '/blast_db_creator/js/script_createdb.js' %}" 
+	type="text/javascript">
+</script>
+{% endblock %}
+
+{% block code %}
+<script>
+	$('#create_db_p').click(function() {
+		$('#spinner').removeClass('d-none');
+		$('#overlay').removeClass('d-none');
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,466 @@
+TBLASTX 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+
+Database: slime_molds-blast-database
+           2 sequences; 6,412 total letters
+
+
+
+Query= LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET450
+CET450_Contig543, whole genome shotgun sequence
+
+Length=3024
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value  N
+
+DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit ribo...  23.8       0.29   1
+AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synth...  23.3       0.41   1
+
+
+>DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit 
+ribosomal RNA gene, partial sequence
+Length=3193
+
+ Score = 23.8 bits (43),  Expect = 0.29
+ Identities = 9/14 (64%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+ Frame = -3/-1
+
+Query  154   HKPSLTLLRTCYLL  113
+             H P LTLLR  Y L
+Sbjct  2644  HAPPLTLLRKVYQL  2603
+
+
+ Score = 20.3 bits (36),  Expect = 3.2
+ Identities = 7/10 (70%), Positives = 8/10 (80%), Gaps = 0/10 (0%)
+ Frame = +2/-2
+
+Query  74    AESRRRRSRQ  103
+             A S+RR SRQ
+Sbjct  2103  ALSKRRSSRQ  2074
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 5/10 (50%), Positives = 8/10 (80%), Gaps = 0/10 (0%)
+ Frame = -2/+3
+
+Query  1718  SSIACLFSVC  1689
+             S +AC ++VC
+Sbjct  2259  SKLACSYAVC  2288
+
+
+>AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase 
+A, complete cds
+Length=3219
+
+ Score = 23.3 bits (42),  Expect = 0.41
+ Identities = 7/10 (70%), Positives = 8/10 (80%), Gaps = 0/10 (0%)
+ Frame = -1/+2
+
+Query  2406  ICLFVIYLHL  2377
+             ICL +IY HL
+Sbjct  119   ICLVIIYAHL  148
+
+
+ Score = 23.3 bits (42),  Expect = 0.41
+ Identities = 9/22 (41%), Positives = 13/22 (59%), Gaps = 0/22 (0%)
+ Frame = +2/-2
+
+Query  1835  RTAVSCMKRKEKWIMTKIIRNV  1900
+             R+A S ++  EKW    + RNV
+Sbjct  1511  RSAASNVRYGEKWSSRSMARNV  1446
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 7/12 (58%), Positives = 9/12 (75%), Gaps = 0/12 (0%)
+ Frame = +2/+2
+
+Query  599  QKNTQTFCLVLL  634
+            Q  TQT CLV++
+Sbjct  101  QAATQTICLVII  136
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 5/7 (71%), Positives = 7/7 (100%), Gaps = 0/7 (0%)
+ Frame = -3/+1
+
+Query  478   SCIFPFI  458
+             SCI+PF+
+Sbjct  2404  SCIYPFL  2424
+
+
+ Score = 19.8 bits (35),  Expect = 4.5
+ Identities = 6/9 (67%), Positives = 7/9 (78%), Gaps = 0/9 (0%)
+ Frame = -3/-3
+
+Query  109  VGLSAPPPP  83
+            VG S+PP P
+Sbjct  598  VGGSSPPSP  572
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 4/6 (67%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+ Frame = +3/-2
+
+Query  2700  KYGERW  2717
+             +YGE+W
+Sbjct  1490  RYGEKW  1473
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 6/7 (86%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+ Frame = +2/+2
+
+Query  71   TAESRRR  91
+            TAE RRR
+Sbjct  281  TAERRRR  301
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 7/15 (47%), Positives = 10/15 (67%), Gaps = 0/15 (0%)
+ Frame = -1/-3
+
+Query  2358  RRTECLSYKKLLLEY  2314
+             R +ECL    +L+EY
+Sbjct  106   RLSECLLLLLMLMEY  62
+
+
+
+Lambda      K        H
+   0.343    0.177    0.657 
+
+
+Effective search space used: 2084073
+
+
+Query= LNVX01000613.1 Candidatus Endomicrobium trichonymphae strain CET450
+CET450_Contig692, whole genome shotgun sequence
+
+Length=3034
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value  N
+
+AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synth...  21.8       1.1    1
+DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit ribo...  20.8       2.3    1
+
+
+>AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase 
+A, complete cds
+Length=3219
+
+ Score = 21.8 bits (39),  Expect = 1.1
+ Identities = 7/8 (88%), Positives = 8/8 (100%), Gaps = 0/8 (0%)
+ Frame = +1/+1
+
+Query  2995  FSHTILKA  3018
+             FSHTIL+A
+Sbjct  781   FSHTILQA  804
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 6/11 (55%), Positives = 8/11 (73%), Gaps = 0/11 (0%)
+ Frame = +3/+3
+
+Query  2379  RCHSAASKKSP  2411
+             RC SAA+ + P
+Sbjct  1911  RCRSAATSRLP  1943
+
+
+ Score = 20.3 bits (36),  Expect = 3.2
+ Identities = 4/9 (44%), Positives = 9/9 (100%), Gaps = 0/9 (0%)
+ Frame = -2/+2
+
+Query  2133  ICATAKPQR  2107
+             +C+T++P+R
+Sbjct  1862  VCSTSRPRR  1888
+
+
+ Score = 20.3 bits (36),  Expect = 3.2
+ Identities = 7/17 (41%), Positives = 10/17 (59%), Gaps = 0/17 (0%)
+ Frame = +1/-2
+
+Query  1414  PPYWGNFVPGTSILFFF  1464
+             PP     +P + I+FFF
+Sbjct  410   PPLNPSLLPKSIIVFFF  360
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 5/7 (71%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+ Frame = -3/-1
+
+Query  2477  EDKREEH  2457
+             ED+RE H
+Sbjct  909   EDRRESH  889
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 5/8 (63%), Positives = 7/8 (88%), Gaps = 0/8 (0%)
+ Frame = +3/+1
+
+Query  2205  KLAIWLWQ  2228
+             KLA+W W+
+Sbjct  2749  KLAMWNWK  2772
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 5/5 (100%), Positives = 5/5 (100%), Gaps = 0/5 (0%)
+ Frame = +3/+2
+
+Query  2547  *CSCC  2561
+             *CSCC
+Sbjct  1217  *CSCC  1231
+
+
+>DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit 
+ribosomal RNA gene, partial sequence
+Length=3193
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 6/7 (86%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+ Frame = +3/-3
+
+Query  2628  SSGKACH  2648
+             S GKACH
+Sbjct  2027  SDGKACH  2007
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 6/7 (86%), Positives = 7/7 (100%), Gaps = 0/7 (0%)
+ Frame = +2/+3
+
+Query  2273  LYTPPVS  2293
+             LYTPPV+
+Sbjct  3039  LYTPPVA  3059
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 6/6 (100%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+ Frame = +3/-2
+
+Query  2811  SQPTSA  2828
+             SQPTSA
+Sbjct  1887  SQPTSA  1870
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 5/9 (56%), Positives = 8/9 (89%), Gaps = 0/9 (0%)
+ Frame = +1/-3
+
+Query  2764  LKLPDSQPV  2790
+             LK+P S+P+
+Sbjct  2996  LKIPRSRPI  2970
+
+
+
+Lambda      K        H
+   0.343    0.177    0.657 
+
+
+Effective search space used: 2090382
+
+
+Query= LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate
+Adiu1 contig2556801719, whole genome shotgun sequence
+
+Length=3022
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value  N
+
+DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit ribo...  24.3       0.21   1
+AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synth...  22.8       0.58   1
+
+
+>DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit 
+ribosomal RNA gene, partial sequence
+Length=3193
+
+ Score = 24.3 bits (44),  Expect = 0.21
+ Identities = 6/11 (55%), Positives = 8/11 (73%), Gaps = 0/11 (0%)
+ Frame = +3/-2
+
+Query  2082  FLSVGIPTSTW  2114
+             F+ +GIP  TW
+Sbjct  846   FMVIGIPNQTW  814
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 7/18 (39%), Positives = 8/18 (44%), Gaps = 0/18 (0%)
+ Frame = -3/+1
+
+Query  2963  WSSTVKTSTRAIDMWIMI  2910
+             WSS      RA   WI +
+Sbjct  751   WSSVFLACPRAYRAWIAV  804
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 7/19 (37%), Positives = 13/19 (68%), Gaps = 0/19 (0%)
+ Frame = +1/-2
+
+Query  1525  ISHRLLPHLKKLSMLSLED  1581
+             I   LLP +++ + LSL++
+Sbjct  72    IQRELLPLIRRHAWLSLQE  16
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 7/16 (44%), Positives = 9/16 (56%), Gaps = 0/16 (0%)
+ Frame = -3/-1
+
+Query  2618  PSKSTLLP*GSDYLCS  2571
+             P +    P*G DY+ S
+Sbjct  1603  PYRPPKFP*GPDYILS  1556
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 6/6 (100%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+ Frame = +2/-1
+
+Query  1286  TPLRAS  1303
+             TPLRAS
+Sbjct  142   TPLRAS  125
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 7/15 (47%), Positives = 8/15 (53%), Gaps = 0/15 (0%)
+ Frame = +2/+1
+
+Query  929  PDNWTG*TSALSVRP  973
+            P +WT    A  VRP
+Sbjct  199  PADWTSVREAGDVRP  243
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 9/24 (38%), Positives = 13/24 (54%), Gaps = 0/24 (0%)
+ Frame = +1/+3
+
+Query  184  WVKRFSKICPGRLVTNKTPKRIPA  255
+            WV   S+  P   +T K  KR+P+
+Sbjct  699  WVCCSSESAPDDWLT*KVVKRVPS  770
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 7/16 (44%), Positives = 9/16 (56%), Gaps = 0/16 (0%)
+ Frame = +2/+3
+
+Query  1097  IIPIPRRANRSSLSLR  1144
+             ++PIP   N    SLR
+Sbjct  1416  LLPIPTMDNPQPSSLR  1463
+
+
+>AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase 
+A, complete cds
+Length=3219
+
+ Score = 22.8 bits (41),  Expect = 0.58
+ Identities = 11/24 (46%), Positives = 14/24 (58%), Gaps = 0/24 (0%)
+ Frame = +2/-2
+
+Query  1103  PIPRRANRSSLSLRVIKSRPPTST  1174
+             P  +R   SS+SLR   + P TST
+Sbjct  2321  P*AQRLRCSSVSLRSTGAVPTTST  2250
+
+
+ Score = 22.3 bits (40),  Expect(2) = 0.67
+ Identities = 6/9 (67%), Positives = 7/9 (78%), Gaps = 0/9 (0%)
+ Frame = +2/+2
+
+Query  542  TARPRKWTR  568
+            T RPR+W R
+Sbjct  560  TFRPRRWRR  586
+
+
+ Score = 22.3 bits (40),  Expect(2) = 0.67
+ Identities = 10/22 (45%), Positives = 12/22 (55%), Gaps = 0/22 (0%)
+ Frame = +2/+2
+
+Query  1109  PRRANRSSLSLRVIKSRPPTST  1174
+             PRR   SS+    I S  PTS+
+Sbjct  1880  PRRTLSSSVCSMPISSHIPTSS  1945
+
+
+ Score = 21.8 bits (39),  Expect = 1.1
+ Identities = 6/13 (46%), Positives = 6/13 (46%), Gaps = 0/13 (0%)
+ Frame = -3/+2
+
+Query  983   WNWWV*PIRPTSI  945
+             W W   P RP  I
+Sbjct  3026  WSWLALPFRPAGI  3064
+
+
+ Score = 20.8 bits (37),  Expect = 2.3
+ Identities = 6/11 (55%), Positives = 8/11 (73%), Gaps = 0/11 (0%)
+ Frame = +3/+2
+
+Query  471   PPGHE*YSAPP  503
+             PP +  +SAPP
+Sbjct  1073  PPSYPGHSAPP  1105
+
+
+ Score = 20.3 bits (36),  Expect = 3.2
+ Identities = 4/7 (57%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+ Frame = -1/-3
+
+Query  22   WSKLPCP  2
+            W++ PCP
+Sbjct  637  WTRHPCP  617
+
+
+ Score = 19.8 bits (35),  Expect = 4.5
+ Identities = 5/6 (83%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+ Frame = -2/+2
+
+Query  2757  SPRSCQ  2740
+             SPR+CQ
+Sbjct  428   SPRACQ  445
+
+
+ Score = 19.3 bits (34),  Expect = 6.4
+ Identities = 5/7 (71%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+ Frame = +3/-2
+
+Query  774  PPLTPSV  794
+            PPL PS+
+Sbjct  410  PPLNPSL  390
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 8/16 (50%), Positives = 9/16 (56%), Gaps = 0/16 (0%)
+ Frame = -2/-2
+
+Query  1080  LLSSRTVSGNIAFPLE  1033
+             LLS RT+    AF  E
+Sbjct  2729  LLSRRTIDAEPAFQAE  2682
+
+
+ Score = 18.8 bits (33),  Expect = 9.0
+ Identities = 6/8 (75%), Positives = 6/8 (75%), Gaps = 0/8 (0%)
+ Frame = +3/-3
+
+Query  609   YPHDQLTP  632
+             Y H QLTP
+Sbjct  1759  YAHFQLTP  1736
+
+
+
+Lambda      K        H
+   0.343    0.177    0.657 
+
+
+Effective search space used: 2081970
+
+
+  Database: slime_molds-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 6,412
+  Number of sequences in database:  2
+
+
+
+Matrix: BLOSUM80
+Neighboring words threshold: 14
+Window for multiple hits: 25

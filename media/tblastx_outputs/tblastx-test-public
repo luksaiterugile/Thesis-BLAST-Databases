@@ -1,0 +1,215 @@
+TBLASTX 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+
+Database: flagellates-blast-database
+           3 sequences; 9,080 total letters
+
+
+
+Query= AB649292.1 Acytostelium subglobosum cesA mRNA for cellulose synthase
+A, complete cds
+
+Length=3219
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value  N
+
+LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET4...  23.1       0.70   1
+LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate A...  20.8       3.4    1
+LNVX01000613.1 Candidatus Endomicrobium trichonymphae strain CET4...  20.3       4.7    1
+
+
+>LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig543, whole genome shotgun sequence
+Length=3024
+
+ Score = 23.1 bits (44),  Expect = 0.70
+ Identities = 9/23 (39%), Positives = 14/23 (61%), Gaps = 0/23 (0%)
+ Frame = -2/+2
+
+Query  1511  RSAASNVRYGEKWSSRSMARNVR  1443
+             R+A S ++  EKW    + RNV+
+Sbjct  1835  RTAVSCMKRKEKWIMTKIIRNVK  1903
+
+
+>LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate 
+Adiu1 contig2556801719, whole genome shotgun sequence
+Length=3022
+
+ Score = 20.8 bits (39),  Expect = 3.4
+ Identities = 11/24 (46%), Positives = 14/24 (58%), Gaps = 0/24 (0%)
+ Frame = -2/+2
+
+Query  2321  P*AQRLRCSSVSLRSTGAVPTTST  2250
+             P  +R   SS+SLR   + P TST
+Sbjct  1103  PIPRRANRSSLSLRVIKSRPPTST  1174
+
+
+ Score = 19.4 bits (36),  Expect = 8.9
+ Identities = 6/10 (60%), Positives = 7/10 (70%), Gaps = 0/10 (0%)
+ Frame = +2/-1
+
+Query  1082  YPGHSAPPCP  1111
+             +PG S  PCP
+Sbjct  31    WPGWSKLPCP  2
+
+
+>LNVX01000613.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig692, whole genome shotgun sequence
+Length=3034
+
+ Score = 20.3 bits (38),  Expect = 4.7
+ Identities = 10/32 (31%), Positives = 17/32 (53%), Gaps = 0/32 (0%)
+ Frame = -2/-1
+
+Query  2513  MKITGSLTTIGTVHRHIINGAIP*KKAVGDRN  2418
+             M I  ++ +IGT  ++I    I    A+G +N
+Sbjct  268   MTIHAAIPSIGTSTKYIKAADINSLSAIGSKN  173
+
+
+ Score = 19.4 bits (36),  Expect = 8.9
+ Identities = 7/8 (88%), Positives = 8/8 (100%), Gaps = 0/8 (0%)
+ Frame = +1/+1
+
+Query  781   FSHTILQA  804
+             FSHTIL+A
+Sbjct  2995  FSHTILKA  3018
+
+
+
+Lambda      K        H
+   0.318    0.134    0.401 
+
+
+Effective search space used: 3068316
+
+
+Query= DQ903668.1 Meriderma fuscatum voucher MM 24907 small subunit
+ribosomal RNA gene, partial sequence
+
+Length=3193
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value  N
+
+LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate A...  25.4       0.14   1
+LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET4...  22.1       1.3    1
+LNVX01000613.1 Candidatus Endomicrobium trichonymphae strain CET4...  20.8       3.4    1
+
+
+>LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate 
+Adiu1 contig2556801719, whole genome shotgun sequence
+Length=3022
+
+ Score = 25.4 bits (49),  Expect = 0.14
+ Identities = 9/27 (33%), Positives = 14/27 (52%), Gaps = 0/27 (0%)
+ Frame = -3/+3
+
+Query  194   CRVLASELPGLSIWPSTYALASLGTQL  114
+             C +    +P LS WP+ Y    +GT +
+Sbjct  2643  CSIRVLLIPSLSGWPTKYLK*MIGTNI  2723
+
+
+ Score = 23.5 bits (45),  Expect = 0.51
+ Identities = 9/28 (32%), Positives = 14/28 (50%), Gaps = 0/28 (0%)
+ Frame = -2/-1
+
+Query  1824  HPDSSGLGRELENRKRDGCTGKLLCPHC  1741
+             HPDS G+ + L  ++    +G     HC
+Sbjct  2683  HPDSEGINKTLIEQQFHRGSGLRASQHC  2600
+
+
+ Score = 22.1 bits (42),  Expect = 1.3
+ Identities = 11/46 (24%), Positives = 22/46 (48%), Gaps = 0/46 (0%)
+ Frame = -2/+1
+
+Query  138   PCEPRYPACSLCFTTGVRSRTQIQRELLPLIRRHAWLSLQEKHTLL  1
+             PC   Y      F   ++    I   LLP +++ + LSL++  +++
+Sbjct  1459  PCSKLYFRL*SLFFKALKV*FSISHRLLPHLKKLSMLSLEDLKSIM  1596
+
+
+ Score = 22.1 bits (42),  Expect = 1.3
+ Identities = 6/11 (55%), Positives = 8/11 (73%), Gaps = 0/11 (0%)
+ Frame = -2/+3
+
+Query  846   FMVIGIPNQTW  814
+             F+ +GIP  TW
+Sbjct  2082  FLSVGIPTSTW  2114
+
+
+ Score = 19.4 bits (36),  Expect = 8.8
+ Identities = 7/18 (39%), Positives = 8/18 (44%), Gaps = 0/18 (0%)
+ Frame = +1/-3
+
+Query  751   WSSVFLACPRAYRAWIAV  804
+             WSS      RA   WI +
+Sbjct  2963  WSSTVKTSTRAIDMWIMI  2910
+
+
+ Score = 19.4 bits (36),  Expect = 8.8
+ Identities = 7/20 (35%), Positives = 12/20 (60%), Gaps = 0/20 (0%)
+ Frame = +1/+2
+
+Query  2812  EMRQ*QVSHALRCSGPHARY  2871
+             E+R+  +SH   C   ++RY
+Sbjct  1436  EVRRRFLSHVQNCISGYSRY  1495
+
+
+>LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig543, whole genome shotgun sequence
+Length=3024
+
+ Score = 22.1 bits (42),  Expect = 1.3
+ Identities = 9/14 (64%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+ Frame = -1/-3
+
+Query  2644  HAPPLTLLRKVYQL  2603
+             H P LTLLR  Y L
+Sbjct  154   HKPSLTLLRTCYLL  113
+
+
+ Score = 21.2 bits (40),  Expect = 2.5
+ Identities = 10/18 (56%), Positives = 11/18 (61%), Gaps = 0/18 (0%)
+ Frame = +2/-2
+
+Query  1757  NLPVHPSRFRFSSSLPKP  1810
+             NLP+      FSSSL KP
+Sbjct  977   NLPLRSPPPSFSSSLLKP  924
+
+
+>LNVX01000613.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig692, whole genome shotgun sequence
+Length=3034
+
+ Score = 20.8 bits (39),  Expect = 3.4
+ Identities = 8/21 (38%), Positives = 11/21 (52%), Gaps = 0/21 (0%)
+ Frame = -3/+3
+
+Query  2033  LISDGKACHEKVQATHVALFS  1971
+             + S GKACH  V      ++S
+Sbjct  2622  MCSSGKACHTYVSYNLSLIYS  2684
+
+
+
+Lambda      K        H
+   0.318    0.134    0.401 
+
+
+Effective search space used: 3047912
+
+
+  Database: flagellates-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 9,080
+  Number of sequences in database:  3
+
+
+
+Matrix: BLOSUM62
+Neighboring words threshold: 13
+Window for multiple hits: 40

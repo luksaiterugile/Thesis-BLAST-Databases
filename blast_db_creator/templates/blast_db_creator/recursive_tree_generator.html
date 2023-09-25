@@ -1,0 +1,34 @@
+{% if nested_dict.children %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button 
+                class="accordion-button collapsed" 
+                type="button" data-bs-toggle="collapse" 
+                data-bs-target="#{{ nested_dict.father }}" 
+                aria-expanded="false" 
+                aria-controls="{{ nested_dict.father }}">
+                {{ nested_dict.father }}
+            </button>
+        </h2>
+        <div 
+            id="{{ nested_dict.father }}" 
+            class="accordion-collapse collapse">
+            <div class="accordion-body">
+                {% for child_dict in nested_dict.children %}
+                    {% include "blast_db_creator/recursive_tree_generator.html" with nested_dict=child_dict %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button 
+                class="accordion-button" 
+                type="button">
+                {{ nested_dict.father }}
+            </button>
+        </h2>
+    </div>
+{% endif %}
+

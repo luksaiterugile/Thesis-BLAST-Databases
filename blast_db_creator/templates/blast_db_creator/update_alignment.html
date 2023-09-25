@@ -1,0 +1,186 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+<title>Update alignment</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center top-margin-f mb-4">
+    <div style="background-color: #B3C4BC" data-aos="fade-up">
+        <div class="border border-light p-4">
+            <h4 class="d-flex align-items-center justify-content-center mb-4">
+				Update alignment
+			</h4>
+            <form 
+				method="post" 
+				id="updatealign_form"
+                class="border border-light p-4" 
+                style="background-color: #e7e8e6"
+				enctype="multipart/form-data"
+				action="{% url 'updatealign' obj.output_filename %}">
+                <div>
+					<div class="mb-3">
+						<span class="wrap">
+							<b>Alignment filename: {{ obj.output_filename }}</b>
+						</span>
+						<a 
+							href="{% url 'blastresultuser' %}">
+							<input 
+								type="button" 
+								value="Choose other alignment" 
+								class="btn btn-outline-dark ml-1" />
+						</a><br>
+						<span class="wrap">
+							<b>Father database: {{ obj.database.slug }}</b>
+						</span>
+					</div>
+					<div>
+                    {% if messages %}
+						{% for message in messages %}
+							<div class="container-fluid p-0">
+								<div class="alert
+									{{ message.tags }} 
+									alert-dismissible fade show" 
+									role="alert">
+									<div class="text-break">
+										{{ message }}
+									</div>
+									<button 
+										type="button" 
+										class="btn-close" 
+										data-bs-dismiss="alert" 
+										aria-label="Close">
+									</button>
+								</div>
+							</div>
+						{% endfor %}
+        			{% endif %}
+					</div>
+                </div>
+				<div class="mt-2">
+					<label for="selected_db">Select the child BLAST 
+						database for updating the alignment:</label>
+					<select 
+						name="selected_db" 
+						id="id_selected_db" 
+						class="select form-select">
+						{% for query_name, child_db in to_align_blastp.items %}
+							{% if query_name and child_db %}
+								{% if query_name == obj.output_filename %}
+									{% for child in child_db %}
+										<option value="{{child}}">
+											{{child}}
+										</option>
+									{% endfor %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% for query_name, child_db in to_align_blastn.items %}
+							{% if query_name and child_db %}
+								{% if query_name == obj.output_filename %}
+									{% for child in child_db %}
+										<option value="{{child}}">
+											{{child}}
+										</option>
+									{% endfor %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% for query_name, child_db in to_align_tblastn.items %}
+							{% if query_name and child_db %}
+								{% if query_name == obj.output_filename %}
+									{% for child in child_db %}
+										<option value="{{child}}">
+											{{child}}
+										</option>
+									{% endfor %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% for query_name, child_db in to_align_tblastx.items %}
+							{% if query_name and child_db %}
+								{% if query_name == obj.output_filename %}
+									{% for child in child_db %}
+										<option value="{{child}}">
+											{{child}}
+										</option>
+									{% endfor %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% for query_name, child_db in to_align_blastx.items %}
+							{% if query_name and child_db %}
+								{% if query_name == obj.output_filename %}
+									{% for child in child_db %}
+										<option value="{{child}}">
+											{{child}}
+										</option>
+									{% endfor %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					</select> 
+				</div>
+                <div class="col text-center mt-3">
+					{% csrf_token %}
+                	<input 
+						type="submit" 
+						id="updatealign"
+						class="btn btn-dark w-100" 
+						value="Update alignment">
+				</div>
+            </form>
+        </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script>
+	$(document).ready(function(){
+		function send_selected_db_ajax(db_name){
+			$.ajax({
+				url: $(this).attr('action'),
+				method: "POST",
+				data: {
+					db_name,
+					csrfmiddlewaretoken:
+					$('input[name=csrfmiddlewaretoken]').val(),
+				},
+				success:function(response){
+					if(response.success){
+                        window.location.href = response.redirect_url;
+					}
+					else{
+                        window.location.href = response.redirect_url;
+					}
+				},
+				error:function(response){
+					window.alert("Could not find the BLAST database which was" +
+					" selected. Please choose different BLAST database or" + 
+					" try again.");
+				}
+			})
+		}
+
+		$('#updatealign').click(function(event){
+			event.preventDefault();
+			if(confirm("Are you sure you want to update this alignment, using" +
+			" the selected BLAST database?")){
+				send_selected_db_ajax(
+					$('#id_selected_db').find(":selected").val());
+			}
+		});
+	})
+</script>
+{% endblock%}

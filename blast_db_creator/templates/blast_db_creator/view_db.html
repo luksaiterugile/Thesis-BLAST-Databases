@@ -1,0 +1,120 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% block head %}
+<title>Public BLAST databases</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block table %}
+<div class="container-fluid margin-table" data-aos="fade-up">
+    <div class="top-margin text-center">
+        <h3>Public BLAST databases</h3>
+    </div>
+    <table 
+        id="public_databases" 
+        class="table table-hover border border-light table-sm" 
+        style="background-color: #B3C4BC">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Database name</th>
+                <th scope="col">Created from</th>
+                <th scope="col">Database type</th>
+                <th scope="col">Submitted at</th>
+                <th scope="col">Download database</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for db_files in blast_db_data %}
+            {% if db_files.user_input.public_or_private == 'public' %}
+            <tr>
+                <td class="align-middle wrap">
+                    {{ db_files.user_input.name_of_blast_db }}
+                </td>
+                <td class="align-middle wrap">
+                    {{ db_files.user_input.filename }}
+                </td>
+                <td class="align-middle">
+                    {{ db_files.user_input.print_type }}
+                </td>
+                <td class="align-middle">
+                    {{ db_files.user_input.created }}
+                </td>
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-outline-dark" 
+                        href="{{ db_files.zip_file.url }}"
+                        >
+                        Download zip file
+                    </a>
+                </td>
+                {% if db_files.user_input.database_type == 'nucl' %}
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-light" 
+                        href="{% url 'blastn' db_files.slug %}">
+                        Use BLASTn
+                    </a>
+                </td>
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-light" 
+                        href="{% url 'tblastn' db_files.slug %}">
+                        Use  tBLASTn
+                    </a>
+                </td>
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-light" 
+                        href="{% url 'tblastx' db_files.slug %}">
+                        Use tBLASTx
+                    </a>
+                </td>
+                {% elif db_files.user_input.database_type == 'prot' %}
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-light" 
+                        href="{% url 'blastp' db_files.slug %}">
+                        Use BLASTp
+                    </a>
+                </td>
+                <td class="align-middle">
+                    <a 
+                        class="btn btn-light" 
+                        href="{% url 'blastx' db_files.slug %}">
+                        Use BLASTx
+                    </a>
+                </td>
+                <td></td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script>
+    $('#public_databases').DataTable({
+            order: [[3, 'desc']]
+        }
+    );
+</script>
+{% endblock %}

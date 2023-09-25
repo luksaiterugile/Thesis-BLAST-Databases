@@ -1,0 +1,2508 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% block head %}
+<title>Usage</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block main %}
+<div>
+	<h1>Usage</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="usage-margin" data-aos="fade-up">
+  <div class="usage-content tree-margin">
+    <h2 class="mb-4">Usage</h2>
+    <div class="accordion" id="accordionUsage">
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseOne" 
+            aria-expanded="false" 
+            aria-controls="collapseOne">
+            Create a public BLAST database
+          </button>
+        </h2>
+        <div 
+          id="collapseOne" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingOne" 
+          data-bs-parent="#accordionUsage">
+          <div class="accordion-body">
+            <p>
+              There are some parameters that must be provided in order to 
+              <a href="{% url 'createpublicdb' %}">create your 
+              own public BLAST database</a>, some of which may be required 
+              or optional. These parameters are listed below, 
+              along with an explanation of each.
+              <br><br>
+              <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert a file, File type</td>
+                    <td>
+                      Inserting a file from which a BLAST database
+                      will be constructed. The file that is being 
+                      provided must be in FASTA format. Each sequence 
+                      in FASTA format 
+                      begins with a single-line header
+                       (definition line), 
+                      which is followed by a line containing the 
+                      sequence's 
+                      data. The definition line must start with a 
+                      carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.
+                      <br>
+                      Other file formats are currently unavailable. 
+                      <br>
+                      File type default = 'Fasta'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Database type</td>
+                    <td>Choose 
+                        either a nucleotide database or a protein 
+                      database based on the biological sequences 
+                      contained 
+                      in the inserted file.
+                      <br>
+                      Default = 'Nucleotide'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Name of database</td>
+                    <td>The name of the BLAST database, which will be 
+                      used to name the output files, must be inserted. 
+                      The only characters that can be used in a BLAST 
+                      database name are letters, digits, underscores, 
+                      and hyphens.</td>
+                  </tr>
+                </table>
+              <br>
+              <b>Optional parameters:</b>
+              <table class="tables-usage">
+                <tr>
+                  <th style="width:20%">Field name</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>Title of database</td>
+                  <td>Only letters, numbers, underscores, and hyphens are 
+                    permitted in a database title. If title of 
+                    database is not provided, name of database is used.
+                    Results of alignments will display 
+                    your provided database title.</td>
+                </tr>
+                <tr>
+                  <td>Enable sequence ID parsing</td>
+                  <td>If field  is 
+                    checked, sequence id(s) are parsed. 
+                  </td>
+                </tr>
+                <tr>
+                  <td>Create hash values</td>
+                  <td>Creates an index of sequence hash values if the 
+                    field is checked. Hash values can be
+                    used to rapidly find out whether a given sequence is 
+                    present in the BLAST database.</td>
+                </tr>
+                <tr>
+                  <td>Version of BLAST database to be created</td>
+                  <td>Choose between the BLAST database versions 4 or 5.
+                    Versions 4 and 5 differ in that version 5 is 
+                    taxonomy aware.
+                    <br>
+                    Default version = '4'.
+                   </td>
+                </tr>
+                <tr>
+                  <td>Taxonomy ID</td>
+                  <td>Specify a taxonomy ID, it will be used to identify 
+                    all of the sequences. Only use this field, if file 
+                    that you have inserted, contains sequences that
+                    belong to the same taxonomy ID.
+                    Numeric value must be larger or equal to 0.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Taxonomy map</td>
+                  <td>Insert a file that contains taxonomy map. File must
+                    contain two columns, where sequence ID is mapped to
+                    the taxonomy ID. </td>
+                </tr>
+              </table>
+              <br>
+              <b>More information on these arguments can be found at:</b> 
+              <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                [2]
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseTwo" 
+            aria-expanded="false" 
+            aria-controls="collapseTwo">
+            View public BLAST databases
+          </button>
+        </h2>
+        <div 
+          id="collapseTwo" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingTwo" 
+          data-bs-parent="#accordionUsage">
+          <div class="accordion-body">
+            <p>
+              You can 
+              <a href="{% url 'viewdb' %}">view public BLAST databases</a>
+              that have previously been created.
+              Users can browse all available public BLAST databases, 
+              sort databases according to a particular parameter, 
+              search for desired BLAST databases, download BLAST databases 
+              as zip file, and perform similar sequence searches using various
+              alignment types.
+              <br>
+              Available similar sequence search types:
+              <ul>
+                <li> 
+                  <b>Blastn</b> - searches in the nucleotide BLAST database 
+                  using a nucleotide query.
+                </li>
+                <li>
+                  <b>Blastp</b> - searches in the protein BLAST database
+                  using a protein query.
+                </li>
+                <li>
+                  <b>tBlastn</b> - searches in the translated nucleotide BLAST 
+                  database using a protein query.
+                </li>
+                <li>
+                  <b>tBlastx</b> - searches in the translated nucleotide BLAST
+                  database using a translated nucleotide query.
+                </li>
+                <li>
+                  <b>Blastx</b> - searches in the protein BLAST database
+                  using a translated nucleotide query.
+                </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseThree" 
+            aria-expanded="false" 
+            aria-controls="collapseThree">
+            Create a private BLAST database
+          </button>
+        </h2>
+        <div 
+          id="collapseThree" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingThree" 
+          data-bs-parent="#accordionUsage">
+          <div class="accordion-body">
+            <p>
+              Private BLAST databases are only available for registered 
+              and logged users. Logged users can choose between creating 
+              public or private BLAST databases. 
+              <br>
+              The other parameters are the same as those that are used to build 
+              public BLAST databases. 
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseFour" 
+            aria-expanded="false" 
+            aria-controls="collapseFour">
+            View private BLAST databases
+          </button>
+        </h2>
+        <div 
+          id="collapseFour" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="headingFour" 
+          data-bs-parent="#accordionUsage">
+          <div class="accordion-body">
+            <p>Only logged user can view their created private BLAST 
+              databases. <br><a href="{% url 'privatedb' %}">Click here to 
+                view your private BLAST databases
+              </a>
+              (link is available for 
+                logged in users only).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="removedb">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseremovedb" 
+            aria-expanded="false" 
+            aria-controls="collapseremovedb">
+            Remove private BLAST databases
+          </button>
+        </h2>
+        <div 
+          id="collapseremovedb" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="removedb" 
+          data-bs-parent="#accordionUsage">
+          <div class="accordion-body">
+            Only private BLAST databases can be removed. 
+            Private BLAST databases can be removed 
+            <a href="{% url 'privatedb' %}">here,
+            </a> by selecting checkbox asocciated with BLAST database(s) and
+            by clicking on "Delete selected BLAST databases" button. 
+            Private BLAST databases will be permanently removed. 
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="blastn">
+          <button 
+            class="accordion-button collapsed" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseblastn" 
+            aria-expanded="false" 
+            aria-controls="collapseblastn">
+            BLASTn program for similar sequence search
+          </button>
+        </h2>
+        <div 
+          id="collapseblastn" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="blastn" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                The BLASTn program for similar sequence search requires 
+                the input of a number of parameters, some of
+                which may be necessary or optional. 
+                Below is a list of these parameters 
+                along with an explanation of each.
+                <br><br>
+                <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert nucleotide query file</td>
+                    <td>Inserted query file must be in FASTA format. 
+                      Each sequence in FASTA format begins with a 
+                      single-line header (definition line), which is 
+                      followed by a line containing the sequence's data. 
+                      The definition line 
+                      must start with a carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert output filename</td>
+                    <td>Provide output filename to save nucleotide
+                      alignment results.
+                      The only characters that can be used in output
+                      filename are letters, digits, underscores, and 
+                      hyphens.
+                    </td>
+                  </tr>
+                </table>
+        
+                <br>
+                <b>Optional parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Location on the query sequence</td>
+                    <td>If you want to limit the search to only certain 
+                      query sequence locations, specify start and
+                      stop positions.
+                      Format: start-stop, delimited by hyphen.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Query strand(s) to search against database</td>
+                    <td>Provide query strand(s) to search against database. 
+                      Depending on wanted alignments you can 
+                      choose between 'minus', 'plus' or 'both' strands. 
+                      <br>
+                      Default = 'Both'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Task to execute</td>
+                    <td>Choose a 'BLASTn' task to execute. 
+                      <br>
+                      Available 'BLASTn' tasks 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/books/NBK279684/"
+                        >
+                        [2]
+                      </a>:
+                      <ul>
+                        <li><b>BLASTn</b> - the traditional program used 
+                          for comparing different species
+                        </li>
+                        <li><b>BLASTn-short</b> - adapted to sequences
+                          30 or fewer nucleotides
+                        </li>
+                        <li><b>DC-megaBLAST</b> - 
+                          typically applied for inter-species 
+                          comparisons
+                        </li>
+                        <li><b>MegaBLAST</b> - for extremely similar 
+                          sequences
+                        </li>
+                      </ul>
+                      Default = 'MegaBLAST'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectation value (E) threshold for saving hits</td>
+                    <td>Provide expectation (E) value for saving hits.
+                      When searching a database of a specific size, 
+                      the expectation value indicates 
+                      how many hits one can "expect" to see by accident. 
+                      The lower the E value is, the more significant 
+                      the match.
+                      <br>
+                      Default = '10'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Word size</td>
+                    <td>Word size of initial match may be provided. Word
+                      size must be equal to 4 or larger.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Cost to open a gap</td>
+                    <td>Provide the cost to open the gap. Can be any integer 
+                      value.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to extend a gap</td>
+                    <td>Provide the cost to extend the gap. Can be any 
+                      integer value.</td>
+                  </tr>
+                  <tr>
+                    <td>Reward for a nucleotide match</td>
+                    <td>Reward for nucleotide match must be larger 
+                      or equal to 0.</td>
+                  </tr>
+                  <tr>
+                    <td>Penalty for a nucleotide mismatch</td>
+                    <td>Penalty for nucleotide mismatch must be lower or 
+                      equal to 0. </td>
+                  </tr>
+                  <tr>
+                    <td>Show NCBI GIs in deflines </td>
+                    <td>Select the field "show NCBI GIs in deflines" 
+                      if GenInfo Identifiers (GIs) are present in the
+                      nucleotide BLAST database and the user wants to 
+                      see GIs in his/her alignment results.</td>
+                  </tr>
+                  <tr>
+                    <td>Line length for formatting alignments</td>
+                    <td>Provide line length for formatting alignments 
+                      in output.
+                      Value must be larger or equal to 1.
+                      <br>
+                      Default = '60'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hits</td>
+                    <td>Alignment results may be sorted by hits. 
+                      Hits can be sorted by evalue, bit score,
+                      total score, percent
+                      identity and query coverage.</td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hps</td>
+                    <td>Alignment results may be sorted by 
+                      High-scoring
+                      Segment Pair (HSP). HSP can be sorted by evalue, 
+                      HSP score, HSP query start, HSP percent identity or 
+                      HSP subject start.</td>
+                  </tr>
+                  <tr>
+                    <td>Apply filtering locations as soft masks</td>
+                    <td>Used only for finding initial matches.</td>
+                  </tr>
+                  <tr>
+                    <td>Use lower case filtering in query and 
+                      subject sequence(s)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      GIs, you must provide a file, containing GIs that 
+                      you would like to use in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      SeqID, you must provide a file, containing SeqID 
+                      that
+                      you would like to use in search.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified GIs, you must provide a file, 
+                      containing GIs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified SeqIDs, you must provide a 
+                      file, 
+                      containing SeqIDs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs to use in search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Taxonomy IDs which must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified taxonomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs to use in search of 
+                      database
+                    </td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, you must provide a 
+                      file, containing taxonomy IDs that must only be
+                      used in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs which
+                      must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to
+                      everything except the specified taxonomy IDs,
+                      you must provide a 
+                      file, containing taxonomy IDs that must not be used 
+                      in search of database.</td>
+                  </tr>
+                  <tr>
+                    <td>Percent identity</td>
+                    <td>Find alignments which have certain percent identity. 
+                      Provide value in range 0 to 100. </td>
+                  </tr>
+                  <tr>
+                    <td>Percent query coverage per hsp</td>
+                    <td>Find alignments based on percent query coverage per 
+                      hsp. 
+                      Provide value in range 0 to 100. </td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of HSPs per subject sequence to save 
+                      for each query</td>
+                    <td>Provide a maximum number of HSPs per subject
+                      sequence to save for each query. 
+                      Value must be larger or equal
+                      to 1.</td>
+                  </tr>
+                  <tr>
+                    <td>Turn on best hit per subject sequence</td>
+                    <td>Retrieve only one best hit per subject sequence
+                      by selecting this field.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of aligned sequences to keep</td>
+                    <td>Default: 500 aligned sequences.</td>
+                  </tr>
+                  <tr>
+                    <td>Perform only ungapped alignment</td>
+                    <td>When this field is selected, 
+                      only ungapped alignments will be present in the 
+                      output file. </td>
+                  </tr>
+                  <tr>
+                    <td>Parse query and subject bar delimited 
+                      sequence identifiers </td>
+                    <td>By 
+                      enabling this field, query and subjects bar
+                       delimited 
+                      sequence identifiers 
+                      will be provided in the output file of alignment. 
+                    </td>
+                  </tr>
+                  
+                </table>		
+                <br>
+                <b>Default parameters 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>:</b>
+                <table class="tables-usage-small" style="width:70%;">
+                  <tr>
+                    <th>Task/Parameter</th>
+                    <th>Word size</th>
+                    <th>Cost to open a gap</th>
+                    <th>Cost to extend a gap</th>
+                    <th>Reward for a nucleotide match</th>
+                    <th>Penalty for a nucleotide mismatch</th>
+                  </tr>
+                  <tr>
+                    <td>BLASTn</td>
+                    <td>11</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>-3</td>
+                  </tr>
+                  <tr>
+                    <td>BLASTn-short</td>
+                    <td>7</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>-3</td>
+                  </tr>
+                  <tr>
+                    <td>MegaBLAST</td>
+                    <td>28</td>
+                    <td>0</td>
+                    <td>2.5</td>
+                    <td>1</td>
+                    <td>-2</td>
+                  </tr>
+                  <tr>
+                    <td>Dc-megaBLAST</td>
+                    <td>11</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>-3</td>
+                  </tr>
+                </table>
+                <br>
+                <b>Supported reward/penalty values and gap costs
+                  can be found at 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                    [2, Section "BLASTN reward/penalty values"]
+                  </a>
+                </b>
+                <br>
+                <b>More information on these arguments can be found at:</b> 
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>
+              </p>
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="blastp">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-blastp" 
+              aria-expanded="false" 
+              aria-controls="collapse-blastp">
+              BLASTp program for similar sequence search
+            </button>
+        </h2>
+        <div 
+          id="collapse-blastp" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="blastp" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                The input of several parameters, some of which may be 
+                required or optional, is required for the BLASTp program of
+                protein sequence searches. A list of these parameters is 
+                provided below, along with a description of each.
+                <br><br>
+                <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert protein query file</td>
+                    <td>
+                      Inserted query file must be in FASTA format. 
+                      Each sequence in FASTA format begins with a 
+                      single-line
+                      header (definition line), which is followed by a 
+                      line 
+                      containing the sequence's data. The definition line 
+                      must start with a carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Insert output filename</td>
+                    <td>Provide output filename to save protein sequence
+                      search results.
+                      The only characters that can be used in output
+                      filename are letters, digits, underscores, 
+                      and hyphens.
+                    </td>
+                  </tr>
+                </table>
+                <br>
+        
+                <b>Optional parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Location on the query sequence</td>
+                    <td>If you want to limit the search to only 
+                      certain query 
+                      sequence locations, specify start and
+                      stop positions.
+                      Format: start-stop, delimited by hyphen.</td>
+                  </tr>
+                  <tr>
+                    <td>Task to execute</td>
+                    <td>
+                      Choose a 'BLASTp' task to execute.
+                      <br>
+                      Available 'BLASTP' tasks 
+                      <a 
+                      href="https://www.ncbi.nlm.nih.gov/books/NBK279684/"
+                      >
+                        [2]
+                      </a>:
+                      <ul>
+                        <li><b>BLASTp</b> - 
+                          for standard protein-protein comparisons
+                        </li>
+                        <li><b>BLASTp-fast</b> - 
+                          suitable for query sequences shorter 
+                          than 30 residues
+                        </li>
+                        <li><b>BLASTp-short</b> - a faster version 
+                          that uses a larger word-size
+                        </li>
+        
+                      </ul>
+                      Default = 'BLASTp'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectation value (E) threshold for saving hits</td>
+                    <td>Provide expectation (E) value for saving hits.
+                      When searching a database of a specific size, 
+                      the expectation value indicates 
+                      how many hits one can "expect" to see by accident. 
+                      The lower the E value is, the more significant 
+                      the match.
+                      <br>
+                      Default = '10'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Word size</td>
+                    <td>Word size of initial match may be provided. Word
+                      size must be equal to 2 or larger.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to open a gap</td>
+                    <td>Provide the cost to open the gap. Can be any integer 
+                      value.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to extend a gap</td>
+                    <td>Provide the cost to extend the gap. Can be any 
+                      integer value.</td>
+                  </tr>
+                  <tr>
+                    <td>Scoring matrix name</td>
+                    <td>Provide scoring matrix name. Some of available
+                      matrices: 
+                      <ul>
+                        <li>PAM30</li>
+                        <li>PAM70</li>
+                        <li>PAM250</li>
+                        <li>BLOSUM80</li>
+                        <li>BLOSUM62</li>
+                        <li>BLOSUM45</li>
+                        <li>BLOSUM50</li>
+                        <li>BLOSUM90</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Minimum word score such that the word is 
+                      added to the BLAST lookup table</td>
+                    <td>Provide value larger or equal to 0.</td>
+                  </tr>
+                  <tr>
+                    <td>Show NCBI GIs in deflines </td>
+                    <td>Select the field "show NCBI GIs in deflines" 
+                      if GenInfo Identifiers (GIs) are present in the
+                      protein BLAST database and the user wants to 
+                      see GIs in his/her alignment results.</td>
+                  </tr>
+                  <tr>
+                    <td>Line length for formatting alignments</td>
+                    <td>Provide line length for formatting alignments in
+                      output.
+                      Value must be larger or equal to 1.
+                      <br>
+                      Default = '60'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hits</td>
+                    <td>Alignment results may be sorted by hits. 
+                      Hits can be sorted by evalue, bit score, 
+                      total score, percentidentity and query coverage.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hps</td>
+                    <td>Alignment results may be sorted by 
+                      High-scoring Segment Pair (HSP). HSP can be 
+                      sorted by evalue, 
+                      HSP score, HSP query start, HSP percent identity or 
+                      HSP subject start.</td>
+                  </tr>
+                  <tr>
+                    <td>Apply filtering locations as soft masks</td>
+                    <td>Used only for finding initial matches.</td>
+                 </tr>
+                 <tr>
+                    <td>Use lower case filtering in query and subject 
+                      sequence(s)</td>
+                    <td></td>
+                 </tr>
+                  <tr>
+                    <td>Insert file of GIs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      GIs, you must provide a file, containing GIs that 
+                      you would like to use in search. [6] </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      SeqID, you must provide a file, containing SeqID 
+                      that you would like to use in search.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified GIs, you must provide a file, 
+                      containing GIs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs which must not be used</td>
+                    <td>In order to restrict search of database to
+                      everything except the specified SeqIDs, 
+                      you must provide a file, 
+                      containing SeqIDs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs to use in search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs which must not be included in search
+        
+                    </td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified taxonomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs to use in 
+                      search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, you must provide a 
+                      file, containing taxonomy IDs that must only be 
+                      used in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs which must not
+                       be included in search
+                    </td>
+                    <td>In order to restrict search of database to
+                      everything except the specified taxonomy IDs, 
+                      you must provide a 
+                      file, containing taxonomy IDs that must not be used 
+                      in search of database.</td>
+                  </tr>
+                  <tr>
+                    <td>Percent query coverage per hsp</td>
+                    <td>Find alignments based on percent query coverage 
+                      per hsp. 
+                      Provide value in range 0 to 100.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of HSPs per 
+                      subject sequence to save for each query</td>
+                    <td>Provide a maximum number of HSPs per subject 
+                      sequence
+                      to save for each query. Value must be larger or 
+                      equal
+                      to 1.</td>
+                  </tr>
+                  <tr>
+                    <td>Turn on best hit per subject sequence</td>
+                    <td>Retrieve only one best hit per subject sequence
+                      by selecting this field.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of aligned sequences to keep</td>
+                    <td>Default: 500 aligned sequences.</td>
+                  </tr>
+                  <tr>
+                    <td>Perform ungapped alignment only</td>
+                    <td>When this field is selected
+                      , only ungapped alignments will be present in the 
+                      output file. </td>
+                  </tr>
+                  <tr>
+                    <td>Parse query and subject bar delimited 
+                      sequence identifiers </td>
+                    <td>By 
+                      enabling this field, query and subjects bar
+                       delimited 
+                      sequence identifiers 
+                      will be provided in the output file of alignment
+                    </td>
+                  </tr>
+                </table>
+                <br>
+                <b>Default parameters 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>:</b>
+                <table class="tables-usage-small" style="width:60%;">
+                  <tr>
+                    <th>Task/Parameter</th>
+                    <th>Word size</th>
+                    <th>Cost to open a gap</th>
+                    <th>Cost to extend a gap</th>
+                    <th>Scoring matrix name</th>
+                  </tr>
+                  <tr>
+                    <td>BLASTP</td>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>1</td>
+                    <td>BLOSUM62</td>
+                  </tr>
+                  <tr>
+                    <td>BLASTP-short</td>
+                    <td>2</td>
+                    <td>9</td>
+                    <td>1</td>
+                    <td>PAM30</td>
+                  </tr>
+                  <tr>
+                    <td>BLASTp-fast</td>
+                    <td>6</td>
+                    <td>11</td>
+                    <td>1</td>
+                    <td>-</td>
+                  </tr>
+                </table>
+                <br>
+        
+                <section id="BLASTSubMatrices">
+                <b>BLAST Substitution Matrices</b>
+                  <p>
+                    Recommended substitution matrices for query lengths 
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                      [2]
+                    </a>:
+                  </p>
+                  <table class="tables-usage-matrix">
+                    <tr>
+                      <th>Query length</th>
+                      <th>Substitution matrix</th>
+                      <th>Gap costs</th>
+                    </tr>
+                    <tr>
+                      <td>&lt 35</td>
+                      <td>PAM-30</td>
+                      <td>(9, 1)</td>
+                    </tr>
+                    <tr>
+                      <td>35-50</td>
+                      <td>PAM-70</td>
+                      <td>(10, 1)</td>
+                    </tr>
+                    <tr>
+                      <td>50-85</td>
+                      <td>BLOSUM-80</td>
+                      <td>(10, 1)</td>
+                    </tr>
+                    <tr>
+                      <td>&gt 85</td>
+                      <td>BLOSUM-62</td>
+                      <td>(10, 1)</td>
+                    </tr>
+                  </table>
+                  <br>
+                  Other available substitution matrices are:
+                  <ul>
+                    <li>BLOSUM-50</li>
+                    <li>BLOSUM-45</li>
+                    <li>PAM-250</li>
+                    <li>BLOSUM-90</li>
+                  </ul>
+                </section>
+                <b>More information on these arguments can be found at:</b> 
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>
+        
+              </p>
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="tblastn">
+            <button 
+              class="accordion-button collapsed" 
+              type="button"
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-tblastn" 
+              aria-expanded="false" 
+              aria-controls="collapse-tblastn">
+              tBLASTn program for similar sequence search
+            </button>
+        </h2>
+        <div 
+          id="collapse-tblastn" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="tblastn" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                The input of several parameters, some of which may be 
+                required or optional, is required for the tBLASTn program of
+                protein sequence searches. A list of these parameters is 
+                provided below, along with a description of each.
+                <br><br>
+                <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert protein query file</td>
+                    <td>
+                      Inserted query file must be in FASTA format. 
+                      Each sequence in FASTA format begins with a 
+                      single-line
+                      header (definition line), which is followed by a 
+                      line 
+                      containing the sequence's data. The definition line 
+                      must start with a carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Insert output filename</td>
+                    <td>Provide output filename to save protein sequence
+                      search results.
+                      The only characters that can be used in output
+                      filename are letters, digits, underscores, 
+                      and hyphens.
+                    </td>
+                  </tr>
+                </table>
+                <br>
+              
+                <b>Optional parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Location on the query sequence</td>
+                    <td>If you want to limit the search to only 
+                      certain query 
+                      sequence locations, specify start and
+                      stop positions.
+                      Format: start-stop, delimited by hyphen.</td>
+                  </tr>
+                  <tr>
+                    <td>Task to execute</td>
+                    <td>
+                      Choose a 'tBLASTn' task to execute.
+                      <br>
+                      Available 'tBLASTn' tasks 
+                      <a 
+                      href="https://www.ncbi.nlm.nih.gov/books/NBK279684/"
+                      >
+                        [2]
+                      </a>:
+                      <ul>
+                        <li><b>tBLASTn</b> - 
+                          for a standard protein-translated nucleotide comparison
+                        </li>
+                        <li><b>tBLASTn-fast</b> - 
+                          for a faster version with a larger word-size
+                        </li>
+                      </ul>
+                      Default = 'tBLASTn'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectation value (E) threshold for saving hits</td>
+                    <td>Provide expectation (E) value for saving hits.
+                      When searching a database of a specific size, 
+                      the expectation value indicates 
+                      how many hits one can "expect" to see by accident. 
+                      The lower the E value is, the more significant 
+                      the match.
+                      <br>
+                      Default = '10'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Length of the largest intron allowed in a
+                       translated nucleotide sequence</td>
+                    <td>
+                      Length of the largest intron allowed in a translated
+                      nucleotide sequence
+                      when linking multiple distinct alignments.
+                      Default = 0
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Word size</td>
+                    <td>Word size of initial match may be provided. Word
+                      size must be equal to 2 or larger.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to open a gap</td>
+                    <td>Provide the cost to open the gap. Can be any integer 
+                      value.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to extend a gap</td>
+                    <td>Provide the cost to extend the gap. Can be any 
+                      integer value.</td>
+                  </tr>
+                  <tr>
+                    <td>Minimum word score such that the word is 
+                      added to the BLAST lookup table</td>
+                    <td>Provide value larger or equal to 0.</td>
+                  </tr>
+                  <tr>
+                    <td>Show NCBI GIs in deflines </td>
+                    <td>Select the field "show NCBI GIs in deflines" 
+                      if GenInfo Identifiers (GIs) are present in the
+                      protein BLAST database and the user wants to 
+                      see GIs in his/her alignment results.</td>
+                  </tr>
+                  <tr>
+                    <td>Line length for formatting alignments</td>
+                    <td>Provide line length for formatting alignments in
+                      output.
+                      Value must be larger or equal to 1.
+                      <br>
+                      Default = '60'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hits</td>
+                    <td>Alignment results may be sorted by hits. 
+                      Hits can be sorted by evalue, bit score, 
+                      total score, percentidentity and query coverage.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hps</td>
+                    <td>Alignment results may be sorted by 
+                      High-scoring Segment Pair (HSP). HSP can be 
+                      sorted by evalue, 
+                      HSP score, HSP query start, HSP percent identity or 
+                      HSP subject start.</td>
+                  </tr>
+                  <tr>
+                    <td>Apply filtering locations as soft masks</td>
+                    <td>Used only for finding initial matches.</td>
+                 </tr>
+                 <tr>
+                    <td>Use lower case filtering in query and subject 
+                      sequence(s)</td>
+                    <td></td>
+                 </tr>
+                  <tr>
+                    <td>Insert file of GIs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      GIs, you must provide a file, containing GIs that 
+                      you would like to use in search. [6] </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      SeqID, you must provide a file, containing SeqID 
+                      that you would like to use in search.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified GIs, you must provide a file, 
+                      containing GIs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs which must not be used</td>
+                    <td>In order to restrict search of database to
+                      everything except the specified SeqIDs, 
+                      you must provide a file, 
+                      containing SeqIDs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs to use in search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs which must not be included in search
+              
+                    </td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified taxonomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs to use in 
+                      search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, you must provide a 
+                      file, containing taxonomy IDs that must only be 
+                      used in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs which must not
+                       be included in search
+                    </td>
+                    <td>In order to restrict search of database to
+                      everything except the specified taxonomy IDs, 
+                      you must provide a 
+                      file, containing taxonomy IDs that must not be used 
+                      in search of database.</td>
+                  </tr>
+                  <tr>
+                    <td>Percent query coverage per hsp</td>
+                    <td>Find alignments based on percent query coverage 
+                      per hsp. 
+                      Provide value in range 0 to 100.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of HSPs per 
+                      subject sequence to save for each query</td>
+                    <td>Provide a maximum number of HSPs per subject 
+                      sequence
+                      to save for each query. Value must be larger or 
+                      equal
+                      to 1.</td>
+                  </tr>
+                  <tr>
+                    <td>Turn on best hit per subject sequence</td>
+                    <td>Retrieve only one best hit per subject sequence
+                      by selecting this field.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of aligned sequences to keep</td>
+                    <td>Default: 500 aligned sequences.</td>
+                  </tr>
+                  <tr>
+                    <td>Perform ungapped alignment only</td>
+                    <td>When this field is selected, only ungapped
+                      alignments will be present in the 
+                      output file. </td>
+                  </tr>
+                  <tr>
+                    <td>Parse query and subject bar delimited 
+                      sequence identifiers </td>
+                    <td>By 
+                      enabling this field, query and subjects bar
+                       delimited 
+                      sequence identifiers 
+                      will be provided in the output file of alignment
+                    </td>
+                  </tr>
+                </table>
+                <br>
+                <b>Default parameters 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>:</b>
+                <table class="tables-usage-small" style="width:60%;">
+                  <tr>
+                    <th>Task/Parameter</th>
+                    <th>Word size</th>
+                    <th>Gap open</th>
+                    <th>Gap extend</th>
+                    <th>Window size</th>
+                  </tr>
+                  <tr>
+                    <td>tBLASTn</td>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>1</td>
+                    <td>40</td>
+                  </tr>
+                  <tr>
+                    <td>tBLASTn-short</td>
+                    <td>6</td>
+                    <td>11</td>
+                    <td>1</td>
+                    <td>40</td>
+                  </tr>
+                </table>
+                <br>
+                
+                <br>
+                <b>More information on these arguments can be found at:</b> 
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>
+              </p>
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="tblastx">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-tblastx" 
+              aria-expanded="false" 
+              aria-controls="collapse-tblastx">
+              tBLASTx program for similar sequence search
+            </button>
+        </h2>
+        <div 
+          id="collapse-tblastx" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="tblastx" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                The tBLASTx program for similar sequence search requires 
+                the input of a number of parameters, some of
+                which may be necessary or optional. 
+                Below is a list of these parameters 
+                along with an explanation of each.
+                <br><br>
+                <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert nucleotide query file</td>
+                    <td>Inserted query file must be in FASTA format. 
+                      Each sequence in FASTA format begins with a 
+                      single-line header (definition line), which is 
+                      followed by a line containing the sequence's data. 
+                      The definition line 
+                      must start with a carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert output filename</td>
+                    <td>Provide output filename to save nucleotide
+                      alignment results.
+                      The only characters that can be used in output
+                      filename are letters, digits, underscores, and 
+                      hyphens.
+                    </td>
+                  </tr>
+                </table>
+              
+                <br>
+                <b>Optional parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Location on the query sequence</td>
+                    <td>If you want to limit the search to only certain 
+                      query sequence locations, specify start and
+                      stop positions.
+                      Format: start-stop, delimited by hyphen.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Query strand(s) to search against database</td>
+                    <td>Provide query strand(s) to search against database. 
+                      Depending on wanted alignments you can 
+                      choose between 'minus', 'plus' or 'both' strands. 
+                      <br>
+                      Default = 'Both'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectation value (E) threshold for saving hits</td>
+                    <td>Provide expectation (E) value for saving hits.
+                      When searching a database of a specific size, 
+                      the expectation value indicates 
+                      how many hits one can "expect" to see by accident. 
+                      The lower the E value is, the more significant 
+                      the match.
+                      <br>
+                      Default = '10'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Word size</td>
+                    <td>Word size of initial match may be provided. Word
+                      size must be equal to 4 or larger.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scoring matrix name</td>
+                    <td>Provide scoring matrix name. Some of available
+                      matrices: 
+                      <ul>
+                        <li>PAM30</li>
+                        <li>PAM70</li>
+                        <li>PAM250</li>
+                        <li>BLOSUM80</li>
+                        <li>BLOSUM62</li>
+                        <li>BLOSUM45</li>
+                        <li>BLOSUM50</li>
+                        <li>BLOSUM90</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Minimum word score such that the word is 
+                      added to the BLAST lookup table</td>
+                    <td>Provide value larger or equal to 0.</td>
+                  </tr>
+                  <tr>
+                    <td>Show NCBI GIs in deflines </td>
+                    <td>Select the field "show NCBI GIs in deflines" 
+                      if GenInfo Identifiers (GIs) are present in the
+                      nucleotide BLAST database and the user wants to 
+                      see GIs in his/her alignment results.</td>
+                  </tr>
+                  <tr>
+                    <td>Line length for formatting alignments</td>
+                    <td>Provide line length for formatting alignments 
+                      in output.
+                      Value must be larger or equal to 1.
+                      <br>
+                      Default = '60'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hits</td>
+                    <td>Alignment results may be sorted by hits. 
+                      Hits can be sorted by evalue, bit score,
+                      total score, percent
+                      identity and query coverage.</td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hps</td>
+                    <td>Alignment results may be sorted by 
+                      High-scoring
+                      Segment Pair (HSP). HSP can be sorted by evalue, 
+                      HSP score, HSP query start, HSP percent identity or 
+                      HSP subject start.</td>
+                  </tr>
+                  <tr>
+                    <td>Apply filtering locations as soft masks</td>
+                    <td>Used only for finding initial matches.</td>
+                  </tr>
+                  <tr>
+                    <td>Use lower case filtering in query and 
+                      subject sequence(s)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      GIs, you must provide a file, containing GIs that 
+                      you would like to use in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      SeqID, you must provide a file, containing SeqID 
+                      that
+                      you would like to use in search.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified GIs, you must provide a file, 
+                      containing GIs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified SeqIDs, you must provide a 
+                      file, 
+                      containing SeqIDs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs to use in search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Taxonomy IDs which must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified taxonomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs to use in search of 
+                      database
+                    </td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, you must provide a 
+                      file, containing taxonomy IDs that must only be
+                      used in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs which
+                      must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to
+                      everything except the specified taxonomy IDs,
+                      you must provide a 
+                      file, containing taxonomy IDs that must not be used 
+                      in search of database.</td>
+                  </tr>
+                  <tr>
+                    <td>Percent query coverage per hsp</td>
+                    <td>Find alignments based on percent query coverage per 
+                      hsp. 
+                      Provide value in range 0 to 100. </td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of HSPs per subject sequence to save 
+                      for each query</td>
+                    <td>Provide a maximum number of HSPs per subject
+                      sequence to save for each query. 
+                      Value must be larger or equal
+                      to 1.</td>
+                  </tr>
+                  <tr>
+                    <td>Turn on best hit per subject sequence</td>
+                    <td>Retrieve only one best hit per subject sequence
+                      by selecting this field.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of aligned sequences to keep</td>
+                    <td>Default: 500 aligned sequences.</td>
+                  </tr>
+                  <tr>
+                    <td>Perform only ungapped alignment</td>
+                    <td>When this field is selected, 
+                      only ungapped alignments will be present in the 
+                      output file. </td>
+                  </tr>
+                  <tr>
+                    <td>Parse query and subject bar delimited 
+                      sequence identifiers </td>
+                    <td>By 
+                      enabling this field, query and subjects bar
+                       delimited 
+                      sequence identifiers 
+                      will be provided in the output file of alignment. 
+                    </td>
+                  </tr>
+                  
+                </table>		
+                <br>
+                <b>Default parameters 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>:</b>
+                <table class="tables-usage-small" style="width:40%;">
+                  <tr>
+                    <th>Task/Parameter</th>
+                    <th>Word size</th>
+                    <th>Minimum word score</th>
+                    <th>Matrix</th>
+                  </tr>
+                  <tr>
+                    <td>tBLASTx</td>
+                    <td>3</td>
+                    <td>13</td>
+                    <td>BLOSUM62</td>
+                  </tr>
+                </table>
+                <br>
+                <section id="BLASTSubMatricestblastx">
+                  <b>BLAST Substitution Matrices</b>
+                    <p>
+                      Recommended substitution matrices for query lengths 
+                      <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                        [2]
+                      </a>:
+                    </p>
+                    <table class="tables-usage-matrix" style="width:40%;">
+                      <tr>
+                        <th>Query length</th>
+                        <th>Substitution matrix</th>
+                        <th>Gap costs</th>
+                      </tr>
+                      <tr>
+                        <td>&lt 35</td>
+                        <td>PAM-30</td>
+                        <td>(9, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>35-50</td>
+                        <td>PAM-70</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>50-85</td>
+                        <td>BLOSUM-80</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>&gt 85</td>
+                        <td>BLOSUM-62</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                    </table>
+                    <br>
+                    Other available substitution matrices are:
+                    <ul>
+                      <li>BLOSUM-50</li>
+                      <li>BLOSUM-45</li>
+                      <li>PAM-250</li>
+                      <li>BLOSUM-90</li>
+                    </ul>
+                  </section>
+                <b>More information on these arguments can be found at:</b> 
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>
+              </p>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="blastx">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-blastx" 
+              aria-expanded="false" 
+              aria-controls="collapse-blastx">
+              BLASTx program for similar sequence search
+            </button>
+        </h2>
+        <div 
+          id="collapse-blastx" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="blastx" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                The BLASTx program for similar sequence search requires 
+                the input of a number of parameters, some of
+                which may be necessary or optional. 
+                Below is a list of these parameters 
+                along with an explanation of each.
+                <br><br>
+                <b>Required parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Insert nucleotide query file</td>
+                    <td>Inserted query file must be in FASTA format. 
+                      Each sequence in FASTA format begins with a 
+                      single-line header (definition line), which is 
+                      followed by a line containing the sequence's data. 
+                      The definition line 
+                      must start with a carat (">")
+                      and then a specific sequence identifier. 
+                      Blank lines in sequence are not permitted.
+                      <br>
+                      For more information on FASTA format, visit 
+                      <a 
+                        href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp">
+                        [3]
+                      </a>
+                      , 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">
+                        [4]
+                      </a>
+                      ,
+                      <a 
+                        href="https://en.wikipedia.org/wiki/FASTA_format">
+                        [5]
+                      </a>.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert output filename</td>
+                    <td>Provide output filename to save nucleotide
+                      alignment results.
+                      The only characters that can be used in output
+                      filename are letters, digits, underscores, and 
+                      hyphens.
+                    </td>
+                  </tr>
+                </table>
+              
+                <br>
+                <b>Optional parameters:</b>
+                <table class="tables-usage">
+                  <tr>
+                    <th style="width:20%">Field name</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>Location on the query sequence</td>
+                    <td>If you want to limit the search to only certain 
+                      query sequence locations, specify start and
+                      stop positions.
+                      Format: start-stop, delimited by hyphen.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Query strand(s) to search against database</td>
+                    <td>Provide query strand(s) to search against database. 
+                      Depending on wanted alignments you can 
+                      choose between 'minus', 'plus' or 'both' strands. 
+                      <br>
+                      Default = 'Both'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Length of the largest intron allowed in a
+                       translated nucleotide sequence</td>
+                    <td>
+                      Length of the largest intron allowed in a translated
+                      nucleotide sequence
+                      when linking multiple distinct alignments.
+                      Default = 0
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Task to execute</td>
+                    <td>Choose a 'BLASTx' task to execute. 
+                      <br>
+                      Available 'BLASTx' tasks 
+                      <a 
+                        href="https://www.ncbi.nlm.nih.gov/books/NBK279684/"
+                        >
+                        [2]
+                      </a>:
+                      <ul>
+                        <li><b>BLASTx</b> - for standard translated 
+                          nucleotide-protein comparison
+                        </li>
+                        <li><b>BLASTx-fast</b> -  a faster version
+                          that uses a larger word size 
+                        </li>
+                      </ul>
+                      Default = 'BLASTx'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scoring matrix name</td>
+                    <td>Provide scoring matrix name. Some of available
+                      matrices: 
+                      <ul>
+                        <li>PAM30</li>
+                        <li>PAM70</li>
+                        <li>PAM250</li>
+                        <li>BLOSUM80</li>
+                        <li>BLOSUM62</li>
+                        <li>BLOSUM45</li>
+                        <li>BLOSUM50</li>
+                        <li>BLOSUM90</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Expectation value (E) threshold for saving hits</td>
+                    <td>Provide expectation (E) value for saving hits.
+                      When searching a database of a specific size, 
+                      the expectation value indicates 
+                      how many hits one can "expect" to see by accident. 
+                      The lower the E value is, the more significant 
+                      the match.
+                      <br>
+                      Default = '10'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Word size</td>
+                    <td>Word size of initial match may be provided. Word
+                      size must be equal to 4 or larger.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Cost to open a gap</td>
+                    <td>Provide the cost to open the gap. Can be any integer 
+                      value.</td>
+                  </tr>
+                  <tr>
+                    <td>Cost to extend a gap</td>
+                    <td>Provide the cost to extend the gap. Can be any 
+                      integer value.</td>
+                  </tr>
+                  <tr>
+                    <td>Minimum word score such that the word is 
+                      added to the BLAST lookup table</td>
+                    <td>Provide value larger or equal to 0.</td>
+                  </tr>
+                  <tr>
+                    <td>Show NCBI GIs in deflines </td>
+                    <td>Select the field "show NCBI GIs in deflines" 
+                      if GenInfo Identifiers (GIs) are present in the
+                      nucleotide BLAST database and the user wants to 
+                      see GIs in his/her alignment results.</td>
+                  </tr>
+                  <tr>
+                    <td>Line length for formatting alignments</td>
+                    <td>Provide line length for formatting alignments 
+                      in output.
+                      Value must be larger or equal to 1.
+                      <br>
+                      Default = '60'.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hits</td>
+                    <td>Alignment results may be sorted by hits. 
+                      Hits can be sorted by evalue, bit score,
+                      total score, percent
+                      identity and query coverage.</td>
+                  </tr>
+                  <tr>
+                    <td>Sorting option for hps</td>
+                    <td>Alignment results may be sorted by 
+                      High-scoring
+                      Segment Pair (HSP). HSP can be sorted by evalue, 
+                      HSP score, HSP query start, HSP percent identity or 
+                      HSP subject start.</td>
+                  </tr>
+                  <tr>
+                    <td>Apply filtering locations as soft masks</td>
+                    <td>Used only for finding initial matches.</td>
+                  </tr>
+                  <tr>
+                    <td>Use lower case filtering in query and 
+                      subject sequence(s)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      GIs, you must provide a file, containing GIs that 
+                      you would like to use in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs to use</td>
+                    <td>In order to restrict search of database to list of 
+                      SeqID, you must provide a file, containing SeqID 
+                      that
+                      you would like to use in search.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of GIs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified GIs, you must provide a file, 
+                      containing GIs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of SeqIDs which must not be used</td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified SeqIDs, you must provide a 
+                      file, 
+                      containing SeqIDs that must not be used in search of 
+                      database.</td>
+                  </tr>
+                  <tr>
+                    <td>Taxonomy IDs to use in search of database</td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Taxonomy IDs which must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to 
+                      everything
+                      except the specified taxonomy IDs, provide a list 
+                      of taxonomy IDs, delimited by comma ','.</td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs to use in search of 
+                      database
+                    </td>
+                    <td>In order to restrict search of database to include 
+                      only the specified taxonoomy IDs, you must provide a 
+                      file, containing taxonomy IDs that must only be
+                      used in search. </td>
+                  </tr>
+                  <tr>
+                    <td>Insert file of taxonomy IDs which
+                      must not be included in search
+                    </td>
+                    <td>In order to restrict search of database to
+                      everything except the specified taxonomy IDs,
+                      you must provide a 
+                      file, containing taxonomy IDs that must not be used 
+                      in search of database.</td>
+                  </tr>
+                  <tr>
+                    <td>Percent query coverage per hsp</td>
+                    <td>Find alignments based on percent query coverage per 
+                      hsp. 
+                      Provide value in range 0 to 100. </td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of HSPs per subject sequence to save 
+                      for each query</td>
+                    <td>Provide a maximum number of HSPs per subject
+                      sequence to save for each query. 
+                      Value must be larger or equal
+                      to 1.</td>
+                  </tr>
+                  <tr>
+                    <td>Turn on best hit per subject sequence</td>
+                    <td>Retrieve only one best hit per subject sequence
+                      by selecting this field.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum number of aligned sequences to keep</td>
+                    <td>Default: 500 aligned sequences.</td>
+                  </tr>
+                  <tr>
+                    <td>Perform only ungapped alignment</td>
+                    <td>When this field is selected, 
+                      only ungapped alignments will be present in the 
+                      output file. </td>
+                  </tr>
+                  <tr>
+                    <td>Parse query and subject bar delimited 
+                      sequence identifiers </td>
+                    <td>By 
+                      enabling this field, query and subjects bar
+                       delimited 
+                      sequence identifiers 
+                      will be provided in the output file of alignment. 
+                    </td>
+                  </tr>
+                  
+                </table>		
+                <br>
+                <b>Default parameters 
+                  <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>:</b>
+                <table class="tables-usage-small" style="width:30%;">
+                  <tr>
+                    <th>Task/Parameter</th>
+                    <th>Word size</th>
+                    <th>Gap open</th>
+                    <th>Gap extend</th>
+                  </tr>
+                  <tr>
+                    <td>BLASTx</td>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>BLASTx-fast</td>
+                    <td>6</td>
+                    <td>11</td>
+                    <td>1</td>
+                  </tr>
+                </table>
+                <br>
+                <section id="BLASTSubMatricesblastx">
+                  <b>BLAST Substitution Matrices</b>
+                    <p>
+                      Recommended substitution matrices for query lengths 
+                      <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                        [2]
+                      </a>:
+                    </p>
+                    <table class="tables-usage-matrix" style="width:40%;">
+                      <tr>
+                        <th>Query length</th>
+                        <th>Substitution matrix</th>
+                        <th>Gap costs</th>
+                      </tr>
+                      <tr>
+                        <td>&lt 35</td>
+                        <td>PAM-30</td>
+                        <td>(9, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>35-50</td>
+                        <td>PAM-70</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>50-85</td>
+                        <td>BLOSUM-80</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                      <tr>
+                        <td>&gt 85</td>
+                        <td>BLOSUM-62</td>
+                        <td>(10, 1)</td>
+                      </tr>
+                    </table>
+                    <br>
+                    Other available substitution matrices are:
+                    <ul>
+                      <li>BLOSUM-50</li>
+                      <li>BLOSUM-45</li>
+                      <li>PAM-250</li>
+                      <li>BLOSUM-90</li>
+                    </ul>
+                  </section>
+                <br>
+                <b>More information on these arguments can be found at:</b> 
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK279684/">
+                  [2]
+                </a>
+              </p>
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="nuclAlign">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-nuclAlign" 
+              aria-expanded="false" 
+              aria-controls="collapse-nuclAlign">
+                View similar sequence search results
+            </button>
+        </h2>
+        <div 
+          id="collapse-nuclAlign" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="nuclAlign" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                Public alignment results can be viewed at
+                <a href="{% url 'blastresultpublic' %}">public BLAST results</a>
+                by clicking on the 'View Blastn Results' button. Results of a 
+                particular alignments can be downloaded or viewed.
+                <br>
+                Private alignment results can be viewed
+                at <a href="{% url 'blastresultuser' %}">
+                private BLAST results</a>(link is available for 
+                logged in users only).
+              </p>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="removealign">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-removealign" 
+              aria-expanded="false" 
+              aria-controls="collapse-removealign">
+                Remove alignment results
+            </button>
+        </h2>
+        <div 
+          id="collapse-removealign" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="removealign" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+                Only private alignment results can be removed. 
+                Private alignment results can be removed 
+                <a href="{% url 'blastresultuser' %}">here.
+                </a> 
+                Firsly, select a button of which BLAST+ application suite 
+                alignment results you would like to view. Available 
+                BLAST+ applications are "BLASTn", "BLASTp", "BLASTx", "tBLASTx",
+                "tBlastn".
+                To remove alignment result, select checkbox that is
+                asocciated with alignment result and
+                click on "Delete selected alignments" button. 
+                Private alignment results will be permanently removed. 
+            </div>
+        </div>
+      </div>
+  
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="batch">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-batch" 
+              aria-expanded="false" 
+              aria-controls="collapse-protbatch">
+                Batch alignment generation for many BLAST databases
+            </button>
+        </h2>
+        <div 
+          id="collapse-batch" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="batch" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+                To retrieve batch alignment results from many BLAST databases,
+                use "Batch alignment generation for many BLAST databases" button
+                in <a href="{% url 'privatedb' %}">this page</a>. Then select
+                a filter - which BLAST+ application suite program to use 
+                for batch alignment generation for many BLAST databases. Then,
+                select two or more private BLAST databases and provide 
+                parameters which will be used for similar sequence search. 
+                All the parameters will be applied for each BLAST database 
+                similar sequence search. Results can be viewed immediately after
+                processing or later in <a href="{% url 'blastresultuser' %}">
+                  alignment results page.
+                </a> 
+            </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="updatedb">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-updatedb" 
+              aria-expanded="false" 
+              aria-controls="collapse-updatedb">
+                Update BLAST database
+            </button>
+        </h2>
+        <div 
+          id="collapse-updatedb" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="updatedb" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+                To update certain private BLAST database click on "Update"
+                button in <a href="{% url 'privatedb' %}">this page
+                </a>. To update the BLAST database, user must provide input 
+                file. All the parameters for BLAST database creator 
+                remain the same as original (father) BLAST database. 
+            </div>
+        </div>
+      </div>  
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="tree">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-tree" 
+              aria-expanded="false" 
+              aria-controls="collapse-tree">
+                Generate the BLAST Databases tree
+            </button>
+        </h2>
+        <div 
+          id="collapse-tree" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="tree" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+                Click on "Generate the BLAST DB tree" button in 
+                <a href="{% url 'privatedb' %}">this page
+                </a> and select any private BLAST database's checkbox to 
+                retrieve BLAST database tree. If BLAST database does not have 
+                any updates (children BLAST databases), only selected BLAST
+                database will be seen.
+            </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="update-align">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-update-align" 
+              aria-expanded="false" 
+              aria-controls="collapse-update-align">
+                Updating alignment results
+            </button>
+        </h2>
+        <div 
+          id="collapse-update-align" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="update-align" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+                To update certain alignment results of private BLAST database 
+                must 
+                have updates (children BLAST databases). 
+                If the alignment result was not updated using children BLAST 
+                database, "Update alignment" button
+                appears next to certain alignment. User must select which
+                child BLAST database to use for alignment result update.
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="taskslist">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapse-taskslist" 
+              aria-expanded="false" 
+              aria-controls="collapse-taskslist">
+                View completed tasks 
+            </button>
+        </h2>
+        <div 
+          id="collapse-taskslist" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="taskslist" 
+          data-bs-parent="#accordionUsage">
+            <div class="accordion-body">
+              <p>
+                When user submits form for creating BLAST databases, retrieving
+                alignments or updating, after submit user is redirected to 
+                <a href="{% url 'task_list' %}">tasks list page</a>, where
+                user can periodically check if the processing of their request
+                is done. If the task complete, it will show up, providing 
+                the name of task, item name, task status, date created and 
+                completes and also a button, which is depended on task status, 
+                where user can view errors or results of the task that was 
+                requested.
+              </p>
+            </div>
+        </div>
+    </div>
+
+
+
+      <div class="accordion-item">
+          <h2 class="accordion-header" id="contact">
+              <button 
+                class="accordion-button collapsed" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapse-contact" 
+                aria-expanded="false" 
+                aria-controls="collapse-contact">
+                  Contact Us
+              </button>
+          </h2>
+          <div 
+            id="collapse-contact" 
+            class="accordion-collapse collapse" 
+            aria-labelledby="contact" 
+            data-bs-parent="#accordionUsage">
+              <div class="accordion-body">
+                <p>If you have any questions feel free to contact us by email
+                  and we will be sure to get back to you as soon as possible.
+                 </p>
+                <p>
+                  <i class="bi bi-envelope"></i>
+                  <b>webblastdatabases@gmail.com</b>
+                </p>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="accordion-item">
+          <h2 class="accordion-header" id="references">
+              <button 
+                class="accordion-button collapsed" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapse-references" 
+                aria-expanded="false" 
+                aria-controls="collapse-references">
+                  References
+              </button>
+          </h2>
+          <div 
+            id="collapse-references" 
+            class="accordion-collapse collapse" 
+            aria-labelledby="references" 
+            data-bs-parent="#accordionUsage">
+              <div class="accordion-body">
+                <ol>
+                  <li>
+                    <cite>
+                      BLAST® Command Line Applications User Manual [Internet]. 
+                      Bethesda (MD): National Center for 
+                      Biotechnology Information(US); 2008-. 
+                      Available from:
+                      https://www.ncbi.nlm.nih.gov/books/NBK279690/
+                    </cite>
+                  </li>
+                  <li>
+                    <cite>
+                      BLAST® Command Line Applications User Manual [Internet].
+                      Bethesda (MD): National Center for 
+                      Biotechnology Information(US); 2008-. 
+                      Appendices. 2008 Jun 23 [Updated 2021 Mar 14].
+                      Available from: 
+                      https://www.ncbi.nlm.nih.gov/books/NBK279684/
+                    </cite>
+                  </li>
+                  <li>
+                    <cite>
+                      U.S. National Library of Medicine. (n.d.). 
+                      Blast topics. 
+                      National Center for Biotechnology Information. 
+                      Retrieved August 01, 2022, 
+                      from 
+                      https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&amp;PAGE_TYPE=BlastDocs&amp;DOC_TYPE=BlastHelp 
+                    </cite>
+                  </li>
+                  <li> 
+                    <cite>
+                      U.S. National Library of Medicine. (n.d.). 
+                      Fasta format for nucleotide sequences.
+                      National Center for Biotechnology Information. 
+                      Retrieved August 01, 2022, 
+                      from https://www.ncbi.nlm.nih.gov/genbank/fastaformat/ 
+                    </cite>
+                  </li>
+                  <li>
+                    <cite>
+                      Wikipedia contributors.
+                      (2022, March 13). 
+                      FASTA format. In Wikipedia, 
+                      The Free Encyclopedia.
+                      Retrieved 10:04, August 23, 2022, 
+                      from https://en.wikipedia.org/w/index.php?title=FASTA_format&oldid=1076840315
+                    </cite>
+                  </li>
+                  <li>
+                    <cite>
+                      Seg*. Seg. (n.d.). 
+                      Retrieved August 02, 2022, 
+                      from http://www.dbbm.fiocruz.br/cgc/seg.html 
+                    </cite>
+                  </li>
+                  </ol> 
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

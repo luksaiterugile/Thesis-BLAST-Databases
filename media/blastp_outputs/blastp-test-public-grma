@@ -1,0 +1,324 @@
+BLASTP 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: cyanobacteria-blast-database
+           5 sequences; 1,480 total letters
+
+
+
+Query= UWJ20634.1 Transcriptional repressor for NAD biosynthesis in
+gram-positives [Bacillus cereus]
+
+Length=180
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protei...  20.4       0.12 
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  14.6       8.8  
+
+
+>WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protein 
+[Cyanobacteria]
+Length=476
+
+ Score = 20.4 bits (41),  Expect = 0.12, Method: Compositional matrix adjust.
+ Identities = 11/28 (39%), Positives = 17/28 (61%), Gaps = 1/28 (4%)
+
+Query  150  DGIHLH-TIEADSKEKLDAACEALDKAG  176
+            D IH +  +E  S+++  A  EAL +AG
+Sbjct  94   DAIHWNRDVEPYSRQRDTAVVEALKEAG  121
+
+
+ Score = 15.8 bits (29),  Expect = 3.9, Method: Compositional matrix adjust.
+ Identities = 4/7 (57%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+
+Query  86   HKPAEVR  92
+            H+P +VR
+Sbjct  134  HEPGDVR  140
+
+
+ Score = 15.0 bits (27),  Expect = 7.6, Method: Compositional matrix adjust.
+ Identities = 5/22 (23%), Positives = 11/22 (50%), Gaps = 0/22 (0%)
+
+Query  150  DGIHLHTIEADSKEKLDAACEA  171
+            +G  +   E  + E+L+  C+ 
+Sbjct  203  NGFPVEPGEQGALERLEEFCDG  224
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 14.6 bits (26),  Expect = 8.8, Method: Compositional matrix adjust.
+ Identities = 8/30 (27%), Positives = 13/30 (43%), Gaps = 2/30 (7%)
+
+Query  125  SNRFDVEQYLQKIENTNAS--YLSQLTDGI  152
+            ++RF +        N NA   Y   +T G+
+Sbjct  77   NSRFAISTTELGFTNENAPLDYTYTMTAGV  106
+
+
+
+Lambda      K        H        a         alpha
+   0.315    0.131    0.361    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 193305
+
+
+Query= CAE6424803.1 Transcriptional repressor for NAD biosynthesis in
+gram-positives [Listeria monocytogenes]
+
+Length=173
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]   18.1       0.62 
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  14.6       7.6  
+
+
+>WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+Length=424
+
+ Score = 18.1 bits (35),  Expect = 0.62, Method: Compositional matrix adjust.
+ Identities = 18/112 (16%), Positives = 45/112 (40%), Gaps = 16/112 (14%)
+
+Query  9    RRQMILKWLKE---AEAPISGNQLAQKTNVSRQVIVQDISLLKAGNEPIMATPQGYIYAK  65
+            R   +L+ +++   AE P++G +++   +V+ +     I+L   G + ++          
+Sbjct  29   REMPVLRQIQDRFAAEKPLAGIRISACCHVTTETAHLAIALKAGGADAVLIASNPLSTQD  88
+
+Query  66   ETSYT-------------GERRVIAVKHTKEQAAEELNILVDHGVSIIDVIV  104
+            + + +             GE      +H +       NI++D G  ++  +V
+Sbjct  89   DVAASLVADYGIPVFALRGEDSATYHRHVETALDHRPNIIIDDGSDVVATLV  140
+
+
+ Score = 15.8 bits (29),  Expect = 3.4, Method: Compositional matrix adjust.
+ Identities = 7/14 (50%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+
+Query  41  VQDISLLKAGNEPI  54
+           V+DISL   G + I
+Sbjct  11  VKDISLAAQGKQRI  24
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 14.6 bits (26),  Expect = 7.6, Method: Compositional matrix adjust.
+ Identities = 6/18 (33%), Positives = 9/18 (50%), Gaps = 0/18 (0%)
+
+Query  126  KFVRKLQTTGATMLSGLT  143
+            +F R+L +  A    G T
+Sbjct  8    RFARRLSSVFAQRERGFT  25
+
+
+
+Lambda      K        H        a         alpha
+   0.316    0.132    0.361    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 184100
+
+
+Query= CAE6356239.1 Transcriptional repressor for NAD biosynthesis in
+gram-positives [Listeria monocytogenes]
+
+Length=173
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]   18.1       0.62 
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  14.6       7.6  
+
+
+>WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+Length=424
+
+ Score = 18.1 bits (35),  Expect = 0.62, Method: Compositional matrix adjust.
+ Identities = 18/112 (16%), Positives = 45/112 (40%), Gaps = 16/112 (14%)
+
+Query  9    RRQMILKWLKE---AEAPISGNQLAQKTNVSRQVIVQDISLLKAGNEPIMATPQGYIYAK  65
+            R   +L+ +++   AE P++G +++   +V+ +     I+L   G + ++          
+Sbjct  29   REMPVLRQIQDRFAAEKPLAGIRISACCHVTTETAHLAIALKAGGADAVLIASNPLSTQD  88
+
+Query  66   ETSYT-------------GERRVIAVKHTKEQAAEELNILVDHGVSIIDVIV  104
+            + + +             GE      +H +       NI++D G  ++  +V
+Sbjct  89   DVAASLVADYGIPVFALRGEDSATYHRHVETALDHRPNIIIDDGSDVVATLV  140
+
+
+ Score = 15.8 bits (29),  Expect = 3.4, Method: Compositional matrix adjust.
+ Identities = 7/14 (50%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+
+Query  41  VQDISLLKAGNEPI  54
+           V+DISL   G + I
+Sbjct  11  VKDISLAAQGKQRI  24
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 14.6 bits (26),  Expect = 7.6, Method: Compositional matrix adjust.
+ Identities = 6/18 (33%), Positives = 9/18 (50%), Gaps = 0/18 (0%)
+
+Query  126  KFVRKLQTTGATMLSGLT  143
+            +F R+L +  A    G T
+Sbjct  8    RFARRLSSVFAQRERGFT  25
+
+
+
+Lambda      K        H        a         alpha
+   0.316    0.132    0.361    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 184100
+
+
+Query= APH80036.1 Transcriptional repressor for NAD biosynthesis in
+gram-positives [Listeria monocytogenes]
+
+Length=173
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]   18.1       0.62 
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  14.6       7.6  
+
+
+>WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+Length=424
+
+ Score = 18.1 bits (35),  Expect = 0.62, Method: Compositional matrix adjust.
+ Identities = 18/112 (16%), Positives = 45/112 (40%), Gaps = 16/112 (14%)
+
+Query  9    RRQMILKWLKE---AEAPISGNQLAQKTNVSRQVIVQDISLLKAGNEPIMATPQGYIYAK  65
+            R   +L+ +++   AE P++G +++   +V+ +     I+L   G + ++          
+Sbjct  29   REMPVLRQIQDRFAAEKPLAGIRISACCHVTTETAHLAIALKAGGADAVLIASNPLSTQD  88
+
+Query  66   ETSYT-------------GERRVIAVKHTKEQAAEELNILVDHGVSIIDVIV  104
+            + + +             GE      +H +       NI++D G  ++  +V
+Sbjct  89   DVAASLVADYGIPVFALRGEDSATYHRHVETALDHRPNIIIDDGSDVVATLV  140
+
+
+ Score = 15.8 bits (29),  Expect = 3.4, Method: Compositional matrix adjust.
+ Identities = 7/14 (50%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+
+Query  41  VQDISLLKAGNEPI  54
+           V+DISL   G + I
+Sbjct  11  VKDISLAAQGKQRI  24
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 14.6 bits (26),  Expect = 7.6, Method: Compositional matrix adjust.
+ Identities = 6/18 (33%), Positives = 9/18 (50%), Gaps = 0/18 (0%)
+
+Query  126  KFVRKLQTTGATMLSGLT  143
+            +F R+L +  A    G T
+Sbjct  8    RFARRLSSVFAQRERGFT  25
+
+
+
+Lambda      K        H        a         alpha
+   0.316    0.132    0.361    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 184100
+
+
+Query= APH77020.1 Transcriptional repressor for NAD biosynthesis in
+gram-positives [Listeria monocytogenes]
+
+Length=173
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]   18.1       0.62 
+WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protei...  14.6       7.6  
+
+
+>WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+Length=424
+
+ Score = 18.1 bits (35),  Expect = 0.62, Method: Compositional matrix adjust.
+ Identities = 18/112 (16%), Positives = 45/112 (40%), Gaps = 16/112 (14%)
+
+Query  9    RRQMILKWLKE---AEAPISGNQLAQKTNVSRQVIVQDISLLKAGNEPIMATPQGYIYAK  65
+            R   +L+ +++   AE P++G +++   +V+ +     I+L   G + ++          
+Sbjct  29   REMPVLRQIQDRFAAEKPLAGIRISACCHVTTETAHLAIALKAGGADAVLIASNPLSTQD  88
+
+Query  66   ETSYT-------------GERRVIAVKHTKEQAAEELNILVDHGVSIIDVIV  104
+            + + +             GE      +H +       NI++D G  ++  +V
+Sbjct  89   DVAASLVADYGIPVFALRGEDSATYHRHVETALDHRPNIIIDDGSDVVATLV  140
+
+
+ Score = 15.8 bits (29),  Expect = 3.4, Method: Compositional matrix adjust.
+ Identities = 7/14 (50%), Positives = 9/14 (64%), Gaps = 0/14 (0%)
+
+Query  41  VQDISLLKAGNEPI  54
+           V+DISL   G + I
+Sbjct  11  VKDISLAAQGKQRI  24
+
+
+>WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein 
+[Cyanobacteria]
+Length=174
+
+ Score = 14.6 bits (26),  Expect = 7.6, Method: Compositional matrix adjust.
+ Identities = 6/18 (33%), Positives = 9/18 (50%), Gaps = 0/18 (0%)
+
+Query  126  KFVRKLQTTGATMLSGLT  143
+            +F R+L +  A    G T
+Sbjct  8    RFARRLSSVFAQRERGFT  25
+
+
+
+Lambda      K        H        a         alpha
+   0.316    0.132    0.361    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 184100
+
+
+  Database: cyanobacteria-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 1,480
+  Number of sequences in database:  5
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 11
+Window for multiple hits: 40

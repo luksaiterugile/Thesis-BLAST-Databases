@@ -1,0 +1,528 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+<title>Task List</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block main %}
+<div class="top-margin-f ms-4 me-4">
+    <h4>Task List</h4>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div 
+                        class="alert {{ message.tags }} alert-dismissible fade show" 
+                        role="alert">
+                        <div class="text-break">
+                            {{ message }}
+                        </div>
+                        <button 
+                            type="button" 
+                            class="btn-close" 
+                            data-bs-dismiss="alert" 
+                            aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form id="refreshForm">
+        {% csrf_token %}
+        <label for="refreshTime">Refresh Time:</label>
+        <span class="ms-1 position-relative d-inline-block">
+            <i 
+                class="bi bi-info-circle text-dark info-icon" 
+                data-bs-toggle="tooltip" data-bs-placement="right" 
+                title="You can only set the refresh time once. 
+                Insert refresh time either in seconds (s), minutes
+                (m) or hours (h). Provide only number(s) and one 
+                corresponding letter. Default is 30 seconds (30s).">
+            </i>
+        </span>
+        <div class="d-flex">
+            <input 
+                class="form-control" 
+                type="text" 
+                id="refreshTime" 
+                name="refreshTime" 
+                style="width:80px;"
+                placeholder="30s">
+            <button type="submit" class="btn btn-outline-dark ms-2" 
+                id="submitButton">
+                Submit
+            </button>
+        </div>
+    </form>
+
+
+    {% if user.is_authenticated %}
+    <p class="mt-2">
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#running_table" 
+            aria-expanded="false" 
+            aria-controls="running_table">View Running Tasks</button>
+        <button 
+            class="btn btn-dark change mt-2" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#finished_table" 
+            aria-expanded="false" 
+            aria-controls="finished_table">View Finished Tasks</button>
+    </p>
+
+    <div class="collapse" id="finished_table">
+        <div class="container-fluid">
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-dark btn-rounded fit mb-3 mt-3" 
+                id="deletetask"
+                value="Delete selected tasks">
+        </div>
+        <table 
+        id="task_list_table"
+        class="table table-hover border border-light table-sm" 
+        style="background-color: #B3C4BC">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                        <input 
+                            type="checkbox" 
+                            id="select_all_tasks"
+                            class="checkbox_del form-check-input"
+                            value="selectalltasks"/> 
+                    </th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Task Status</th>
+                    <th scope="col">Date Finished</th>
+                    <th scope="col">Task Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr id="{{ task.task_id }}">
+                    <td class="wrap">
+                        <input 
+                            type="checkbox" 
+                            id="delete_task"
+                            class="checkbox form-check-input"
+                            name="tasks[]" 
+                            value="{{ task.task_id }}"
+                        >
+                    </td>
+                    <td class="wrap">
+                        {{ task.task_name }}
+                    </td>
+                    <td class="wrap">
+                        {{ task.item_name }}
+                    </td>
+                    <td class="wrap">
+                        {{ task.status }}
+                        {% if task.status == "SUCCESS" %}
+                        <i class="bi bi-check-lg fs-3 text-success"></i>
+                        {% elif task.status == "FAILURE" %}
+                        <i class="bi bi-x-lg fs-4 text-danger"></i>
+                        {% else %}
+                        <i class="bi bi-arrow-clockwise fs-4"></i>
+                        {% endif %}
+                    </td>
+                    <td class="wrap">
+                        {{ task.date_done }}
+                    </td>
+                    {% if task.status == "FAILURE" %}
+                    <td class="wrap">
+                        <a 
+                            id="redirectpage"
+                            href="{% url 'viewing-task-outcome' slug=task.task_id %}"
+                            class="btn btn-light task_button">
+                            View Errors
+                        </a>
+                    </td>
+                    {% elif task.status == "SUCCESS" %}
+                        <td class="wrap">
+                            <a 
+                                id="redirectpage"
+                                href="{% url 'viewing-task-outcome' slug=task.task_id %}"
+                                class="btn btn-light task_button">
+                                View Results
+                            </a>
+                        </td>
+                    {% else %}
+                    <td class="wrap"></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collapse" id="running_table">
+        <div class="container-fluid">
+            <table
+                id="runningprivatetable"
+                class="table table-hover border border-light table-sm"
+                style="background-color: #B3C4BC">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Item Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if running_tasks %}
+                        {% for run_tasks in running_tasks %}
+                        <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="align-middle wrap">
+                            {{ run_tasks.task_name }}</td>
+                        <td class="align-middle wrap">
+                            {{ run_tasks.item_name }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js">
+</script>
+<script>
+var private_task_table = $('#task_list_table').DataTable(
+    {
+        bAutoWidth: false, 
+        aoColumns : [
+            { sWidth: '2%' },
+            { sWidth: '12%' },
+            { sWidth: '28%' },
+            { sWidth: '10%' },
+            { sWidth: '10%' },
+            { sWidth: '15%' },
+        ],
+        order: [[4, 'desc']]
+    }
+);
+var private_running_tasks = $('#runningprivatetable').DataTable(
+    {
+        bAutoWidth: false, 
+        aoColumns : [
+            { sWidth: '5%' },
+            { sWidth: '40%' },
+            { sWidth: '55%' },
+        ]
+    }
+)
+</script>
+<script>
+    // Show only one collapse at a time
+    $('.change').click( function(e) {
+            $('.collapse').collapse('hide');
+    });
+
+    function call_ajax(task_names){
+        $.ajax({
+            url: ".",
+            method: "POST",
+            data: {
+                task_names,
+                csrfmiddlewaretoken:
+                $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success:function(response){
+                for(var db = 0; db < task_names.length; db++){
+                    private_task_table.row(
+                        $('tr#' + task_names[db])
+                    ).remove().draw(false)
+                }
+                $('#select_all_tasks').prop('checked', false);
+            }
+        })
+    }
+
+    function formatMeridiem(meridiem) {
+        if (meridiem === "am") {
+            return "a.m.";
+        } else {
+            return "p.m.";
+        }
+    }
+
+    function update_tasks(data) {
+        $.ajax({
+            url: "{% url 'update_task_list' %}",
+            type: "GET",
+            success: function(data) {
+                // Filling up running tasks table
+                var running_tasks_table = $("#running_table tbody");
+                
+                if (data.running_tasks.length) {
+                    private_running_tasks.clear().draw();
+                    running_tasks_table.empty();
+                    $.each(data.running_tasks, function(id, val) {
+                        var row = [
+                            id + 1,
+                            val.task_name,
+                            val.item_name
+                        ];
+                        private_running_tasks.row.add(row).draw();
+                    });
+                } else {
+                    running_tasks_table.empty();
+                    private_running_tasks.clear().draw();
+                }
+
+                var task_list_table_body = $("#task_list_table tbody");
+
+                if (data.tasks.length) {
+                    task_list_table_body.empty();
+                    private_task_table.clear().draw();
+                    $.each(data.tasks, function(id, value) {
+                        var statusIcon = getStatusIcon(value.status);
+                        var outcomeButton = getOutcomeButton(value.status, value.task_id);
+                        var formattedDate = moment.utc(value.date_done).format("MMM D, YYYY,h:mm ") + formatMeridiem(moment.utc(value.date_done).format("a"));;
+
+                        var row = [
+                            "<input type='checkbox' class='checkbox_del form-check-input' id='delete_task' name='tasks[]' value='" + value.task_id + "'>",
+                            value.task_name,
+                            value.item_name,
+                            value.status + statusIcon,
+                            formattedDate,
+                            outcomeButton
+                        ];
+                        private_task_table.row.add(row);
+                    });
+                    private_task_table.order([[4, 'desc']]);
+                } 
+                else {
+                    task_list_table_body.empty();
+                    private_task_table.clear().draw();
+                }
+
+                private_task_table.order([[4, 'desc']]).draw();
+            }
+        });
+    }
+
+    function getStatusIcon(status) {
+        if (status === "SUCCESS") {
+            return "<i class='bi bi-check-lg fs-3 text-success'></i>";
+        } else if (status === "FAILURE") {
+            return "<i class='bi bi-x-lg fs-4 text-danger'></i>";
+        } else {
+            return "<i class='bi bi-arrow-clockwise fs-4'></i>";
+        }
+    }
+
+    function getOutcomeButton(status, task_id) {
+        if (status === "FAILURE") {
+            return "<a id='redirectpage' href='/view_task_outcome/" + task_id + "' class='btn btn-light task_button'>View Errors</a>";
+        } else if (status === "SUCCESS") {
+            return "<a id='redirectpage' href='/view_task_outcome/" + task_id + "' class='btn btn-light task_button'>View Results</a>";
+        } else {
+            return "";
+        }
+    }
+
+
+    // Set 30 seconds as default
+    let default_refresh_t = 30000;
+    window.refreshInterval = setInterval(update_tasks, default_refresh_t);
+
+    $("#refreshForm").submit(function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Retrieve value
+        const refreshTime = $("#refreshTime").val();
+
+        if (refreshTime) {
+            // Integer value
+            const timeValue = parseInt(refreshTime, 10);
+            // Take the time unit
+            const timeUnit = refreshTime.slice(-1);
+
+            if (!Number.isNaN(timeValue)) {
+                switch (timeUnit) {
+                    case "s":
+                        let maxSeconds = 8 * 60 * 60; // 8 hours
+                        if (timeValue < 10 || timeValue > maxSeconds) {
+                            window.alert("Invalid refresh time. " +
+                                "Refresh time should be " +
+                                "between 10 seconds and 8 hours.");
+                            return;
+                        }
+                        // Convert seconds
+                        interval = timeValue * 1000;
+                        break;
+
+                    case "m":
+                        let maxMinutes = 8 * 60;
+
+                        if (timeValue < 1 || timeValue > maxMinutes) {
+                            window.alert("Invalid refresh time. " +
+                            "Refresh time should be " +
+                            "between 10 seconds and 8 hours.");
+                            return
+                        }
+                        // Convert minutes 
+                        interval =  timeValue * 60 * 1000;
+                        break;
+
+                    case "h":
+                        let maxHours = 8;
+                        if (timeValue < 1 || timeValue > maxHours) {
+                            window.alert("Invalid refresh time. " +
+                            "Refresh time should be " +
+                            "between 10 seconds and 8 hours.");
+                            return;
+                        }
+
+                        // Convert hours
+                        interval = timeValue * 60 * 60 * 1000;
+                        break;
+
+                    default:
+                        window.alert("Invalid refresh time. Please " +
+                        "provide a valid refresh time (e.g., 10s, 5m, 1h).");
+                        return;
+                }
+            }
+        }
+
+        // Clear the previous time
+        clearInterval(window.refreshInterval);
+
+        // Set the new interval with the calculated refresh time
+        window.refreshInterval = setInterval(update_tasks, interval);
+
+        // Disable the input field
+        $("#refreshTime").prop("disabled", true);
+        $("#submitButton").prop("disabled", true);
+        
+    });
+
+
+
+    // Using checkboxes to remove tasks
+    $('#deletetask').click(function(){
+        if(confirm("Are you sure you want to delete " +
+        "selected tasks? The task(s) will be deleted permanently."))
+        {
+            var task_names = [];
+            // Retrieve selected checkbox names
+            private_task_table.$(':checkbox:checked').each(function(i){
+                task_names[i] = $(this).val().trim();
+            })
+
+            // Check if any DB selected
+            if(task_names.length === 0){
+                window.alert("Please select tasks "+
+                "you want to delete.");
+            }
+            else{
+                if(task_names[0] == 'selectall'){
+                    task_names.shift();
+                    if(task_names.length === 0){
+                        window.alert("Please select tasks "+ 
+                        "you want to delete.");
+                    }
+                    else{
+                        // Send to ajax
+                        call_ajax(task_names);
+                        // Reset select all button
+                        $('#select_all_tasks').prop('checked', false);
+                    }
+                }
+                else{
+                    // Send to ajax
+                    call_ajax(task_names);
+                    // Reset select all button
+                    $('#select_all_tasks').prop('checked', false);
+                }
+            }
+        }
+    })
+
+    // Select all checkbox listener
+    $('#select_all_tasks').click(function(){
+        selected_values = [];
+        if(this.checked){
+            // If select all checkbox is checked
+            private_task_table.$('.checkbox').each(
+            function(){
+                if($(this).prop('value') != 'selectalltasks'){
+                    this.checked = true;
+                    selected_values.push($(this).prop('value'));
+                }
+            });
+        }
+        else{
+            // If select all checkbox is not checked
+            private_task_table.$('.checkbox').each(
+            function(){
+                this.checked = false;
+            });
+        }
+    })
+
+    // Remove checked all if at least one of items is unchecked
+    private_task_table.$('.checkbox').click(function(){
+        if(private_task_table.$('.checkbox:checked').length == 
+            private_task_table.$('.checkbox').length){
+            if (!$('#select_all_tasks').prop('disabled')){
+                $('#select_all_tasks').prop('checked', true);
+            }
+        }
+        else{
+            $('#select_all_tasks').prop('checked', false);
+        }
+    })
+</script>
+<script>
+$('#redirectpage').click(function() {
+    $('#spinner').removeClass('d-none');
+    $('#overlay').removeClass('d-none');
+});
+
+// Hide the spinner when the page has finished loading
+window.addEventListener('load', function() {
+    document.getElementById('spinner').classList.add('d-none');
+    document.getElementById('overlay').classList.add('d-none');
+});
+</script>
+{% endblock %}
+{% block tooltip %}
+<script>
+    // Default tooltip code from Bootstrap documentation 
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+</script>
+{% endblock %}
+

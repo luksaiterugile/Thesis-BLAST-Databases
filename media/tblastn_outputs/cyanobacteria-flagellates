@@ -1,0 +1,190 @@
+TBLASTN 2.9.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+
+Database: flagellates-blast-database
+           3 sequences; 9,080 total letters
+
+
+
+Query= WP_190631330.1 MULTISPECIES: ElyC/SanA/YdcF family protein
+[Cyanobacteria]
+
+Length=259
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET4...  28.1       0.002
+
+
+>LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig543, whole genome shotgun sequence
+Length=3024
+
+ Score = 28.1 bits (61),  Expect = 0.002, Method: Compositional matrix adjust.
+ Identities = 11/26 (42%), Positives = 18/26 (69%), Gaps = 2/26 (8%)
+ Frame = +1
+
+Query  236  MAEDF--PADRCFMTAEQLRQAFMLS  259
+            +AE++  P D+CF+  E+ RQA+  S
+Sbjct  628  LAEEYNLPTDKCFVILEEHRQAYRQS  705
+
+
+
+Lambda      K        H        a         alpha
+   0.323    0.136    0.411    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 629300
+
+
+Query= WP_190630988.1 MULTISPECIES: adenosylhomocysteinase [Cyanobacteria]
+
+Length=424
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.319    0.134    0.383    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1091664
+
+
+Query= WP_190630793.1 MULTISPECIES: orange carotenoid protein N-terminal
+domain-containing protein [Cyanobacteria]
+
+Length=147
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET4...  18.1       1.1  
+
+
+>LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig543, whole genome shotgun sequence
+Length=3024
+
+ Score = 18.1 bits (35),  Expect = 1.1, Method: Compositional matrix adjust.
+ Identities = 6/9 (67%), Positives = 8/9 (89%), Gaps = 0/9 (0%)
+ Frame = -1
+
+Query  95   KLAFWHRLF  103
+            K +F+HRLF
+Sbjct  930  KASFYHRLF  904
+
+
+
+Lambda      K        H        a         alpha
+   0.327    0.136    0.401    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 320650
+
+
+Query= WP_190630652.1 MULTISPECIES: FAD-binding domain-containing protein
+[Cyanobacteria]
+
+Length=476
+                                                                      Score        E
+Sequences producing significant alignments:                          (Bits)     Value
+
+LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain CET4...  20.8       0.73 
+LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate A...  17.7       6.3  
+
+
+>LNVX01000511.1 Candidatus Endomicrobium trichonymphae strain 
+CET450 CET450_Contig543, whole genome shotgun sequence
+Length=3024
+
+ Score = 20.8 bits (42),  Expect = 0.73, Method: Compositional matrix adjust.
+ Identities = 7/14 (50%), Positives = 10/14 (71%), Gaps = 0/14 (0%)
+ Frame = +3
+
+Query  150  YTPFWRNWAKRSKA  163
+            Y+P W+N+  R KA
+Sbjct  738  YSPLWQNYRNRRKA  779
+
+
+ Score = 18.1 bits (35),  Expect = 4.6, Method: Compositional matrix adjust.
+ Identities = 8/24 (33%), Positives = 12/24 (50%), Gaps = 0/24 (0%)
+ Frame = +3
+
+Query  382   VDGDLSSNNGGWQWSASSGMDPKP  405
+             +DGD+S  +   Q   +   DP P
+Sbjct  2376  LDGDISQKDRLIQDLINIAGDPPP  2447
+
+
+>LQAA01000043.1 MAG: Candidatus Adiutrix intracellularis isolate 
+Adiu1 contig2556801719, whole genome shotgun sequence
+Length=3022
+
+ Score = 17.7 bits (34),  Expect = 6.3, Method: Compositional matrix adjust.
+ Identities = 7/18 (39%), Positives = 9/18 (50%), Gaps = 0/18 (0%)
+ Frame = +3
+
+Query  335  PIVDAAMRQLNEMGWMHN  352
+            P     +RQLN+    HN
+Sbjct  399  PGAKRPLRQLNQAKRHHN  452
+
+
+
+Lambda      K        H        a         alpha
+   0.320    0.137    0.437    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 1237665
+
+
+Query= WP_190630603.1 MULTISPECIES: type IV pilin-like G/H family protein
+[Cyanobacteria]
+
+Length=174
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.320    0.131    0.377    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 396032
+
+
+  Database: flagellates-blast-database
+    Posted date:  May 24, 2023  7:03 PM
+  Number of letters in database: 9,080
+  Number of sequences in database:  3
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 13
+Window for multiple hits: 40

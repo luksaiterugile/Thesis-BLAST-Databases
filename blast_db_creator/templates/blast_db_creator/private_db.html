@@ -1,0 +1,727 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load static %}
+{% block head %}
+<title>My BLAST Databases</title>
+<link 
+    rel="stylesheet" 
+    href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block table %}
+{% if user.is_authenticated %}
+<div class="container-fluid margin-table" data-aos="fade-up">
+    <div class="top-margin text-center mb-4">
+        <h3>My BLAST databases</h3>
+    </div>
+    <div class="mb-3">
+        {% csrf_token %}
+        <input 
+            type="submit" 
+            class="btn btn-dark btn-rounded fit" 
+            id="deleteblastdb"
+            value="Delete selected BLAST databases">
+        <br>
+        <input 
+            class="btn btn-dark btn-rounded fit mt-2 collapsebutton" 
+            id="generate_tree"
+            value="Generate the BLAST DB tree"
+            data-bs-toggle="collapse"
+            href="#chooseDB"
+            role="button"
+            aria-expanded="false"
+            aria-controls="chooseDB">
+        <div class="collapse" id="chooseDB">
+            <div class="card card-body cardselect" style="width:300px;">
+                Select one BLAST database to generate the BLAST DB tree
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-outline-dark btn-rounded mt-2 btn-sm" 
+                id="generateTree"
+                value="Generate">   
+            </div>
+        </div>
+        <br>
+        <input 
+            type="align" 
+            class="btn btn-dark btn-rounded mt-2 collapsebutton" 
+            id="alignblastdb"
+            value="Batch alignment generation for many BLAST databases"
+            data-bs-toggle="collapse"
+            href="#choosetype"
+            role="button"
+            aria-expanded="false"
+            aria-controls="choosetype">
+        <div class="collapse" id="choosetype">
+            <div class="card card-body cardselect">
+                <p>Choose the type of alignment task:</p>
+                <div class="form-check">
+                    <input 
+                        class="form-check-input filter" 
+                        type="radio" 
+                        data-filter="Nucleotide" 
+                        id="blastn"
+                        name="filter">
+                    <label 
+                        class="form-check-label" 
+                        for="blastn">BLASTn</label><br>
+
+                    <input 
+                        class="form-check-input filter" 
+                        type="radio" 
+                        data-filter="Protein" 
+                        id="blastp"
+                        name="filter">
+                    <label 
+                        class="form-check-label" 
+                        for="blastp">BLASTp</label><br>
+
+                    <input 
+                        class="form-check-input filter" 
+                        type="radio" 
+                        data-filter="Nucleotide" 
+                        id="tblastn"
+                        name="filter">
+                    <label 
+                        class="form-check-label" 
+                        for="tblastn">tBLASTn</label><br>
+                    
+                    <input 
+                        class="form-check-input filter" 
+                        type="radio" 
+                        data-filter="Nucleotide" 
+                        id="tblastx"
+                        name="filter">
+                    <label 
+                        class="form-check-label" 
+                        for="tblastx">tBLASTx</label><br>
+                    
+                    <input 
+                        class="form-check-input filter" 
+                        type="radio" 
+                        data-filter="Protein" 
+                        id="blastx"
+                        name="filter">
+                    <label 
+                        class="form-check-label" 
+                        for="blastx">BLASTx</label><br>
+                </div>
+            {% csrf_token %}
+            <input 
+                type="submit" 
+                class="btn btn-outline-dark btn-rounded mt-2 btn-sm" 
+                id="aligndb"
+                value="Submit">   
+            <input 
+                type="submit"
+                class="btn btn-outline-dark btn-rounded mt-2 btn-sm"
+                id="removefilter"
+                value="Reset">
+            <label class="selectallcheckbox">
+                <input 
+                    type="checkbox" 
+                    id="select_all_align"
+                    class="checkbox-align form-check-input"
+                    value="selectallalign"
+                /> Select all filtered
+            </label> 
+            </div>
+        </div>
+        <br>
+    </div>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div 
+                        class="alert {{ message.tags }} alert-dismissible fade show" 
+                        role="alert">
+                        <div class="text-break">
+                            {{ message }}
+                        </div>
+                        <button 
+                            type="button" 
+                            class="btn-close" 
+                            data-bs-dismiss="alert" 
+                            aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <table 
+        id="private_databases" 
+        class="table table-hover border border-light table-sm" 
+        style="background-color: #B3C4BC">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    <input 
+                        type="checkbox" 
+                        id="select_all"
+                        class="checkbox_del form-check-input"
+                        value="selectall"
+                        /> 
+                </th>
+                <th scope="col">Database name</th>
+                <th scope="col">Created from</th>
+                <th scope="col">Database type</th>
+                <th scope="col">Submitted at</th>
+                <th scope="col">Download database</th>
+                <th scope="col">Update database</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for db_files in blast_db_data %}
+                {% if db_files.user_input %}
+                    {% if db_files.user_input.public_or_private == 'private' %}
+                        {% if db_files.user_input.user == user %}
+                            <tr id="{{ db_files.user_input.name_of_blast_db }}">
+                                <td class="align-middle">
+                                    <input 
+                                        type="checkbox" 
+                                        id="delete_db"
+                                        class="checkbox form-check-input"
+                                        name="blast_db_names[]" 
+                                        value="{{ db_files.user_input.name_of_blast_db }}"
+                                    >
+                                </td>
+                                <td class="align-middle wrap">
+                                    {{ db_files.user_input.name_of_blast_db }}
+                                </td>
+                                <td class="align-middle wrap">
+                                    {{ db_files.user_input.filename }}</td>
+                                <td class="align-middle">
+                                    {{ db_files.user_input.print_type }}</td>
+                                <td class="align-middle">
+                                    {{ db_files.user_input.created }}
+                                </td>
+                                <td class="align-middle">
+                                    <a 
+                                    class="btn btn-outline-dark" 
+                                    href="{{ db_files.zip_file.url }}">
+                                    Download zip file
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-dark fitbutton"
+                                        href="{% url 'update' db_files.slug %}">
+                                        Update
+                                    </a>
+                                </td>
+                                {% if db_files.user_input.database_type == 'nucl' %}
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-light" 
+                                        href="{% url 'blastn' db_files.slug %}">
+                                        Use BLASTn
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-light" 
+                                        href="{% url 'tblastn' db_files.slug %}">
+                                        Use tBLASTn
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-light" 
+                                        href="{% url 'tblastx' db_files.slug %}">
+                                        Use tBLASTx
+                                    </a>
+                                </td>
+                                {% elif db_files.user_input.database_type == 'prot' %}
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-light" 
+                                        href="{% url 'blastp' db_files.slug %}">
+                                        Use BLASTp
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <a 
+                                        class="btn btn-light" 
+                                        href="{% url 'blastx' db_files.slug %}">
+                                        Use BLASTx
+                                    </a>
+                                </td>
+                                <td></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block code %}
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script 
+    src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js">
+</script>
+<script>
+    var private_db_table = $('#private_databases').DataTable(
+        {
+            bAutoWidth: false, 
+            aoColumns : [
+                { sWidth: '2%' },
+                { sWidth: '12%' },
+                { sWidth: '20%' },
+                { sWidth: '8%' },
+                { sWidth: '12%' },
+                { sWidth: '11%' },
+                { sWidth: '9%' },
+                { sWidth: '8%' },
+                { sWidth: '8%' },
+                { sWidth: '8%' }
+            ],
+            order: [[4, 'desc']]
+        }
+    );
+</script>
+<script>
+    $(document).ready(function(){
+        // Only one collapse open at a time
+        $('.collapsebutton').click( function(e) {
+            $('.collapse').collapse('hide');
+        });
+        
+        // Reset all checkboxes and filters when page loaded
+        private_db_table.$('.checkbox').each(function(){
+                    this.checked = false;
+        });
+        private_db_table.columns().search('').draw();
+        $('#blastn').prop('checked', false);
+        $('#blastp').prop('checked', false);
+        $('#tblastn').prop('checked', false);
+        $('#tblastx').prop('checked', false);
+        $('#blastx').prop('checked', false);
+
+        $('#select_all_align').prop('checked', false);
+        $('#select_all').prop('checked', false);
+        $('#select_all').attr("disabled", false);
+
+        // Ajax for deletion of DBs
+        function call_ajax(blast_db_names){
+            $.ajax({
+                url: ".",
+                method: "POST",
+                data: {
+                    blast_db_names,
+                    csrfmiddlewaretoken:
+                    $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(response){
+                    for(var db = 0; db < blast_db_names.length; db++){
+                        private_db_table.row(
+                            $('tr#' + blast_db_names[db])
+                            ).remove().draw(false)
+                    }
+                    $('#select_all').prop('checked', false);
+                }
+            })
+        }
+
+        // Using checkboxes to remove BLAST databases
+        var selected_values = [];
+        $('#deleteblastdb').click(function(){
+            if(confirm("Are you sure you want to delete " +
+            "selected BLAST databases?" + "\n" + "By deleting selected BLAST " +
+            "databases all generated alignment results will be deleted " +
+            "automatically. " ))
+            {
+                var blast_db_names = [];
+                // Retrieve selected checkbox names
+                private_db_table.$(':checkbox:checked').each(function(i){
+                    blast_db_names[i] = $(this).val().trim();
+                })
+
+                // Check if any DB selected
+                if(blast_db_names.length === 0){
+                    window.alert("Please select BLAST databases "+
+                    "you want to delete");
+                }
+                else{
+                    if(blast_db_names[0] == 'selectall'){
+                        blast_db_names.shift();
+                        if(blast_db_names.length === 0){
+                            window.alert("Please select BLAST "+ 
+                            "databases you want to delete");
+                        }
+                        else{
+                            // Send to ajax
+                            call_ajax(blast_db_names);
+                            // Reset select all button
+                            $('#select_all').prop('checked', false);
+                        }
+                    }
+                    else{
+                        // Send to ajax
+                        call_ajax(blast_db_names);
+                        // Reset select all button
+                        $('#select_all').prop('checked', false);
+                    }
+                }
+            }
+        })
+
+        // Select all checkbox listener
+        $('#select_all').click(function(){
+            selected_values = [];
+            if(this.checked){
+                // If select all checkbox is checked
+                private_db_table.$('.checkbox').each(
+                function(){
+                    if($(this).prop('value') != 'selectall' && 
+                        $(this).prop('value') != 'selectallalign'){
+                        this.checked = true;
+                        selected_values.push($(this).prop('value'));
+                    }
+                });
+            }
+            else{
+                // If select all checkbox is not checked
+                private_db_table.$('.checkbox').each(
+                function(){
+                    this.checked = false;
+                });
+            }
+        })
+
+        // Remove checked all if at least one of items is unchecked
+        private_db_table.$('.checkbox').click(function(){
+            if(private_db_table.$('.checkbox:checked').length == 
+                private_db_table.$('.checkbox').length){
+                if (!$('#select_all').prop('disabled')){
+                    $('#select_all').prop('checked', true);
+                }
+            }
+            else{
+                $('#select_all').prop('checked', false);
+            }
+        })
+
+
+        // Ajax for batch alignment generation for many BLAST databases
+        function return_with_ajax(db_to_align, type_of_db, align_using){
+            $.ajax({
+                url: "{% url 'retrieve-multi' %}",
+                method: "POST",
+                data: {
+                    db_to_align,
+                    csrfmiddlewaretoken:
+                    $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(response){
+                    var constructed_url = '/' +
+                     align_using + '/' + response.slug;
+
+                    setTimeout(function(){
+                        window.location.replace(constructed_url);
+                    }, 1000);
+                    
+                },
+                error:function(response){
+                    window.alert("Something went wrong." +
+                    " Could not find selected BLAST databases");
+                }
+            })
+        }
+
+        // If batch alignments collapse is open
+        $('#choosetype').on('shown.bs.collapse', function () {
+        
+            // Disabling select all checkbox if collapse open
+            $('#select_all').prop('checked', false);
+            $("#select_all").attr('disabled', true);
+
+            // Uncheck all checkboxes
+            private_db_table.$('.checkbox').each(function(){
+                    this.checked = false;
+                });
+
+            // Filter changing event listener
+            $('.filter').on("change", function() {
+                // Filter datatable based on radio button
+                var type_of_db = $('input[name="filter"]:checked')
+                .attr("data-filter");
+
+                // Remove check on checked checkboxes if filter changes
+                private_db_table.$('.checkbox').each(
+                function(){
+                        this.checked = false;
+                });
+
+                // Applying the filter
+                private_db_table.column(3).search(type_of_db).draw();
+                $('#select_all_align').prop('checked', false);
+
+                // Find filtered rows and uncheck them all
+                let filteredRows = 
+                    private_db_table.rows({search: 'applied'}).nodes();
+                $(filteredRows).find('input[type="checkbox"]')
+                        .prop('checked', false);
+
+                // Remove checked on select all filtered if at least one 
+                // of items in table unchecked, if all selected, select all 
+                // filtered becomes selected
+                $(filteredRows).on('change', 'input[type="checkbox"]', 
+                function() {
+                    const filteredCheckboxes = 
+                        $(filteredRows).find('input[type="checkbox"]');
+                    // If all checkboxes are checked
+                    const allSelected = 
+                    filteredCheckboxes.length === 
+                        filteredCheckboxes.filter(':checked').length;
+
+                    $('#select_all_align').prop('checked', allSelected);
+                });
+
+            })
+
+            // If no filter is selected still correct the select all filtered
+            // Find filtered rows and uncheck them all
+            let filteredRows = 
+                    private_db_table.rows({search: 'applied'}).nodes();
+            $(filteredRows).find('input[type="checkbox"]')
+                    .prop('checked', false);
+
+            // Remove checked on select all filtered if at least one 
+            // of items in table unchecked, if all selected, select all 
+            // filtered becomes selected
+            $(filteredRows).on('change', 'input[type="checkbox"]', 
+            function() {
+                const filteredCheckboxes = 
+                    $(filteredRows).find('input[type="checkbox"]');
+                // If all checkboxes are checked
+                const allSelected = 
+                filteredCheckboxes.length === 
+                    filteredCheckboxes.filter(':checked').length;
+
+                $('#select_all_align').prop('checked', allSelected);
+            });
+
+            // Select all button event listener
+            $('#select_all_align').on("change", function(){
+                if(this.checked){
+                    // Select all but only filtered items
+                    let filteredRows = 
+                        private_db_table.rows({search: 'applied'}).nodes();
+                    $(filteredRows).find('input[type="checkbox"]')
+                        .prop('checked', true);
+                }
+                else{
+                    // Unselect all but only filtered items
+                    let filteredRows = 
+                        private_db_table.rows({search: 'applied'}).nodes();
+                    $(filteredRows).find('input[type="checkbox"]')
+                        .prop('checked', false);
+                }
+            });
+
+
+            // If submit pressed:
+            $('#aligndb').click(function(){
+                // Retrieve filter type
+                var selected_filter = $('input[name="filter"]:checked')
+                    .attr("data-filter");
+                
+                // Check if filter selected, if so, find out which program
+                // for alignment to use
+                if(typeof selected_filter == 'undefined'){
+                    window.alert("Please choose the type of BLAST databases" + 
+                        " to retrieve the alignments for.");
+                }
+                else{
+                    var align_using = 
+                        $('input[name="filter"]:checked').attr('id');
+
+                    // Confirm to make multi align 
+                    if(confirm("Are you sure you want to retrieve the " + 
+                        "alignments for selected BLAST databases? ")){
+
+                        // Retrieve checkboxes that are checked
+                        var selected_db_align = []
+                        let filteredRows = 
+                            private_db_table.rows({search: 'applied'}).nodes();
+
+                        $(filteredRows).find('input[type="checkbox"]:checked'). 
+                        each(function(i){
+                            selected_db_align[i] = $(this).val().trim();
+                        });
+
+                        if(selected_db_align.length === 0){
+                            // No dbs selected
+                            window.alert("Please select BLAST databases " + 
+                            "you want to retrieve the alignments for.");
+                        }
+                        else if(selected_db_align.length === 1 
+                            && selected_db_align[0] === 'selectallalign'){
+                            // Select all multi checkbox selected
+                            window.alert("Please select BLAST databases " + 
+                            "you want to retrieve the alignments for.");
+                        }
+                        else if(selected_db_align.length === 1){
+                            // One db selected
+                            window.alert("Please select two or more " + 
+                                "BLAST databases you want to retrieve " + 
+                                "the alignments for.");
+                        }
+                        else if(selected_db_align.length === 2 && 
+                        selected_db_align.includes('selectallalign')){
+                            // One db selected and selectallalign
+                            window.alert("Please select two or more " + 
+                                "BLAST databases you want to retrieve " + 
+                                "the alignments for.");
+                        }
+                        else{
+                            // Send data to the server
+                            return_with_ajax(selected_db_align, selected_filter,
+                            align_using)
+                        }
+                    }
+                }
+            
+            });
+            
+        });
+
+        // Enabling select all checkbox if collapse for multi is closed
+        $('#choosetype').on('hidden.bs.collapse', function () {
+
+            // Reset table and checkboxes when collapsed
+            $('#blastn').prop('checked', false);
+            $('#blastp').prop('checked', false);
+            $('#tblastn').prop('checked', false);
+            $('#tblastx').prop('checked', false);
+            $('#blastx').prop('checked', false);
+            $('#select_all_align').prop('checked', false);
+
+            private_db_table.$('.checkbox').each(function(){
+                this.checked = false;
+            });
+
+            // Clearing out filter
+            private_db_table.columns().search('').draw();
+
+            // Check if other chooseDB collapse is open now
+            if($('#chooseDB').hasClass('show')) {
+                $('#select_all').prop('checked', false); 
+                $('#select_all').attr("disabled", true);
+            } 
+            else{
+                $('#select_all').prop('checked', false); 
+                $("#select_all").attr('disabled', false);
+            }
+        });
+
+        // If user selects remove filter, clear all checkboxes and filters
+        $('#removefilter').click(function(){
+            private_db_table.columns().search('').draw();
+            $('#blastn').prop('checked', false);
+            $('#blastp').prop('checked', false);
+            $('#tblastn').prop('checked', false);
+            $('#tblastx').prop('checked', false);
+            $('#blastx').prop('checked', false);
+
+            private_db_table.$('.checkbox').each(function(){
+                    this.checked = false;
+            });
+            $('#select_all_align').prop('checked', false);
+        })
+
+        // Generate tree functionality code
+        $('#chooseDB').on('shown.bs.collapse', function (){
+
+            // Generate tree collapse is open
+            $('#select_all').prop('checked', false);
+            $("#select_all").attr('disabled', true);
+
+            // Uncheck all checkboxes
+            private_db_table.$('input[type="checkbox"]').each(function() {
+                this.checked = false;
+            });
+
+            // One checked checkbox is valid
+            private_db_table.$('input[type="checkbox"]').on('change', 
+            function() {
+                if ($(this).is(':checked')) {
+                    private_db_table.$('input[type="checkbox"]').not(this)
+                    .prop('checked', false);
+                }
+            });
+
+            // If submit is pressed in uncollapsed #chooseDB
+            $('#generateTree').click(function(){
+                if($('input[type="checkbox"]').is(":checked")){
+                    if($('input[type=checkbox]:checked').val().trim()){
+                        var slug = $('input[type=checkbox]:checked').val().trim();
+                        $.ajax({
+                            url:"{% url 'sendslugfield' %}",
+                            method: "POST",
+                            data: {
+                                'generate_tree_for': slug,
+                                csrfmiddlewaretoken:
+                                $('input[name=csrfmiddlewaretoken]').val(),
+                            },
+                            success:function(response){
+                                window.location.href = 
+                                '/generate_tree/' + response.slug;
+
+                            },
+                            error:function(xhr, status, error){
+                                window.alert("Something went wrong." +
+                                " Could not find selected BLAST databases");
+                            }
+                        })
+                    }
+                    else{
+                        window.alert("Please select one BLAST database" +
+                        " to generate the BLAST database tree.")
+                    }
+                }
+                else{
+                    window.alert("Please select one BLAST database" +
+                    " to generate the BLAST database tree.")
+                }
+            
+            });
+        });
+
+        // Enabling select all checkboxes if collapsed generateTree
+        $('#chooseDB').on('hidden.bs.collapse', function (){
+            private_db_table.$('input[type="checkbox"]').off('change');
+            if($('#choosetype').hasClass('show')){
+                $('#select_all').prop('checked', false); 
+                $('#select_all').attr("disabled", true);
+            }
+            else{
+                $('#select_all').prop('checked', false); 
+                $('#select_all').attr("disabled", false);
+            }
+
+            // Uncheck all checkboxes
+            private_db_table.$('.checkbox').each(function(){
+                    this.checked = false;
+            });
+        });
+    })
+</script>
+{% endblock %}

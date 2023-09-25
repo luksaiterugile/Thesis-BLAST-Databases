@@ -1,0 +1,161 @@
+{% extends "blast_db_creator/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+<title>Update BLAST database</title>
+{% endblock %}
+
+{% block navigation %}
+<a class="navbar-brand text-dark" href="{% url 'home' %}">BLAST Databases</a>
+{% endblock %}
+
+{% block content %}
+<div class="top-margin d-flex align-items-center justify-content-center mb-4">
+    <form 
+        method="post"
+        enctype="multipart/form-data"
+        style="background-color: #B3C4BC"
+        data-aos="fade-up">
+        {% csrf_token %}
+        <div class="border border-light p-4">
+            <h3 
+                class="text-center">
+                Update BLAST database
+		    </h3>
+            <div 
+                class="border border-light p-4" 
+                style="background-color: #e7e8e6">
+                <div class="mb-3">
+                    <span 
+                        class="font-weight-bold wrap">
+                        BLAST Database: {{ object.user_input.name_of_blast_db }}
+                    </span>
+                    {% if user.is_authenticated %}
+					<a 
+						href="{% url 'privatedb' %}">
+						<input 
+							type="button" 
+							value="Choose other BLAST database" 
+							class="btn btn-outline-dark ml-1" />
+					</a>
+					{% else %}
+					<a 
+						href="{% url 'viewdb' %}">
+						<input 
+							type="button" 
+							value="Choose other BLAST database" 
+							class="btn btn-outline-dark ml-1" />
+					</a>
+					{% endif %}
+                    <br><br>
+                    <div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="container-fluid p-0">
+                                    <div 
+                                        class="alert {{ message.tags }} alert-dismissible fade show" 
+                                        role="alert">
+                                        <div class="text-break">
+                                            {{ message }}
+                                        </div>
+                                        <button 
+                                            type="button" 
+                                            class="btn-close" 
+                                            data-bs-dismiss="alert" 
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <p>
+                        <b>Only one update option is available. Choose one:</b>
+                    </p>
+                    <div>
+                        {{ updateform|crispy }}
+                        <input 
+                            class="btn btn-dark w-100" 
+                            type="submit"
+                            id="updatedb" 
+                            name="upload"
+                            data-slug="{{ slug }}"
+                            value="Save changes">                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function(){
+        function button_param(button){
+            button.innerHTML = "Clear inserted file";
+            button.style.fontFamily = 'Arial';
+            button.style.fontSize = '1em';
+            button.className = "btn btn-outline-dark btn-sm mt-2";
+            button.setAttribute('type','button');
+        }
+
+        var input_file = document.getElementById('id_updated_file_input');
+        var input_file_div = document.
+        getElementById('div_id_updated_file_input');
+        var input_clear_button = document.createElement("button");
+        button_param(input_clear_button);
+        input_file_div.appendChild(input_clear_button);
+        var input_text = document.getElementById('id_updated_file_text');
+
+        if(input_file.files.length !== 0){
+            input_text.disabled = true;
+        }
+        else{
+            input_text.disabled = false;
+        }
+
+        if(input_text.value.length !== 0){
+            input_file.disabled = true;
+        }
+        else{
+            input_file.disabled = false;
+        }
+
+        input_file.addEventListener("change", () => {
+            if(input_file.files.length !== 0){
+                input_text.disabled = true;
+            }
+            else{
+                input_text.disabled = false;
+            }
+        })
+
+        input_clear_button.addEventListener("click", () => {
+            input_file.value = null;
+            input_text.disabled = false;
+        })
+
+        input_text.addEventListener("change", () => {
+            if(input_text.value.length === 0){
+                input_file.disabled = false;
+            }
+            else{
+                input_file.disabled = true;
+            }
+        })
+    });
+
+</script>
+{% endblock %}
+
+{% block code %}
+<script>
+$('#updatedb').click(function() {
+	$('#spinner').removeClass('d-none');
+	$('#overlay').removeClass('d-none');
+});
+</script>
+{% endblock %}
