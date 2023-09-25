@@ -16,7 +16,7 @@ To set up the BLAST Databases application, follow the steps below:
 Execute the following command:
 
 ```bash
-git clone https://git.mif.vu.lt/rulu6649/blast-databases.git
+git clone https://github.com/luksaiterugile/Thesis-BLAST-Databases.git
 ```
 
 2. Enter the repository directory and install the required packages by executing the following command:
